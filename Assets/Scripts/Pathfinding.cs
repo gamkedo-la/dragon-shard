@@ -1,0 +1,340 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Pathfinding : MonoBehaviour
+{
+    private GameObject CurrentLocation;
+
+    private List<GameObject> Checked = new List<GameObject>();
+    private List<GameObject> ToCheck = new List<GameObject>();
+
+    private List<GameObject> CanMoveTo = new List<GameObject>();
+
+    private List<GameObject> ThisMove = new List<GameObject>();
+
+    private GameObject[] Path;
+
+    public int MovePoints;
+
+    int MP;
+
+    private bool moving = false;
+
+    float t = 0;
+
+    int step = 1;
+
+    float mapSpeed = 5;
+
+    Vector3 tempP;
+    Vector3 tempN;
+
+    Transform Grid;
+
+    Clicker thisClicker;
+
+    public int Grass;
+    public int Forest;
+    public int Water;
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Grid = GameObject.Find("Grid").transform;
+        thisClicker = GameObject.Find("Main Camera").GetComponent<Clicker>();
+        
+        MP = MovePoints;
+        RaycastHit rhInfo;
+        bool didHit = Physics.Raycast(transform.position, Vector3.forward, out rhInfo, 5.0f);
+        if (didHit)
+        {
+            CurrentLocation = rhInfo.collider.gameObject;
+            CurrentLocation.GetComponent<Pathnode>().SetCurrentOccupant(GetComponent<Unit>().Owner);
+            Vector3 temp = CurrentLocation.transform.position;
+            temp.z = -2;
+            transform.position = temp;
+
+        }
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+        if(moving == true)
+        {
+
+            transform.position = Vector3.Lerp(tempP, tempN, t);
+            t += Time.deltaTime * mapSpeed;
+
+            if(t >= 1)
+            {
+                CurrentLocation = Path[Path.Length - 1 - step];
+                CurrentLocation.GetComponent<Pathnode>().SetCurrentOccupant(GetComponent<Unit>().Owner);
+                Path[Path.Length - step].GetComponent<Pathnode>().SetCurrentOccupant(-1);
+                MovePoints -= CurrentLocation.GetComponent<Pathnode>().GetMPRequired();
+
+                if(Path.Length - 1 - step <= 0)
+                {
+                    moving = false;
+
+                    step = 1;
+                    Checked.Clear();
+                    CanMoveTo.Clear();
+                    ToCheck.Clear();
+                    ThisMove.Clear();
+                    thisClicker.Clear();
+
+                    Vector3 temp = transform.position;
+                    temp.z = -2;
+                    transform.position = temp;
+
+                    t = 0;
+
+                    return;
+
+                }
+                step += 1;
+                t = 0;
+                tempP = Path[Path.Length - step].transform.position;
+                tempP.z = transform.position.z;
+                tempN = Path[Path.Length - step - 1].transform.position;
+                tempN.z = transform.position.z;
+
+            }
+
+        }
+
+    }
+
+    void FindAvailableTiles(GameObject T)
+    {
+        if (Checked.Contains(T))
+        {
+            return;
+
+        }
+        Checked.Add(T);
+        ToCheck.Remove(T);
+
+        if (T.GetComponent<Pathnode>().GetCurrentOccupant() != GetComponent<Unit>().Owner
+            && T.GetComponent<Pathnode>().GetCurrentOccupant() != -1)
+        {
+            T.GetComponent<Pathnode>().MPRemain = -1;
+
+        }
+
+        //Debug.Log("checking " + T.name);
+
+        if (T.GetComponent<Pathnode>().MPRemain >= 0)
+        {
+            if (CanMoveTo.Contains(T) == false)
+            {
+
+                CanMoveTo.Add(T);
+            }
+        }
+
+        if (T.GetComponent<Pathnode>().MPRemain <= 0)
+        {
+
+            return;
+        }
+
+        foreach (GameObject adj in T.GetComponent<Tile>().Adjacent)
+        {
+            if (ToCheck.Contains(adj) || Checked.Contains(adj))
+            {
+
+                if (adj.GetComponent<Pathnode>().Previous != null 
+                    && adj.GetComponent<Pathnode>().Previous.GetComponent<Pathnode>().MPRemain < T.GetComponent<Pathnode>().MPRemain)
+                {
+
+                    adj.GetComponent<Pathnode>().Previous = T;
+                    adj.GetComponent<Pathnode>().MPRemain = T.GetComponent<Pathnode>().MPRemain - adj.GetComponent<Pathnode>().GetMPRequired();
+
+
+
+                }
+            }
+            else
+            {
+
+                adj.GetComponent<Pathnode>().Previous = T;
+                adj.GetComponent<Pathnode>().MPRemain = T.GetComponent<Pathnode>().MPRemain - adj.GetComponent<Pathnode>().GetMPRequired();
+
+
+            }
+
+        }
+
+        foreach (GameObject TT in T.GetComponent<Tile>().Adjacent)
+        {
+            if (ToCheck.Contains(TT) == false && Checked.Contains(TT) == false)
+            {
+
+                ToCheck.Add(TT);
+            }
+        }
+
+
+        if (ToCheck.Count > 0)
+        {
+            foreach (GameObject T_T in ToCheck.ToArray())
+            {
+                FindAvailableTiles(T_T);
+            }
+        }
+
+
+        //foreach(GameObject T in CurrentLocation.GetComponent<Tile>().Adjacent)
+        //{
+
+        //    if(Checked.Contains(T) == false)
+        //    {
+
+        //        Checked.Add(T)
+
+        //    }
+
+        //}
+
+
+    }
+
+
+    public void GenerateMovementOptions()
+    {
+
+        ToCheck.Clear();
+        Checked.Clear();
+        CanMoveTo.Clear();
+
+        foreach(Transform node in Grid)
+        {
+
+            node.GetComponent<Pathnode>().SetMPRequired(1);
+
+            if (node.GetComponent<Tile>().thisTile == TileType.grass)
+            {
+
+                node.GetComponent<Pathnode>().SetMPRequired(Grass);
+            }
+
+            if (node.GetComponent<Tile>().thisTile == TileType.forest)
+            {
+
+                node.GetComponent<Pathnode>().SetMPRequired(Forest);
+            }
+            if (node.GetComponent<Tile>().thisTile == TileType.water)
+            {
+
+                node.GetComponent<Pathnode>().SetMPRequired(Water);
+            }
+
+        }
+
+        //Debug.Log("calculating movement");
+
+        CurrentLocation.GetComponent<Pathnode>().MPRemain = MovePoints;
+
+        ToCheck.Add(CurrentLocation);
+
+        CanMoveTo.Add(CurrentLocation);
+
+        FindAvailableTiles(CurrentLocation);
+
+
+        foreach (GameObject T in ToCheck.ToArray())
+        {
+
+            FindAvailableTiles(T);
+        }
+
+        foreach (Transform TTT in GameObject.Find("Grid").transform)
+        {
+
+            if (CanMoveTo.Contains(TTT.gameObject) == false)
+            {
+
+                TTT.GetComponent<Pathnode>().Fade();
+
+            }
+
+        }
+
+
+    }
+
+    public void MoveTo(GameObject EndPoint)
+    {
+
+        if(CanMoveTo.Contains(EndPoint) == false)
+        {
+
+            Checked.Clear();
+            CanMoveTo.Clear();
+            ToCheck.Clear();
+            ThisMove.Clear();
+            thisClicker.Clear();
+
+            Debug.Log("invalid destination");
+            return;
+        }
+
+
+        int i = 0;
+
+        ThisMove.Add(EndPoint);
+
+        GameObject N = EndPoint;
+
+        while (N.GetComponent<Pathnode>().Previous != null)
+        {
+
+            ThisMove.Add(N.GetComponent<Pathnode>().Previous);
+            N = N.GetComponent<Pathnode>().Previous;
+
+        }
+
+        //Debug.Log("creating Path");
+        Path = new GameObject[ThisMove.Count];
+        //Debug.Log("Path created successfully");
+        Path.SetValue(EndPoint, i);
+        i++;
+
+        N = EndPoint;
+
+        while(N.GetComponent<Pathnode>().Previous != null)
+        {
+
+            Path.SetValue(N.GetComponent<Pathnode>().Previous, i);
+            i++;
+            N = N.GetComponent<Pathnode>().Previous;
+
+        }
+
+        tempP = Path[Path.Length - 1].transform.position;
+        tempP.z = transform.position.z;
+        tempN = Path[Path.Length - 2].transform.position;
+        tempN.z = transform.position.z;
+
+        moving = true;
+        thisClicker.ActionInProgress = true;
+
+
+    }
+
+
+
+    public void TurnStart()
+    {
+        MovePoints = MP;
+
+    }
+
+
+}

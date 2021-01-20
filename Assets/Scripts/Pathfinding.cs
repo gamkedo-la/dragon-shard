@@ -47,14 +47,15 @@ public class Pathfinding : MonoBehaviour
         
         MP = MovePoints;
         RaycastHit rhInfo;
-        bool didHit = Physics.Raycast(transform.position, Vector3.forward, out rhInfo, 5.0f);
+        bool didHit = Physics.Raycast(transform.position, Vector3.down, out rhInfo, 20.0f);
         if (didHit)
         {
             CurrentLocation = rhInfo.collider.gameObject;
             CurrentLocation.GetComponent<Pathnode>().SetCurrentOccupant(GetComponent<Unit>().Owner);
             Vector3 temp = CurrentLocation.transform.position;
-            temp.z = -2;
+            temp.y += .4f;
             transform.position = temp;
+            transform.Rotate(-45, 0, 0);
 
         }
 
@@ -89,7 +90,7 @@ public class Pathfinding : MonoBehaviour
                     thisClicker.Clear();
 
                     Vector3 temp = transform.position;
-                    temp.z = -2;
+                    
                     transform.position = temp;
 
                     t = 0;
@@ -100,9 +101,9 @@ public class Pathfinding : MonoBehaviour
                 step += 1;
                 t = 0;
                 tempP = Path[Path.Length - step].transform.position;
-                tempP.z = transform.position.z;
+                tempP.y = transform.position.y;
                 tempN = Path[Path.Length - step - 1].transform.position;
-                tempN.z = transform.position.z;
+                tempN.y = transform.position.y;
 
             }
 
@@ -318,9 +319,9 @@ public class Pathfinding : MonoBehaviour
         }
 
         tempP = Path[Path.Length - 1].transform.position;
-        tempP.z = transform.position.z;
+        tempP.y = transform.position.y;
         tempN = Path[Path.Length - 2].transform.position;
-        tempN.z = transform.position.z;
+        tempN.y = transform.position.y;
 
         moving = true;
         thisClicker.ActionInProgress = true;

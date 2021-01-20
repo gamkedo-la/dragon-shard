@@ -67,7 +67,7 @@ public class Tile : MonoBehaviour
         Collider[] A = Physics.OverlapSphere(transform.position, 1);
         foreach (Collider T in A)
         {
-            if (T.gameObject != gameObject)
+            if (T.gameObject != gameObject && T.gameObject.tag == "map")
             {
                 Adjacent.Add(T.gameObject);
             }

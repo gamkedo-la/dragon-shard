@@ -27,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482913979014513225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 1.0361351, y: 4.239749, z: -3.7734375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8609727770329427313}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &8418702396608738464
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -98,13 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: 0
-  movementStats:
-  - T: 1
-    MovePointsUsed: 1
-  - T: 2
-    MovePointsUsed: 3
-  - T: 3
-    MovePointsUsed: 2
 --- !u!114 &3925146671997168782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,13 +111,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentLocation: {fileID: 0}
-  Checked: []
-  ToCheck: []
-  CanMoveTo: []
-  ThisMove: []
-  Path: []
   MovePoints: 3
-  moving: 0
+  Grass: 1
+  Forest: 2
+  Water: 3
 --- !u!65 &2912521252164921533
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -164,7 +154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5340830168021350741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8331741792303336479}

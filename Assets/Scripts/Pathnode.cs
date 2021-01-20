@@ -7,7 +7,7 @@ public class Pathnode : MonoBehaviour
     public GameObject Previous;
     public int MPRemain = 0;
 
-    GameObject F;
+
 
     private int CurrentOccupant = -1;
     public int MPRequired = 0;
@@ -15,8 +15,7 @@ public class Pathnode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        F = transform.Find("fade").gameObject;
-        F.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -30,13 +29,13 @@ public class Pathnode : MonoBehaviour
 
         Previous = null;
         MPRemain = 0;
-        F.SetActive(false);
+        GetComponent<SpriteRenderer>().color = Color.white;
 
     }
 
     public void Fade()
     {
-        F.SetActive(true);
+        GetComponent<SpriteRenderer>().color = Color.grey;
 
     }
 

@@ -68,7 +68,7 @@ public class Clicker : MonoBehaviour
 
         foreach (Transform TTT in GameObject.Find("Grid").transform)
         {
-            TTT.gameObject.GetComponent<Pathnode>().Reset();
+            TTT.gameObject.GetComponent<Pathnode>().ResetPath();
         }
 
 

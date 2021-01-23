@@ -5,19 +5,23 @@ using UnityEngine;
 public enum TileType { unassigned, grass, water, forest }
 
 [ExecuteInEditMode]
+[SelectionBase]
 public class Tile : MonoBehaviour
 {
+
+    
+
     public int Row;
     public int Column;
 
     public TileType thisTile;
 
-    public Sprite DEFAULT;
-    public Sprite WATER;
-    public Sprite GRASS;
-    public Sprite FOREST;
+    public GameObject DEFAULT;
+    public GameObject WATER;
+    public GameObject GRASS;
+    public GameObject FOREST;
 
-    Sprite thisSprite;
+    public GameObject Current;
 
     public List<GameObject> Adjacent = new List<GameObject>();
 
@@ -30,32 +34,55 @@ public class Tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
         TileUpdate();
+#endif
     }
 
     public void TileUpdate()
     {
+
+
         if (thisTile == TileType.forest)
         {
-            thisSprite = FOREST;
+            FOREST.SetActive(true);
+            Current = FOREST;
+
+            DEFAULT.SetActive(false);
+            WATER.SetActive(false);
+            GRASS.SetActive(false);
 
         }
         if (thisTile == TileType.water)
         {
-            thisSprite = WATER;
+            WATER.SetActive(true);
+            Current = WATER;
+
+            DEFAULT.SetActive(false);
+            FOREST.SetActive(false);
+            GRASS.SetActive(false);
 
         }
         if (thisTile == TileType.grass)
         {
-            thisSprite = GRASS;
+            GRASS.SetActive(true);
+            Current = GRASS;
+
+            DEFAULT.SetActive(false);
+            WATER.SetActive(false);
+            FOREST.SetActive(false);
 
         }
         if (thisTile == TileType.unassigned)
         {
-            thisSprite = DEFAULT;
+            DEFAULT.SetActive(true);
+            Current = default;
+
+            FOREST.SetActive(false);
+            WATER.SetActive(false);
+            GRASS.SetActive(false);
 
         }
-        GetComponent<SpriteRenderer>().sprite = thisSprite;
 
 
     }

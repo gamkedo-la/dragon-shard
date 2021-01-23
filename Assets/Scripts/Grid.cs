@@ -81,7 +81,7 @@ public class Grid : MonoBehaviour
                     {
 
 
-                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), transform.rotation, gameObject.transform);
+                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), Quaternion.identity, gameObject.transform);
 
                         tl.name = "Hex_" + i + "_" + j;
 
@@ -111,7 +111,7 @@ public class Grid : MonoBehaviour
 
 
 
-                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), transform.rotation, gameObject.transform);
+                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), Quaternion.identity, gameObject.transform);
 
                         tl.name = "Hex_" + i + "_" + j;
 
@@ -143,7 +143,7 @@ public class Grid : MonoBehaviour
                     {
 
 
-                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), transform.rotation, gameObject.transform);
+                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), Quaternion.identity, gameObject.transform);
 
                         tl.name = "Hex_" + i + "_" + j;
 
@@ -173,7 +173,7 @@ public class Grid : MonoBehaviour
 
 
 
-                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), transform.rotation, gameObject.transform);
+                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), Quaternion.identity, gameObject.transform);
 
                         tl.name = "Hex_" + i + "_" + j;
 

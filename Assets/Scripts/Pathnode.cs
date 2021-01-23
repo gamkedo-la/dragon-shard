@@ -24,18 +24,18 @@ public class Pathnode : MonoBehaviour
         
     }
 
-    public void Reset()
+    public void ResetPath()
     {
 
         Previous = null;
         MPRemain = 0;
-        GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<Tile>().Current.GetComponent<Fader>().ResetTile();
 
     }
 
     public void Fade()
     {
-        GetComponent<SpriteRenderer>().color = Color.grey;
+        GetComponent<Tile>().Current.GetComponent<Fader>().Fade();
 
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Grid : MonoBehaviour
 {
@@ -81,7 +82,11 @@ public class Grid : MonoBehaviour
                     {
 
 
-                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), Quaternion.identity, gameObject.transform);
+                        //GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), Quaternion.identity, gameObject.transform);
+
+                        GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
+
+                        tl.transform.position = new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j);
 
                         tl.name = "Hex_" + i + "_" + j;
 
@@ -111,7 +116,11 @@ public class Grid : MonoBehaviour
 
 
 
-                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), Quaternion.identity, gameObject.transform);
+                        //GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), Quaternion.identity, gameObject.transform);
+
+                        GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
+
+                        tl.transform.position = new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f);
 
                         tl.name = "Hex_" + i + "_" + j;
 
@@ -143,7 +152,11 @@ public class Grid : MonoBehaviour
                     {
 
 
-                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), Quaternion.identity, gameObject.transform);
+                        //GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), Quaternion.identity, gameObject.transform);
+
+                        GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
+
+                        tl.transform.position = new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j);
 
                         tl.name = "Hex_" + i + "_" + j;
 
@@ -173,7 +186,11 @@ public class Grid : MonoBehaviour
 
 
 
-                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), Quaternion.identity, gameObject.transform);
+                        //GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), Quaternion.identity, gameObject.transform);
+
+                        GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
+
+                        tl.transform.position = new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f);
 
                         tl.name = "Hex_" + i + "_" + j;
 

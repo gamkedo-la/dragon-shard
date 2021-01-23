@@ -16,8 +16,10 @@ public class ArmorColor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
         GetComponent<SpriteRenderer>().color = 
             GameObject.Find("GameManager").GetComponent<Players>().
             ThisGame[transform.parent.gameObject.GetComponent<Unit>().Owner].thisColor;
+#endif
     }
 }

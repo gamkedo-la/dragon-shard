@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Clicker : MonoBehaviour
 {
-    public Pathfinding CurrentUnit;
+    public Unit CurrentUnit;
     public GameObject EndPoint;
+    public bool DoingSomething;
 
     public bool ActionInProgress = false;
 
@@ -21,17 +22,17 @@ public class Clicker : MonoBehaviour
                 bool didHit = Physics.Raycast(toMouse, out rhInfo, 50.0f);
                 if (didHit)
                 {
-                    if (CurrentUnit == null 
-                        && rhInfo.collider.gameObject.GetComponent<Unit>() != null 
-                        && rhInfo.collider.gameObject.GetComponent<Unit>().Owner == GameObject.Find("GameManager").GetComponent<Players>().CurrentTurn)
+                    if (rhInfo.collider.gameObject.GetComponent<Unit>() != null
+                        && rhInfo.collider.gameObject.GetComponent<Unit>().Owner == GameObject.Find("GameManager").GetComponent<Players>().CurrentTurn
+                        && DoingSomething == false)
                     {
 
                         Debug.Log(rhInfo.collider.name + " . . " + rhInfo.point);
-                        CurrentUnit = rhInfo.collider.GetComponent<Pathfinding>();
+                        CurrentUnit = rhInfo.collider.GetComponent<Unit>();
 
                         if (CurrentUnit != null)
                         {
-                            CurrentUnit.GenerateMovementOptions();
+                            CurrentUnit.DisplayOptions();
 
                         }
                         else
@@ -43,13 +44,31 @@ public class Clicker : MonoBehaviour
                     }
                     else
                     {
+                        if(rhInfo.collider.gameObject.tag == "move button")
+                        {
+                            CurrentUnit.HideOptions();
+                            CurrentUnit.GetComponent<Pathfinding>().GenerateMovementOptions();
+                            DoingSomething = true;
+
+                        }
+
+                        if(rhInfo.collider.gameObject.tag == "attack button")
+                        {
+
+                            //do combat stuff here
+                            CurrentUnit.HideOptions();
+                           
+                        }
+
                         if (rhInfo.collider.GetComponent<Pathnode>() != null 
                             && rhInfo.collider.GetComponent<Pathnode>().GetCurrentOccupant() == -1 
-                            && CurrentUnit != null)
+                            && CurrentUnit != null
+                            && DoingSomething == true)
                         {
                             Debug.Log(rhInfo.collider.name + " . . " + rhInfo.point);
                             EndPoint = rhInfo.collider.gameObject;
                             CurrentUnit.GetComponent<Pathfinding>().MoveTo(EndPoint);
+                            DoingSomething = false;
                         }
                     }
 

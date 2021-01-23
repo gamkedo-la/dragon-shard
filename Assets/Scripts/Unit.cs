@@ -5,6 +5,10 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     public int Owner;
+    public Players GM;
+    public Clicker Click;
+
+    public GameObject Options;
 
     //public MovementStat[] movementStats;
 
@@ -12,7 +16,7 @@ public class Unit : MonoBehaviour
     void Start()
     {
 
-        
+        Options = transform.Find("Action Menu").gameObject;  
         
     }
 
@@ -29,6 +33,34 @@ public class Unit : MonoBehaviour
 
 
     }
+
+    public void GetClicked()
+    {
+        if(GM.CurrentTurn == Owner)
+        {
+
+            DisplayOptions();
+
+        }
+
+
+
+    }
+
+
+    public void DisplayOptions()
+    {
+        Options.SetActive(true);
+
+
+    }
+
+    public void HideOptions()
+    {
+        Options.SetActive(false);
+
+    }
+
 
     [System.Serializable]
     public struct MovementStat

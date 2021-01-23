@@ -52,10 +52,9 @@ public class Pathfinding : MonoBehaviour
         {
             CurrentLocation = rhInfo.collider.gameObject;
             CurrentLocation.GetComponent<Pathnode>().SetCurrentOccupant(GetComponent<Unit>().Owner);
-            Vector3 temp = CurrentLocation.transform.position;
-            temp.y += .4f;
-            transform.position = temp;
-            transform.Rotate(-45, 0, 0);
+            transform.position = CurrentLocation.transform.position;
+
+            transform.Rotate(-90, 0, 0);
 
         }
 

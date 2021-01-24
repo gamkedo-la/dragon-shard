@@ -51,7 +51,7 @@ public class Pathfinding : MonoBehaviour
         if (didHit)
         {
             CurrentLocation = rhInfo.collider.gameObject;
-            CurrentLocation.GetComponent<Pathnode>().SetCurrentOccupant(GetComponent<Unit>().Owner);
+            CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = gameObject;
             transform.position = CurrentLocation.transform.position;
 
             transform.Rotate(-90, 0, 0);
@@ -73,8 +73,8 @@ public class Pathfinding : MonoBehaviour
             if(t >= 1)
             {
                 CurrentLocation = Path[Path.Length - 1 - step];
-                CurrentLocation.GetComponent<Pathnode>().SetCurrentOccupant(GetComponent<Unit>().Owner);
-                Path[Path.Length - step].GetComponent<Pathnode>().SetCurrentOccupant(-1);
+                CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = gameObject;
+                Path[Path.Length - step].GetComponent<Pathnode>().CurrentOccupant = null;
                 MovePoints -= CurrentLocation.GetComponent<Pathnode>().GetMPRequired();
 
                 if(Path.Length - 1 - step <= 0)
@@ -120,13 +120,14 @@ public class Pathfinding : MonoBehaviour
         Checked.Add(T);
         ToCheck.Remove(T);
 
-        if (T.GetComponent<Pathnode>().GetCurrentOccupant() != GetComponent<Unit>().Owner
-            && T.GetComponent<Pathnode>().GetCurrentOccupant() != -1)
+        if (T.GetComponent<Pathnode>().CurrentOccupant != null)
         {
-            T.GetComponent<Pathnode>().MPRemain = -1;
+            if (T.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != GetComponent<Unit>().Owner)
+            {
+                T.GetComponent<Pathnode>().MPRemain = -1;
 
+            }
         }
-
         //Debug.Log("checking " + T.name);
 
         if (T.GetComponent<Pathnode>().MPRemain >= 0)

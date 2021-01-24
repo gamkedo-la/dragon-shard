@@ -9,7 +9,7 @@ public class Pathnode : MonoBehaviour
 
 
 
-    private int CurrentOccupant = -1;
+    public GameObject CurrentOccupant = null;
     public int MPRequired = 0;
 
     // Start is called before the first frame update
@@ -39,18 +39,7 @@ public class Pathnode : MonoBehaviour
 
     }
 
-    public int GetCurrentOccupant()
-    {
 
-        return CurrentOccupant;
-
-    }
-
-    public void SetCurrentOccupant(int O)
-    {
-
-        CurrentOccupant = O;
-    }
 
     public int GetMPRequired()
     {

@@ -63,7 +63,7 @@ public class Clicker : MonoBehaviour
                         }
 
                         else if(rhInfo.collider.GetComponent<Pathnode>() != null 
-                            && rhInfo.collider.GetComponent<Pathnode>().GetCurrentOccupant() == -1 
+                            && rhInfo.collider.GetComponent<Pathnode>().CurrentOccupant == null 
                             && CurrentUnit != null
                             && SelectingAction == true
                             && CurrentUnit.GetComponent<Pathfinding>().CanMoveTo.Contains(rhInfo.collider.gameObject))

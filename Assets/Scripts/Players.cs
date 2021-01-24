@@ -9,6 +9,8 @@ public class Players : MonoBehaviour
 
     public int CurrentTurn = 0;
 
+    public Clicker thisClicker;
+
 
     private void Start()
     {
@@ -34,7 +36,7 @@ public class Players : MonoBehaviour
 
     public void EndCurrentTurn()
     {
-
+        thisClicker.Clear();
         CurrentTurn += 1;
         if(CurrentTurn >= ThisGame.Length)
         {

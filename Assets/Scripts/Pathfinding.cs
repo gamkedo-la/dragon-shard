@@ -9,7 +9,7 @@ public class Pathfinding : MonoBehaviour
     private List<GameObject> Checked = new List<GameObject>();
     private List<GameObject> ToCheck = new List<GameObject>();
 
-    private List<GameObject> CanMoveTo = new List<GameObject>();
+    public List<GameObject> CanMoveTo = new List<GameObject>();
 
     private List<GameObject> ThisMove = new List<GameObject>();
 

@@ -10555,6 +10555,7 @@ MonoBehaviour:
     Gold: 0
     Units: []
   CurrentTurn: 0
+  thisClicker: {fileID: 963194229}
 --- !u!4 &884718146
 Transform:
   m_ObjectHideFlags: 0
@@ -11342,6 +11343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentUnit: {fileID: 0}
   EndPoint: {fileID: 0}
+  SelectingAction: 0
   ActionInProgress: 0
 --- !u!1 &977900431 stripped
 GameObject:

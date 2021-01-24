@@ -6,9 +6,10 @@ public class Clicker : MonoBehaviour
 {
     public Unit CurrentUnit;
     public GameObject EndPoint;
-    public bool DoingSomething;
+    public bool SelectingAction;
 
     public bool ActionInProgress = false;
+
 
     // Update is called once per frame
     void Update()
@@ -24,7 +25,7 @@ public class Clicker : MonoBehaviour
                 {
                     if (rhInfo.collider.gameObject.GetComponent<Unit>() != null
                         && rhInfo.collider.gameObject.GetComponent<Unit>().Owner == GameObject.Find("GameManager").GetComponent<Players>().CurrentTurn
-                        && DoingSomething == false)
+                        && SelectingAction == false)
                     {
 
                         Debug.Log(rhInfo.collider.name + " . . " + rhInfo.point);
@@ -48,11 +49,12 @@ public class Clicker : MonoBehaviour
                         {
                             CurrentUnit.HideOptions();
                             CurrentUnit.GetComponent<Pathfinding>().GenerateMovementOptions();
-                            DoingSomething = true;
+                            SelectingAction = true;
+
 
                         }
 
-                        if(rhInfo.collider.gameObject.tag == "attack button")
+                        else if(rhInfo.collider.gameObject.tag == "attack button")
                         {
 
                             //do combat stuff here
@@ -60,15 +62,22 @@ public class Clicker : MonoBehaviour
                            
                         }
 
-                        if (rhInfo.collider.GetComponent<Pathnode>() != null 
+                        else if(rhInfo.collider.GetComponent<Pathnode>() != null 
                             && rhInfo.collider.GetComponent<Pathnode>().GetCurrentOccupant() == -1 
                             && CurrentUnit != null
-                            && DoingSomething == true)
+                            && SelectingAction == true
+                            && CurrentUnit.GetComponent<Pathfinding>().CanMoveTo.Contains(rhInfo.collider.gameObject))
                         {
                             Debug.Log(rhInfo.collider.name + " . . " + rhInfo.point);
                             EndPoint = rhInfo.collider.gameObject;
                             CurrentUnit.GetComponent<Pathfinding>().MoveTo(EndPoint);
-                            DoingSomething = false;
+                            SelectingAction = false;
+                            ActionInProgress = true;
+                        }
+                        else
+                        {
+                            CurrentUnit.HideOptions();
+                            Clear();
                         }
                     }
 
@@ -84,6 +93,7 @@ public class Clicker : MonoBehaviour
         CurrentUnit = null;
         EndPoint = null;
         ActionInProgress = false;
+        SelectingAction = false;
 
         foreach (Transform TTT in GameObject.Find("Grid").transform)
         {

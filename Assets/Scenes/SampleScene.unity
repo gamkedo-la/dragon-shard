@@ -10527,7 +10527,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 884718146}
-  - component: {fileID: 884718145}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -10535,27 +10534,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &884718145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884718144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2edf444ad043814a8b3368da07dcb59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ThisGame:
-  - thisColor: {r: 1, g: 0, b: 0, a: 1}
-    Gold: 0
-    Units: []
-  - thisColor: {r: 0, g: 0.4651866, b: 1, a: 1}
-    Gold: 0
-    Units: []
-  CurrentTurn: 0
-  thisClicker: {fileID: 963194229}
 --- !u!4 &884718146
 Transform:
   m_ObjectHideFlags: 0
@@ -11257,6 +11235,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -11345,6 +11324,27 @@ MonoBehaviour:
   EndPoint: {fileID: 0}
   SelectingAction: 0
   ActionInProgress: 0
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2edf444ad043814a8b3368da07dcb59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ThisGame:
+  - thisColor: {r: 1, g: 0, b: 0, a: 1}
+    Gold: 0
+    Units: []
+  - thisColor: {r: 0, g: 0.4651866, b: 1, a: 1}
+    Gold: 0
+    Units: []
+  CurrentTurn: 0
+  thisClicker: {fileID: 963194229}
 --- !u!1 &977900431 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3458714714561766421, guid: c582789d9c263bf4b94171af9688643f,
@@ -18255,7 +18255,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 884718145}
+      - m_Target: {fileID: 0}
         m_MethodName: EndCurrentTurn
         m_Mode: 1
         m_Arguments:

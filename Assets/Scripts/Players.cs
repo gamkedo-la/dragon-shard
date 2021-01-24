@@ -14,6 +14,7 @@ public class Players : MonoBehaviour
 
     private void Start()
     {
+        thisClicker.GetComponent<Clicker>();
         GameObject[] StartingUnits = GameObject.FindGameObjectsWithTag("Unit");
 
         for (int i = 0; i < ThisGame.Length; i++)

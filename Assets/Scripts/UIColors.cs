@@ -14,7 +14,7 @@ public class UIColors : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GM = GameObject.Find("GameManager").GetComponent<Players>();
+        GM = GameObject.Find("Main Camera").GetComponent<Players>();
 
         if (GetComponent<Button>() != null)
         {

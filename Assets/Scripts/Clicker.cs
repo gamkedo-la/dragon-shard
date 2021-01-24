@@ -24,7 +24,7 @@ public class Clicker : MonoBehaviour
                 if (didHit)
                 {
                     if (rhInfo.collider.gameObject.GetComponent<Unit>() != null
-                        && rhInfo.collider.gameObject.GetComponent<Unit>().Owner == GameObject.Find("GameManager").GetComponent<Players>().CurrentTurn
+                        && rhInfo.collider.gameObject.GetComponent<Unit>().Owner == GetComponent<Players>().CurrentTurn
                         && SelectingAction == false)
                     {
 

@@ -43,7 +43,7 @@ public class Pathfinding : MonoBehaviour
     void Start()
     {
         Grid = GameObject.Find("Grid").transform;
-        thisClicker = GameObject.Find("Main Camera").GetComponent<Clicker>();
+        thisClicker = GetComponent<Unit>().Click;
         
         MP = MovePoints;
         RaycastHit rhInfo;
@@ -255,7 +255,7 @@ public class Pathfinding : MonoBehaviour
             FindAvailableTiles(T);
         }
 
-        foreach (Transform TTT in GameObject.Find("Grid").transform)
+        foreach (Transform TTT in Grid)
         {
 
             if (CanMoveTo.Contains(TTT.gameObject) == false)

@@ -18,7 +18,7 @@ public class ArmorColor : MonoBehaviour
     {
 #if UNITY_EDITOR
         GetComponent<SpriteRenderer>().color = 
-            GameObject.Find("GameManager").GetComponent<Players>().
+            GameObject.Find("Main Camera").GetComponent<Players>().
             ThisGame[transform.parent.gameObject.GetComponent<Unit>().Owner].thisColor;
 #endif
     }

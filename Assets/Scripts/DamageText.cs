@@ -10,10 +10,27 @@ public class DamageText : MonoBehaviour
     Vector3 temp;
     public GameObject Camera;
 
+    public Color TColor;
+
+    public int FSize;
+
+    public TextMesh T;
+
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<TextMesh>().text = dam.ToString();
+        transform.LookAt(Camera.transform);
+        if (dam == 0)
+        {
+            T.text = "MISS";
+        }
+        else
+        {
+            T.text = dam.ToString();
+        }
+        T.color = TColor;
+        T.fontSize = FSize;
+
         Destroy(gameObject, 0.5f);
 
     }

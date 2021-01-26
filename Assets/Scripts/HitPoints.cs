@@ -32,19 +32,31 @@ public class HitPoints : MonoBehaviour
 
         CurrentHP -= damage;
         Vector3 temp = transform.position;
-        temp.y = 1.3f;
+        temp.y = .5f;
 
         GameObject T = Instantiate(DamageText, temp, Quaternion.identity);
         T.GetComponent<DamageText>().dam = damage;
         T.GetComponent<DamageText>().Camera = Cam;
+        T.GetComponent<DamageText>().FSize = 500;
 
-        if(damage < 0)
+        T.GetComponent<DamageText>().TColor = Color.red;
+
+        if (damage < -0)
         {
 
-            T.GetComponent<TextMesh>().color = Color.green;
+            T.GetComponent<DamageText>().TColor = Color.green;
+
+        }
+        if(damage == 0)
+        {
+
+            T.GetComponent<DamageText>().TColor = Color.white;
+            T.GetComponent<DamageText>().FSize = 300;
         }
 
-        if(CurrentHP > MaxHP)
+
+        
+        if (CurrentHP > MaxHP)
         {
             CurrentHP = MaxHP;
         }

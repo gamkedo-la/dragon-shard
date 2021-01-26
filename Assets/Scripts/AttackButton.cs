@@ -11,6 +11,9 @@ public class AttackButton : MonoBehaviour
     public Text DefDam;
     public Text DefAtt;
 
+    public Text Cat;
+    public Text AggName;
+    public Text DefName;
 
 
 
@@ -26,13 +29,17 @@ public class AttackButton : MonoBehaviour
         
     }
 
-    public void Populate(int AD, int AA, int DD, int DA)
+    public void Populate(int AD, int AA, int DD, int DA, string C, string AN, string DN)
     {
 
         AggDam.text = AD.ToString() + " damage";
         AggAtt.text = AA.ToString() + " attacks";
         DefDam.text = DD.ToString() + " damage";
         DefAtt.text = DA.ToString() + " attacks";
+
+        Cat.text = C;
+        AggName.text = AN;
+        DefName.text = DN;
 
 
     }

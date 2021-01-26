@@ -18,10 +18,9 @@ public class Attack : MonoBehaviour
     public float timer = 0;
     public bool turn = true;
     public int counter = 0;
-    public int enemyCounter;
+    public int enemyCounter = 0;
 
-    public float ChanceToGetHit;
-    public float HitChance;
+    public float EnemyDef;
 
 
     public int GrassDef;
@@ -29,6 +28,9 @@ public class Attack : MonoBehaviour
     public int WaterDef;
 
     public int CurrentDef;
+
+    public string MeleeName;
+    public string RangedName;
 
 
     // Start is called before the first frame update
@@ -40,10 +42,13 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         
         if(Target != null)
         {
-            if(timer <= 0)
+
+            timer -= Time.deltaTime;
+            if (timer <= 0)
             {
                 if(turn == true)
                 {
@@ -59,7 +64,7 @@ public class Attack : MonoBehaviour
                         return;
 
                     }
-                    Att(Target, thisDamage, HitChance);
+                    Att(Target, thisDamage, EnemyDef);
                     turn = false;
                     counter ++;
 
@@ -67,7 +72,7 @@ public class Attack : MonoBehaviour
 
 
                 }
-                if(turn == false)
+                else if(turn == false)
                 {
                     if (enemyCounter >= Target.GetComponent<Attack>().thisAttack)
                     {
@@ -75,7 +80,7 @@ public class Attack : MonoBehaviour
                         return;
 
                     }
-                    Target.GetComponent<Attack>().Att(GetComponent<HitPoints>(), Target.GetComponent<Attack>().thisDamage, ChanceToGetHit);
+                    Target.GetComponent<Attack>().Att(GetComponent<HitPoints>(), Target.GetComponent<Attack>().thisDamage, CurrentDef);
                     turn = true;
                     enemyCounter ++;
 
@@ -98,7 +103,18 @@ public class Attack : MonoBehaviour
 
     public void Att(HitPoints Enemy, int D, float Chance)
     {
-        Enemy.TakeDamage(D);
+        int R = Random.Range(1, 101);
+
+        if (R < Chance)
+        {
+            Enemy.TakeDamage(0);
+        }
+        else
+        {
+
+            Enemy.TakeDamage(D);
+        }
+
 
     }
 

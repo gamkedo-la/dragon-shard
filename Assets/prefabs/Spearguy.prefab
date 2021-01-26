@@ -55,7 +55,7 @@ MonoBehaviour:
   GM: {fileID: 0}
   Click: {fileID: 0}
   Options: {fileID: 0}
-  UnitName: Spear
+  UnitName: Spearguy
 --- !u!114 &3925146671997168782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06731ba15b11bb4a9a22ddd097d49e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ToCheck: []
+  ToBeChecked: []
   ValidTargets: []
   TargetLocations: []
   Grid: {fileID: 0}
@@ -120,8 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MeleeAttacks: 2
   MeleeDamage: 5
-  RangedAttacks: 0
-  RangedDamage: 0
+  RangedAttacks: 1
+  RangedDamage: 2
   Target: {fileID: 0}
   thisAttack: 0
   thisDamage: 0
@@ -129,12 +129,13 @@ MonoBehaviour:
   turn: 1
   counter: 0
   enemyCounter: 0
-  ChanceToGetHit: 0
-  HitChance: 0
+  EnemyDef: 0
   GrassDef: 40
   ForestDef: 50
   WaterDef: 20
   CurrentDef: 0
+  MeleeName: Spear
+  RangedName: Throw Rock
 --- !u!114 &7926924879536991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHP: 50
   CurrentHP: 50
-  DamageText: {fileID: 6215587415028543921, guid: b185651c5616a1240bfabf12d11d3bb4,
+  DamageText: {fileID: 1682866155419517283, guid: 4efa638b120ee6c4ba42a799d94e4519,
     type: 3}
 --- !u!1 &2110409302615645008
 GameObject:

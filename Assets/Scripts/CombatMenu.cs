@@ -67,7 +67,10 @@ public class CombatMenu : MonoBehaviour
             AttackButton1.GetComponent<AttackButton>().Populate(Aggressor.GetComponent<Attack>().RangedDamage,
                 Aggressor.GetComponent<Attack>().RangedAttacks,
                 Defender.GetComponent<Attack>().RangedDamage,
-                Defender.GetComponent<Attack>().RangedAttacks);
+                Defender.GetComponent<Attack>().RangedAttacks, 
+                "Ranged",
+                Aggressor.GetComponent<Attack>().RangedName, 
+                Defender.GetComponent<Attack>().RangedName);
             
 
         }
@@ -76,7 +79,10 @@ public class CombatMenu : MonoBehaviour
             AttackButton1.GetComponent<AttackButton>().Populate(Aggressor.GetComponent<Attack>().MeleeDamage,
                 Aggressor.GetComponent<Attack>().MeleeAttacks,
                 Defender.GetComponent<Attack>().MeleeDamage,
-                Defender.GetComponent<Attack>().MeleeAttacks);
+                Defender.GetComponent<Attack>().MeleeAttacks,                
+                "Melee",
+                Aggressor.GetComponent<Attack>().MeleeName,
+                Defender.GetComponent<Attack>().MeleeName);
 
             if(Aggressor.GetComponent<Attack>().RangedAttacks <= 0)
             {
@@ -92,7 +98,10 @@ public class CombatMenu : MonoBehaviour
                 AttackButton2.GetComponent<AttackButton>().Populate(Aggressor.GetComponent<Attack>().RangedDamage,
                     Aggressor.GetComponent<Attack>().RangedAttacks,
                     Defender.GetComponent<Attack>().RangedDamage,
-                    Defender.GetComponent<Attack>().RangedAttacks);
+                    Defender.GetComponent<Attack>().RangedAttacks,
+                    "Ranged",
+                    Aggressor.GetComponent<Attack>().RangedName,
+                    Defender.GetComponent<Attack>().RangedName);
 
             }
 
@@ -111,5 +120,61 @@ public class CombatMenu : MonoBehaviour
         GetComponent<CanvasGroup>().interactable = false;
         GetComponent<CanvasGroup>().blocksRaycasts = false;
 
+    }
+
+
+    public void AB1()
+    {
+
+        if(noMelee == true)
+        {
+
+            Aggressor.GetComponent<Attack>().thisDamage = Aggressor.GetComponent<Attack>().RangedDamage;
+            Aggressor.GetComponent<Attack>().thisAttack = Aggressor.GetComponent<Attack>().RangedAttacks;
+
+            Defender.GetComponent<Attack>().thisDamage = Defender.GetComponent<Attack>().RangedDamage;
+            Defender.GetComponent<Attack>().thisAttack = Defender.GetComponent<Attack>().RangedAttacks;
+
+            Aggressor.GetComponent<Attack>().Target = Defender.GetComponent<HitPoints>();
+
+
+        }
+        else
+        {
+
+            Aggressor.GetComponent<Attack>().thisDamage = Aggressor.GetComponent<Attack>().MeleeDamage;
+            Aggressor.GetComponent<Attack>().thisAttack = Aggressor.GetComponent<Attack>().MeleeAttacks;
+
+            Defender.GetComponent<Attack>().thisDamage = Defender.GetComponent<Attack>().MeleeDamage;
+            Defender.GetComponent<Attack>().thisAttack = Defender.GetComponent<Attack>().MeleeAttacks;
+
+            
+
+            Aggressor.GetComponent<Attack>().Target = Defender.GetComponent<HitPoints>();
+
+
+        }
+        Aggressor.GetComponent<Attack>().EnemyDef = Defender.GetComponent<Attack>().CurrentDef;
+        Aggressor.GetComponent<Pathfinding>().MovePoints = 0;
+        Cancel();
+
+    }
+
+    public void AB2()
+    {
+
+        Aggressor.GetComponent<Attack>().thisDamage = Aggressor.GetComponent<Attack>().RangedDamage;
+        Aggressor.GetComponent<Attack>().thisAttack = Aggressor.GetComponent<Attack>().RangedAttacks;
+
+        Defender.GetComponent<Attack>().thisDamage = Defender.GetComponent<Attack>().RangedDamage;
+        Defender.GetComponent<Attack>().thisAttack = Defender.GetComponent<Attack>().RangedAttacks;
+
+        Aggressor.GetComponent<Attack>().Target = Defender.GetComponent<HitPoints>();
+
+        Aggressor.GetComponent<Attack>().EnemyDef = Defender.GetComponent<Attack>().CurrentDef;
+
+        Aggressor.GetComponent<Pathfinding>().MovePoints = 0;
+
+        Cancel();
     }
 }

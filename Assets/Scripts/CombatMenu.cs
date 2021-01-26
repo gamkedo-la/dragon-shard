@@ -18,6 +18,11 @@ public class CombatMenu : MonoBehaviour
 
     public Clicker click;
 
+    public GameObject AttackButton1;
+    public GameObject AttackButton2;
+
+    bool noMelee = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +37,14 @@ public class CombatMenu : MonoBehaviour
 
     public void Populate()
     {
+        AttackButton1.GetComponent<CanvasGroup>().alpha = 1;
+        AttackButton1.GetComponent<CanvasGroup>().interactable = true;
+        AttackButton1.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        AttackButton2.GetComponent<CanvasGroup>().alpha = 1;
+        AttackButton2.GetComponent<CanvasGroup>().interactable = true;
+        AttackButton2.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
 
         AggName.text = Aggressor.GetComponent<Unit>().UnitName;
         AggDef.text = "Defense: " + Aggressor.GetComponent<Attack>().CurrentDef.ToString() + "%";
@@ -42,6 +55,50 @@ public class CombatMenu : MonoBehaviour
         AggColor.color = Aggressor.GetComponent<Unit>().GM.ThisGame[Aggressor.GetComponent<Unit>().Owner].thisColor;
 
         DefColor.color = Defender.GetComponent<Unit>().GM.ThisGame[Defender.GetComponent<Unit>().Owner].thisColor;
+
+        if(Aggressor.GetComponent<Attack>().MeleeAttacks <= 0)
+        {
+
+            noMelee = true;
+        }
+
+        if(noMelee == true)
+        {
+            AttackButton1.GetComponent<AttackButton>().Populate(Aggressor.GetComponent<Attack>().RangedDamage,
+                Aggressor.GetComponent<Attack>().RangedAttacks,
+                Defender.GetComponent<Attack>().RangedDamage,
+                Defender.GetComponent<Attack>().RangedAttacks);
+            
+
+        }
+        else
+        {
+            AttackButton1.GetComponent<AttackButton>().Populate(Aggressor.GetComponent<Attack>().MeleeDamage,
+                Aggressor.GetComponent<Attack>().MeleeAttacks,
+                Defender.GetComponent<Attack>().MeleeDamage,
+                Defender.GetComponent<Attack>().MeleeAttacks);
+
+            if(Aggressor.GetComponent<Attack>().RangedAttacks <= 0)
+            {
+
+                AttackButton2.GetComponent<CanvasGroup>().alpha = 0;
+                AttackButton2.GetComponent<CanvasGroup>().interactable = false;
+                AttackButton2.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+            }
+            else
+            {
+
+                AttackButton2.GetComponent<AttackButton>().Populate(Aggressor.GetComponent<Attack>().RangedDamage,
+                    Aggressor.GetComponent<Attack>().RangedAttacks,
+                    Defender.GetComponent<Attack>().RangedDamage,
+                    Defender.GetComponent<Attack>().RangedAttacks);
+
+            }
+
+
+
+        }
 
     }
 

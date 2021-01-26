@@ -34,9 +34,9 @@ public class Tile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-#if UNITY_EDITOR
-        TileUpdate();
-#endif
+//#if UNITY_EDITOR
+//        TileUpdate();
+//#endif
     }
 
     public void TileUpdate()

@@ -10,6 +10,8 @@ public class Unit : MonoBehaviour
 
     public GameObject Options;
 
+    public string UnitName;
+
     //public MovementStat[] movementStats;
 
     // Start is called before the first frame update

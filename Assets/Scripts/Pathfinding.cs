@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pathfinding : MonoBehaviour
 {
-    private GameObject CurrentLocation;
+    public GameObject CurrentLocation;
 
     private List<GameObject> Checked = new List<GameObject>();
     private List<GameObject> ToCheck = new List<GameObject>();
@@ -30,7 +30,7 @@ public class Pathfinding : MonoBehaviour
     Vector3 tempP;
     Vector3 tempN;
 
-    Transform Grid;
+    public Transform Grid;
 
     Clicker thisClicker;
 
@@ -58,6 +58,8 @@ public class Pathfinding : MonoBehaviour
 
         }
 
+        GetComponent<Attack>().SetDef();
+
     }
 
     // Update is called once per frame
@@ -76,6 +78,8 @@ public class Pathfinding : MonoBehaviour
                 CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = gameObject;
                 Path[Path.Length - step].GetComponent<Pathnode>().CurrentOccupant = null;
                 MovePoints -= CurrentLocation.GetComponent<Pathnode>().GetMPRequired();
+
+                GetComponent<Attack>().SetDef();
 
                 if(Path.Length - 1 - step <= 0)
                 {

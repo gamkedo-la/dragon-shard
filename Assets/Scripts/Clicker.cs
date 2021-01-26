@@ -6,7 +6,7 @@ public class Clicker : MonoBehaviour
 {
     public Unit CurrentUnit;
     public GameObject EndPoint;
-    public bool SelectingAction;
+    public bool SelectingAction = false;
 
     public bool ActionInProgress = false;
 
@@ -28,12 +28,13 @@ public class Clicker : MonoBehaviour
                         && SelectingAction == false)
                     {
 
-                        Debug.Log(rhInfo.collider.name + " . . " + rhInfo.point);
+                        //Debug.Log(rhInfo.collider.name + " . . " + rhInfo.point);
                         CurrentUnit = rhInfo.collider.GetComponent<Unit>();
 
                         if (CurrentUnit != null)
                         {
                             CurrentUnit.DisplayOptions();
+                            return;
 
                         }
                         else
@@ -50,6 +51,7 @@ public class Clicker : MonoBehaviour
                             CurrentUnit.HideOptions();
                             CurrentUnit.GetComponent<Pathfinding>().GenerateMovementOptions();
                             SelectingAction = true;
+                            return;
 
 
                         }
@@ -57,8 +59,10 @@ public class Clicker : MonoBehaviour
                         else if(rhInfo.collider.gameObject.tag == "attack button")
                         {
 
-                            //do combat stuff here
+                            CurrentUnit.GetComponent<SelectAttack>().FindTargets();
                             CurrentUnit.HideOptions();
+                            SelectingAction = true;
+                            return;
                            
                         }
 
@@ -73,10 +77,33 @@ public class Clicker : MonoBehaviour
                             CurrentUnit.GetComponent<Pathfinding>().MoveTo(EndPoint);
                             SelectingAction = false;
                             ActionInProgress = true;
+                            return;
                         }
+                       
+                        else if(CurrentUnit != null
+                            && CurrentUnit.GetComponent<SelectAttack>().ValidTargets.Contains(rhInfo.collider.gameObject) == true
+                            && SelectingAction == true
+                            && rhInfo.collider.gameObject.GetComponent<HitPoints>() != null)
+                        {
+
+                            Debug.Log(CurrentUnit.name + " is fighting " + rhInfo.collider.name);
+                            CurrentUnit.GetComponent<SelectAttack>().InitiateCombat(rhInfo.collider.gameObject);
+                            SelectingAction = false;
+                            ActionInProgress = true;
+                            //return;
+
+
+
+                        }
+
+
+
                         else
                         {
-                            CurrentUnit.HideOptions();
+                            if (CurrentUnit != null)
+                            {
+                                CurrentUnit.HideOptions();
+                            }
                             Clear();
                         }
                     }
@@ -90,6 +117,7 @@ public class Clicker : MonoBehaviour
 
     public void Clear()
     {
+        Debug.Log("clear");
         CurrentUnit = null;
         EndPoint = null;
         ActionInProgress = false;

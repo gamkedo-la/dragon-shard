@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 7241291557752397142}
   - component: {fileID: 3925146671997168782}
   - component: {fileID: 7005856022841044557}
+  - component: {fileID: 683707704383475333}
+  - component: {fileID: 6575824421574598638}
+  - component: {fileID: 7926924879536991}
   m_Layer: 0
   m_Name: Spearguy
   m_TagString: Unit
@@ -52,6 +55,7 @@ MonoBehaviour:
   GM: {fileID: 0}
   Click: {fileID: 0}
   Options: {fileID: 0}
+  UnitName: Spear
 --- !u!114 &3925146671997168782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,8 +68,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 491f02ae0bfe67641a4c52f182b03c84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentLocation: {fileID: 0}
   CanMoveTo: []
   MovePoints: 3
+  Grid: {fileID: 0}
   Grass: 1
   Forest: 2
   Water: 3
@@ -83,6 +89,68 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!114 &683707704383475333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482913979014513225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06731ba15b11bb4a9a22ddd097d49e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToCheck: []
+  ValidTargets: []
+  TargetLocations: []
+  Grid: {fileID: 0}
+  CombatMenu: {fileID: 0}
+--- !u!114 &6575824421574598638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482913979014513225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd69a3b68a5d1c45bc86c49b4ec863e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeleeAttacks: 2
+  MeleeDamage: 5
+  RangedAttacks: 0
+  RangedDamage: 0
+  Target: {fileID: 0}
+  thisAttack: 0
+  thisDamage: 0
+  timer: 0
+  turn: 1
+  counter: 0
+  enemyCounter: 0
+  ChanceToGetHit: 0
+  HitChance: 0
+  GrassDef: 40
+  ForestDef: 50
+  WaterDef: 20
+  CurrentDef: 0
+--- !u!114 &7926924879536991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482913979014513225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541726d8a2db6f7499eb6c2600f01069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 50
+  CurrentHP: 50
+  DamageText: {fileID: 6215587415028543921, guid: b185651c5616a1240bfabf12d11d3bb4,
+    type: 3}
 --- !u!1 &2110409302615645008
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5823972455582642290
 Transform:
   m_ObjectHideFlags: 0

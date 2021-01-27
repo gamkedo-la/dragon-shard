@@ -6,7 +6,7 @@ using UnityEngine;
 public class Terrain : MonoBehaviour
 {
 
-    private bool PaintingTerrain = false;
+    public bool PaintingTerrain = false;
 
     public TileType PaintBrush;
 
@@ -44,7 +44,7 @@ public class Terrain : MonoBehaviour
             {
                 Tile T = rhInfo.collider.GetComponent<Tile>();
 
-                T.thisTile = PaintBrush;
+                T.SetTile( PaintBrush);
                 T.TileUpdate();
 
                 if (BrushSize > 1)
@@ -53,7 +53,7 @@ public class Terrain : MonoBehaviour
                     foreach (GameObject TT in T.Adjacent)
                     {
 
-                        TT.GetComponent<Tile>().thisTile = PaintBrush;
+                        TT.GetComponent<Tile>().SetTile( PaintBrush);
                         TT.GetComponent<Tile>().TileUpdate();
 
                     }

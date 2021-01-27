@@ -120,17 +120,17 @@ public class Attack : MonoBehaviour
 
     public void SetDef()
     {
-        if(GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().thisTile == TileType.forest)
+        if(GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().GetTile() == TileType.forest)
         {
             CurrentDef = ForestDef;
 
         }
-        if (GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().thisTile == TileType.grass)
+        if (GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().GetTile() == TileType.grass)
         {
             CurrentDef = GrassDef;
 
         }
-        if (GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().thisTile == TileType.water)
+        if (GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().GetTile() == TileType.water)
         {
             CurrentDef = WaterDef;
 

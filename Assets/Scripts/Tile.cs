@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType { unassigned, grass, water, forest }
+public enum TileType { Def, grass, water, forest }
 
 [ExecuteInEditMode]
 [SelectionBase]
@@ -29,14 +29,26 @@ public class Tile : MonoBehaviour
     void Start()
     {
         FindNeighbors();
+        TileUpdate();
     }
+
+    public void SetTile(TileType t)
+    {
+
+        thisTile = t;
+    }
+    public TileType GetTile()
+    {
+        return thisTile;
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-//#if UNITY_EDITOR
-//        TileUpdate();
-//#endif
+
+        //TileUpdate();
+
     }
 
     public void TileUpdate()
@@ -73,7 +85,7 @@ public class Tile : MonoBehaviour
             FOREST.SetActive(false);
 
         }
-        if (thisTile == TileType.unassigned)
+        if (thisTile == TileType.Def)
         {
             DEFAULT.SetActive(true);
             Current = default;

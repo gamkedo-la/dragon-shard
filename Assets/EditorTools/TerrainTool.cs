@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.EditorTools;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 [EditorTool("Terrain Tool")]
 public class TerrainTool : EditorTool
@@ -17,8 +19,10 @@ public class TerrainTool : EditorTool
 
     private void OnEnable()
     {
-        myTerrain = GameObject.Find("TerrainEditor").GetComponent<Terrain>();
-        
+        if (myTerrain == null)
+        {
+            myTerrain = GameObject.Find("TerrainEditor").GetComponent<Terrain>();
+        }
     }
 
     public override GUIContent toolbarIcon =>
@@ -35,10 +39,15 @@ public class TerrainTool : EditorTool
         HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
         HandleMouse();
 
+
     }
 
     void HandleMouse()
     {
+        if (myTerrain == null)
+        {
+            myTerrain = GameObject.Find("TerrainEditor").GetComponent<Terrain>();
+        }
         if (myTerrain != null)
         {
             Event e = Event.current;
@@ -62,6 +71,7 @@ public class TerrainTool : EditorTool
         }
         else
         {
+
             Debug.Log("Error: Cannot find terrain script. Please add TerrainEditor prefab to the scene");
         }
 
@@ -79,7 +89,10 @@ public class TerrainTool : EditorTool
             {
                 Tile T = rhInfo.collider.GetComponent<Tile>();
 
-                T.thisTile = myTerrain.PaintBrush;
+                Undo.RecordObject(T.gameObject, "tile");
+                T.SetTile(myTerrain.PaintBrush);
+
+
                 T.TileUpdate();
 
                 if (myTerrain.BrushSize > 1)
@@ -88,7 +101,8 @@ public class TerrainTool : EditorTool
                     foreach (GameObject TT in T.Adjacent)
                     {
 
-                        TT.GetComponent<Tile>().thisTile = myTerrain.PaintBrush;
+                        TT.GetComponent<Tile>().SetTile(myTerrain.PaintBrush);
+
                         TT.GetComponent<Tile>().TileUpdate();
 
                     }

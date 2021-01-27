@@ -22,7 +22,7 @@ public class Grid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CreateGrid();
+        //CreateGrid();
     }
 
     // Update is called once per frame

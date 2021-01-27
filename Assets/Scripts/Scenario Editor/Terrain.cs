@@ -6,7 +6,7 @@ using UnityEngine;
 public class Terrain : MonoBehaviour
 {
 
-    public bool PaintingTerrain = false;
+    private bool PaintingTerrain = false;
 
     public TileType PaintBrush;
 
@@ -25,38 +25,58 @@ public class Terrain : MonoBehaviour
         {
             if (Input.GetMouseButton(0))
             {
-                Ray toMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit rhInfo;
-                bool didHit = Physics.Raycast(toMouse, out rhInfo, 50.0f);
-
-                if (didHit == true)
-                {
-
-                    if (rhInfo.collider.gameObject.GetComponent<Tile>() != null)
-                    {
-                        Tile T = rhInfo.collider.GetComponent<Tile>();
-
-                        T.thisTile = PaintBrush;
-                        T.TileUpdate();
-
-                        if (BrushSize > 1)
-                        {
-                            T.FindNeighbors();
-                            foreach (GameObject TT in T.Adjacent)
-                            {
-
-                                TT.GetComponent<Tile>().thisTile = PaintBrush;
-                                TT.GetComponent<Tile>().TileUpdate();
-
-                            }
-                        }
-
-
-                    }
-
-                }
+                Paint();
 
             }
         }
     }
+
+    public void Paint()
+    {
+        Ray toMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rhInfo;
+        bool didHit = Physics.Raycast(toMouse, out rhInfo, 50.0f);
+
+        if (didHit == true)
+        {
+
+            if (rhInfo.collider.gameObject.GetComponent<Tile>() != null)
+            {
+                Tile T = rhInfo.collider.GetComponent<Tile>();
+
+                T.thisTile = PaintBrush;
+                T.TileUpdate();
+
+                if (BrushSize > 1)
+                {
+                    T.FindNeighbors();
+                    foreach (GameObject TT in T.Adjacent)
+                    {
+
+                        TT.GetComponent<Tile>().thisTile = PaintBrush;
+                        TT.GetComponent<Tile>().TileUpdate();
+
+                    }
+                }
+
+
+            }
+
+        }
+
+
+    }
+
+    public void PTSet(bool b)
+    {
+        PaintingTerrain = b;
+
+    }
+
+    public bool PTGet()
+    {
+        return PaintingTerrain;
+
+    }
+
 }

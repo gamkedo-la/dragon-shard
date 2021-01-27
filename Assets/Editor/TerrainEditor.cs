@@ -24,7 +24,7 @@ public class TerrainEditor : Editor
 
         PaintBrush = myTerrain.PaintBrush;
         BrushSize = myTerrain.BrushSize;
-        PaintingTerrain = myTerrain.PaintingTerrain;
+        //PaintingTerrain = myTerrain.PaintingTerrain;
     }
 
 
@@ -35,47 +35,56 @@ public class TerrainEditor : Editor
 
 
 #if UNITY_EDITOR
-
-        if (Event.current.type == EventType.MouseDrag || Event.current.type == EventType.MouseDown)
+        if (PaintingTerrain)
         {
-
-            Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
-            RaycastHit rhInfo;
-
-            if (Physics.Raycast(ray, out rhInfo, 10000))
+            if (Event.current.type == EventType.MouseDown)
             {
 
-                if (rhInfo.collider.gameObject.GetComponent<Tile>() != null)
+                //PaintTile();
+
+            }
+
+            //Selection.activeGameObject = myTerrain.transform.gameObject;
+
+        }
+#endif
+    }
+
+    void PaintTile()
+    {
+        Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
+        RaycastHit rhInfo;
+
+        if (Physics.Raycast(ray, out rhInfo, 10000))
+        {
+
+            if (rhInfo.collider.gameObject.GetComponent<Tile>() != null)
+            {
+                Tile T = rhInfo.collider.GetComponent<Tile>();
+
+                T.thisTile = PaintBrush;
+                T.TileUpdate();
+
+                if (BrushSize > 1)
                 {
-                    Tile T = rhInfo.collider.GetComponent<Tile>();
-
-                    T.thisTile = PaintBrush;
-                    T.TileUpdate();
-
-                    if (BrushSize > 1)
+                    T.FindNeighbors();
+                    foreach (GameObject TT in T.Adjacent)
                     {
-                        T.FindNeighbors();
-                        foreach (GameObject TT in T.Adjacent)
-                        {
 
-                            TT.GetComponent<Tile>().thisTile = PaintBrush;
-                            TT.GetComponent<Tile>().TileUpdate();
+                        TT.GetComponent<Tile>().thisTile = PaintBrush;
+                        TT.GetComponent<Tile>().TileUpdate();
 
-                        }
                     }
-
-
                 }
 
 
             }
-            
-        }
-        if (PaintingTerrain)
-        {
-            Selection.activeGameObject = myTerrain.transform.gameObject;
+
+
         }
 
-#endif
+
+
     }
+
 }

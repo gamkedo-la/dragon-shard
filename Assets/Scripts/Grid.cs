@@ -8,7 +8,9 @@ public class Grid : MonoBehaviour
     public int Rows;
     public int Columns;
 
+
     public int LR;
+
     public int LC;
 
 
@@ -227,7 +229,7 @@ public class Grid : MonoBehaviour
             if(T.C == LC || T.R == LR)
             {
 
-                T.T.GetComponent<Tile>().FindNeighbors();
+                //T.T.GetComponent<Tile>().FindNeighbors();
 
             }
 

@@ -6,14 +6,13 @@ public enum TileType { Def, grass, water, forest }
 
 [ExecuteInEditMode]
 [SelectionBase]
+[System.Serializable]
 public class Tile : MonoBehaviour
 {
-
-    
-
     public int Row;
     public int Column;
 
+    [SerializeField]
     public TileType thisTile;
 
     public GameObject DEFAULT;
@@ -21,6 +20,7 @@ public class Tile : MonoBehaviour
     public GameObject GRASS;
     public GameObject FOREST;
 
+    [SerializeField]
     public GameObject Current;
 
     public List<GameObject> Adjacent = new List<GameObject>();

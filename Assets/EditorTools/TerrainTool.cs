@@ -30,7 +30,7 @@ public class TerrainTool : EditorTool
         {
             image = icon,
             text = "Terrain Tool",
-            tooltip = "Edit terrain with this tool"
+            tooltip = "Dragon Shard terrain editor"
 
         };
 
@@ -38,6 +38,7 @@ public class TerrainTool : EditorTool
     {
         HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
         HandleMouse();
+
 
 
     }
@@ -92,6 +93,9 @@ public class TerrainTool : EditorTool
                 Undo.RecordObject(T.gameObject, "tile");
                 T.SetTile(myTerrain.PaintBrush);
 
+                
+                EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+                EditorUtility.SetDirty(T);
 
                 T.TileUpdate();
 
@@ -100,10 +104,11 @@ public class TerrainTool : EditorTool
                     T.FindNeighbors();
                     foreach (GameObject TT in T.Adjacent)
                     {
-
                         TT.GetComponent<Tile>().SetTile(myTerrain.PaintBrush);
 
                         TT.GetComponent<Tile>().TileUpdate();
+                        EditorUtility.SetDirty(TT.GetComponent<Tile>());
+                        
 
                     }
                 }

@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TerrainInEditor : MonoBehaviour
+public class TerrainSelectorButton : MonoBehaviour
 {
+    public TileType thisTile;
+
+    public Terrain T;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +19,11 @@ public class TerrainInEditor : MonoBehaviour
     {
         
     }
+
+    public void SetPaintBrush()
+    {
+        T.PBSet(thisTile);
+
+    }
+
 }

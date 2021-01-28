@@ -79,4 +79,22 @@ public class Terrain : MonoBehaviour
 
     }
 
+    public void PTOn()
+    {
+
+        PaintingTerrain = true;
+    }
+
+    public void PTOff()
+    {
+
+        PaintingTerrain = false;
+    }
+
+    public void PBSet(TileType tile)
+    {
+
+        PaintBrush = tile;
+    }
+
 }

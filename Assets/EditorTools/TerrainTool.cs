@@ -14,8 +14,9 @@ public class TerrainTool : EditorTool
     Texture2D icon;
 
     Terrain myTerrain;
-    
 
+    List<Tile> tilesToUpdate = new List<Tile>();
+    List<Tile> ring = new List<Tile>();
 
     private void OnEnable()
     {
@@ -90,31 +91,60 @@ public class TerrainTool : EditorTool
             {
                 Tile T = rhInfo.collider.GetComponent<Tile>();
 
-                Undo.RecordObject(T.gameObject, "tile");
-                T.SetTile(myTerrain.PaintBrush);
-
-                
-                EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
-                EditorUtility.SetDirty(T);
-
-                T.TileUpdate();
+                tilesToUpdate.Add(T);
 
                 if (myTerrain.BrushSize > 1)
                 {
-                    T.FindNeighbors();
-                    foreach (GameObject TT in T.Adjacent)
+                    for(int i = 2; i <= myTerrain.BrushSize; i++)
                     {
-                        TT.GetComponent<Tile>().SetTile(myTerrain.PaintBrush);
 
-                        TT.GetComponent<Tile>().TileUpdate();
-                        EditorUtility.SetDirty(TT.GetComponent<Tile>());
-                        
+                        foreach(Tile TT in tilesToUpdate)
+                        {
+
+                            foreach(GameObject adj in TT.Adjacent)
+                            {
+
+                                if(tilesToUpdate.Contains(adj.GetComponent<Tile>()) == false &&
+                                    ring.Contains(adj.GetComponent<Tile>()) == false)
+                                {
+                                    ring.Add(adj.GetComponent<Tile>());
+
+                                }
+
+
+                            }
+
+
+                        }
+                        foreach(Tile R in ring)
+                        {
+                            tilesToUpdate.Add(R);
+
+                        }
+
 
                     }
+
+                    
                 }
 
 
             }
+
+            foreach(Tile tile in tilesToUpdate)
+            {
+                Undo.RecordObject(tile.gameObject, "tile");
+                tile.SetTile(myTerrain.PaintBrush);
+
+
+                EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+                EditorUtility.SetDirty(tile);
+
+                tile.TileUpdate();
+
+            }
+            tilesToUpdate.Clear();
+            ring.Clear();
 
         }
 

@@ -12,6 +12,9 @@ public class Terrain : MonoBehaviour
 
     public int BrushSize = 1;
 
+    List<Tile> tilesToUpdate = new List<Tile>();
+    List<Tile> ring = new List<Tile>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,32 +42,47 @@ public class Terrain : MonoBehaviour
 
         if (didHit == true)
         {
-
             if (rhInfo.collider.gameObject.GetComponent<Tile>() != null)
             {
                 Tile T = rhInfo.collider.GetComponent<Tile>();
-
-                T.SetTile( PaintBrush);
-                T.TileUpdate();
+                tilesToUpdate.Add(T);
 
                 if (BrushSize > 1)
                 {
-                    T.FindNeighbors();
-                    foreach (GameObject TT in T.Adjacent)
+                    for (int i = 2; i <= BrushSize; i++)
                     {
 
-                        TT.GetComponent<Tile>().SetTile( PaintBrush);
-                        TT.GetComponent<Tile>().TileUpdate();
+                        foreach (Tile TT in tilesToUpdate)
+                        {
 
+                            foreach (GameObject adj in TT.Adjacent)
+                            {
+
+                                if (tilesToUpdate.Contains(adj.GetComponent<Tile>()) == false &&
+                                    ring.Contains(adj.GetComponent<Tile>()) == false)
+                                {
+                                    ring.Add(adj.GetComponent<Tile>());
+
+                                }
+                            }
+                        }
+                        foreach (Tile R in ring)
+                        {
+                            tilesToUpdate.Add(R);
+
+                        }
                     }
                 }
-
-
             }
 
+            foreach (Tile tile in tilesToUpdate)
+            {
+                tile.SetTile(PaintBrush);
+                tile.TileUpdate();
+            }
+            tilesToUpdate.Clear();
+            ring.Clear();
         }
-
-
     }
 
     public void PTSet(bool b)

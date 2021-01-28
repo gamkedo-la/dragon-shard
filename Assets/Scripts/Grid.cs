@@ -221,4 +221,20 @@ public class Grid : MonoBehaviour
         public GameObject T;
 
     }
+
+    public void UpdateRows(int R)
+    {
+
+        Rows = R;
+        CreateGrid();
+
+    }
+
+    public void UpdateColumns(int C)
+    {
+
+        Columns = C;
+        CreateGrid();
+    }
+
 }

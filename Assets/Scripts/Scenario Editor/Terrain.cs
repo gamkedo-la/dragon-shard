@@ -12,6 +12,8 @@ public class Terrain : MonoBehaviour
 
     public int BrushSize = 1;
 
+    public Grid grid;
+
     List<Tile> tilesToUpdate = new List<Tile>();
     List<Tile> ring = new List<Tile>();
 
@@ -28,6 +30,7 @@ public class Terrain : MonoBehaviour
         {
             if (Input.GetMouseButton(0))
             {
+                grid.FindAllNeighbors();
                 Paint();
 
             }

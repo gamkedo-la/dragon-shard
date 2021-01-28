@@ -7,11 +7,14 @@ public class EditorInterface : MonoBehaviour
 
     public GameObject TerrainSelector;
 
+    public Terrain terrain;
+    public Grid grid;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        terrain.PaintingTerrain = true;   
     }
 
     // Update is called once per frame

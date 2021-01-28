@@ -36,5 +36,12 @@ public class MapSize : MonoBehaviour
 
     }
 
+    public void ValueChange()
+    {
+
+
+
+    }
+
 
 }

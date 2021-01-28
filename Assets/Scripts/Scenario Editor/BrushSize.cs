@@ -21,12 +21,18 @@ public class BrushSize : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        brush = int.Parse(B.text);
+        
     }
 
     public void UpdateBrushSize()
     {
 
         terrain.BrushSize = brush;
+    }
+
+    public void ValueChange()
+    {
+
+        brush = int.Parse(B.text);
     }
 }

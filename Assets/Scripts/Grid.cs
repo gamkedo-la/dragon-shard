@@ -25,6 +25,7 @@ public class Grid : MonoBehaviour
     void Start()
     {
         //CreateGrid();
+        FindAllNeighbors();
     }
 
     // Update is called once per frame
@@ -36,10 +37,8 @@ public class Grid : MonoBehaviour
 
     public void CreateGrid()
     {
-
-        if(Columns < LC)
-        {
-            
+        if (Columns < LC)
+        {            
             foreach(TileSpace tile in GridList.ToArray())
             {
                 if(tile.C > Columns)
@@ -47,17 +46,12 @@ public class Grid : MonoBehaviour
                     
                     DestroyImmediate(tile.T);
                     GridList.Remove(tile);
-
                 }
-
             }
             LC = Columns;
-
-
         }
         if(Rows < LR)
         {
-
             foreach (TileSpace tile in GridList.ToArray())
             {
                 if (tile.R > Rows)
@@ -67,23 +61,18 @@ public class Grid : MonoBehaviour
                     GridList.Remove(tile);
 
                 }
-
             }
             LR = Rows;
-
         }
 
         for (int i = 1; i <= Columns; i++)
         {
             if (i <= LC)
             {
-
                 if (i % 2 == 0)
                 {
                     for (int j = LR+1; j <= Rows; j++)
                     {
-
-
                         //GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), Quaternion.identity, gameObject.transform);
 
                         GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
@@ -100,14 +89,10 @@ public class Grid : MonoBehaviour
                         TileSpace temp;
 
                         temp.T = tl;
-
                         temp.C = i;
-
                         temp.R = j;
 
                         GridList.Add(temp);
-
-
                     }
                 }
 
@@ -115,11 +100,7 @@ public class Grid : MonoBehaviour
                 {
 
                     for (int j = LR+1; j <= Rows; j++)
-
                     {
-
-
-
                         //GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), Quaternion.identity, gameObject.transform);
 
                         GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
@@ -136,18 +117,12 @@ public class Grid : MonoBehaviour
                         TileSpace temp;
 
                         temp.T = tl;
-
                         temp.C = i;
-
                         temp.R = j;
 
                         GridList.Add(temp);
-
                     }
                 }
-
-
-
             }
             else
             {
@@ -156,8 +131,6 @@ public class Grid : MonoBehaviour
                 {
                     for (int j = 1; j <= Rows; j++)
                     {
-
-
                         //GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), Quaternion.identity, gameObject.transform);
 
                         GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
@@ -174,26 +147,17 @@ public class Grid : MonoBehaviour
                         TileSpace temp;
 
                         temp.T = tl;
-
                         temp.C = i;
-
                         temp.R = j;
 
                         GridList.Add(temp);
-
-
                     }
                 }
 
                 else
                 {
-
                     for (int j = 1; j <= Rows; j++)
-
                     {
-
-
-
                         //GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), Quaternion.identity, gameObject.transform);
 
                         GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
@@ -210,35 +174,27 @@ public class Grid : MonoBehaviour
                         TileSpace temp;
 
                         temp.T = tl;
-
                         temp.C = i;
-
                         temp.R = j;
 
                         GridList.Add(temp);
-
                     }
                 }
             }
-
         }
+    }
 
-        foreach(TileSpace T in GridList)
+    public void FindAllNeighbors()
+    {
+        foreach (TileSpace T in GridList)
         {
 
-            if(T.C == LC || T.R == LR)
-            {
-
-                //T.T.GetComponent<Tile>().FindNeighbors();
-
-            }
+            T.T.GetComponent<Tile>().FindNeighbors();
 
         }
-
 
         LR = Rows;
         LC = Columns;
-
 
     }
 
@@ -247,26 +203,22 @@ public class Grid : MonoBehaviour
         foreach(TileSpace tile in GridList)
         {
             DestroyImmediate(tile.T, true);
-
-
-
-
+                                 
         }
+
         GridList.Clear();
+        Rows = 0;
+        Columns = 0;
         LR = 0;
         LC = 0;
-
-
     }
 
     [System.Serializable]
     public struct TileSpace
     {
-
         public int R;
         public int C;
         public GameObject T;
-
 
     }
 }

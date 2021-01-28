@@ -15,6 +15,8 @@ public class TerrainTool : EditorTool
 
     Terrain myTerrain;
 
+    Grid myGrid;
+
     List<Tile> tilesToUpdate = new List<Tile>();
     List<Tile> ring = new List<Tile>();
 
@@ -23,6 +25,7 @@ public class TerrainTool : EditorTool
         if (myTerrain == null)
         {
             myTerrain = GameObject.Find("TerrainEditor").GetComponent<Terrain>();
+            myGrid = GameObject.Find("Grid").GetComponent<Grid>();
         }
     }
 
@@ -50,6 +53,11 @@ public class TerrainTool : EditorTool
         {
             myTerrain = GameObject.Find("TerrainEditor").GetComponent<Terrain>();
         }
+        if(myGrid == null)
+        {
+            myGrid = GameObject.Find("Grid").GetComponent<Grid>();
+            myGrid.FindAllNeighbors();
+        }
         if (myTerrain != null)
         {
             Event e = Event.current;
@@ -58,14 +66,14 @@ public class TerrainTool : EditorTool
                 case EventType.MouseDown:
                     if (e.button == 0)
                     {
-                        Debug.Log(myTerrain.PaintBrush);
+                        //Debug.Log(myTerrain.PaintBrush);
                         Paint();
                     }
                     break;
                 case EventType.MouseDrag:
                     if (e.button == 0) 
                     {
-                        Debug.Log(myTerrain.PaintBrush);
+                        //Debug.Log(myTerrain.PaintBrush);
                         Paint();
                     }
                     break;
@@ -110,25 +118,15 @@ public class TerrainTool : EditorTool
                                     ring.Add(adj.GetComponent<Tile>());
 
                                 }
-
-
                             }
-
-
                         }
                         foreach(Tile R in ring)
                         {
                             tilesToUpdate.Add(R);
 
                         }
-
-
-                    }
-
-                    
+                    }                    
                 }
-
-
             }
 
             foreach(Tile tile in tilesToUpdate)
@@ -145,14 +143,6 @@ public class TerrainTool : EditorTool
             }
             tilesToUpdate.Clear();
             ring.Clear();
-
         }
-
-
     }
-
-
-
-
-
 }

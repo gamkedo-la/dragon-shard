@@ -16,13 +16,16 @@ public class GridEditor : Editor
 
         if (GUILayout.Button("Update Grid Size"))
         {
-            myGrid.CreateGrid(); 
+            myGrid.CreateGrid();
+            myGrid.FindAllNeighbors();
+            EditorUtility.SetDirty(myGrid);
         }
 
         if (GUILayout.Button("Clear"))
         {
 
             myGrid.ResetGrid();
+            EditorUtility.SetDirty(myGrid);
 
         }
 

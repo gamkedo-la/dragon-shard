@@ -37,6 +37,9 @@ public class Pathfinding : MonoBehaviour
     public int Grass;
     public int Forest;
     public int Water;
+    public int Sand;
+    public int Hills;
+    public int Castle;
 
 
     // Start is called before the first frame update

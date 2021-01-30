@@ -75,6 +75,9 @@ MonoBehaviour:
   Grass: 1
   Forest: 2
   Water: 3
+  Sand: 3
+  Hills: 2
+  Castle: 1
 --- !u!136 &7005856022841044557
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -133,6 +136,9 @@ MonoBehaviour:
   GrassDef: 40
   ForestDef: 50
   WaterDef: 20
+  SandDef: 30
+  HillsDef: 50
+  CastleDef: 60
   CurrentDef: 0
   MeleeName: Spear
   RangedName: Throw Rock

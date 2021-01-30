@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType { Def, grass, water, forest }
+public enum TileType { Def, grass, water, forest, sand, hills, castle}
 
 [ExecuteInEditMode]
 [SelectionBase]
@@ -19,6 +19,9 @@ public class Tile : MonoBehaviour
     public GameObject WATER;
     public GameObject GRASS;
     public GameObject FOREST;
+    public GameObject SAND;
+    public GameObject HILLS;
+    public GameObject CASTLE;
 
     [SerializeField]
     public GameObject Current;
@@ -63,6 +66,9 @@ public class Tile : MonoBehaviour
             DEFAULT.SetActive(false);
             WATER.SetActive(false);
             GRASS.SetActive(false);
+            SAND.SetActive(false);
+            HILLS.SetActive(false);
+            CASTLE.SetActive(false);
 
         }
         if (thisTile == TileType.water)
@@ -73,6 +79,9 @@ public class Tile : MonoBehaviour
             DEFAULT.SetActive(false);
             FOREST.SetActive(false);
             GRASS.SetActive(false);
+            SAND.SetActive(false);
+            HILLS.SetActive(false);
+            CASTLE.SetActive(false);
 
         }
         if (thisTile == TileType.grass)
@@ -83,6 +92,9 @@ public class Tile : MonoBehaviour
             DEFAULT.SetActive(false);
             WATER.SetActive(false);
             FOREST.SetActive(false);
+            SAND.SetActive(false);
+            HILLS.SetActive(false);
+            CASTLE.SetActive(false);
 
         }
         if (thisTile == TileType.Def)
@@ -92,6 +104,49 @@ public class Tile : MonoBehaviour
 
             FOREST.SetActive(false);
             WATER.SetActive(false);
+            GRASS.SetActive(false);
+            SAND.SetActive(false);
+            HILLS.SetActive(false);
+            CASTLE.SetActive(false);
+
+        }
+
+        if (thisTile == TileType.sand)
+        {
+            SAND.SetActive(true);
+            Current = SAND;
+
+            DEFAULT.SetActive(false);
+            WATER.SetActive(false);
+            FOREST.SetActive(false);
+            GRASS.SetActive(false);
+            HILLS.SetActive(false);
+            CASTLE.SetActive(false);
+
+        }
+        if (thisTile == TileType.hills)
+        {
+            HILLS.SetActive(true);
+            Current = HILLS;
+
+            DEFAULT.SetActive(false);
+            WATER.SetActive(false);
+            FOREST.SetActive(false);
+            SAND.SetActive(false);
+            GRASS.SetActive(false);
+            CASTLE.SetActive(false);
+
+        }
+        if (thisTile == TileType.castle)
+        {
+            CASTLE.SetActive(true);
+            Current = CASTLE;
+
+            DEFAULT.SetActive(false);
+            WATER.SetActive(false);
+            FOREST.SetActive(false);
+            SAND.SetActive(false);
+            HILLS.SetActive(false);
             GRASS.SetActive(false);
 
         }

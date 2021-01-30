@@ -26,6 +26,9 @@ public class Attack : MonoBehaviour
     public int GrassDef;
     public int ForestDef;
     public int WaterDef;
+    public int SandDef;
+    public int HillsDef;
+    public int CastleDef;
 
     public int CurrentDef;
 

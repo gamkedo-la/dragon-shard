@@ -29,14 +29,27 @@ public class Pathnode : MonoBehaviour
 
         Previous = null;
         MPRemain = 0;
-        GetComponent<Tile>().Current.GetComponent<Fader>().ResetTile();
+        if (GetComponent<Tile>().Current.GetComponent<Fader>() != null)
+        {
+            GetComponent<Tile>().Current.GetComponent<Fader>().ResetTile();
+        }
+        else if (GetComponent<Tile>().Current.GetComponent<FaderControler>() != null)
+        {
+            GetComponent<Tile>().Current.GetComponent<FaderControler>().ResetTile();
+        }
 
     }
 
     public void Fade()
     {
-        GetComponent<Tile>().Current.GetComponent<Fader>().Fade();
-
+        if (GetComponent<Tile>().Current.GetComponent<Fader>() != null)
+        {
+            GetComponent<Tile>().Current.GetComponent<Fader>().Fade();
+        }
+        else if (GetComponent<Tile>().Current.GetComponent<FaderControler>() != null)
+        {
+            GetComponent<Tile>().Current.GetComponent<FaderControler>().Fade();
+        }
     }
 
 

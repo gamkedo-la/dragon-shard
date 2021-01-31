@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fader : MonoBehaviour
+public class FaderControler : MonoBehaviour
 {
-
-    public Material Normal;
-    public Material Faded;
+    public List<GameObject> mats = new List<GameObject>();
 
 
     // Start is called before the first frame update
@@ -24,13 +22,21 @@ public class Fader : MonoBehaviour
     public void ResetTile()
     {
 
-        GetComponent<MeshRenderer>().material = Normal;
+        foreach(GameObject g in mats)
+        {
+            g.GetComponent<Fader>().ResetTile();
+
+        }
 
     }
 
     public void Fade()
     {
+        foreach (GameObject g in mats)
+        {
+            g.GetComponent<Fader>().Fade();
 
-        GetComponent<MeshRenderer>().material = Faded;
+        }
     }
+
 }

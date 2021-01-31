@@ -138,6 +138,21 @@ public class Attack : MonoBehaviour
             CurrentDef = WaterDef;
 
         }
+        if (GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().GetTile() == TileType.sand)
+        {
+            CurrentDef = SandDef;
+
+        }
+        if (GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().GetTile() == TileType.castle)
+        {
+            CurrentDef = CastleDef;
+
+        }
+        if (GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().GetTile() == TileType.hills)
+        {
+            CurrentDef = HillsDef;
+
+        }
 
 
     }

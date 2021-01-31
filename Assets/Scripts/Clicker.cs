@@ -58,12 +58,15 @@ public class Clicker : MonoBehaviour
 
                         else if(rhInfo.collider.gameObject.tag == "attack button")
                         {
+                            if(CurrentUnit == null)
+                            {
+                                Debug.LogError($"CurrentUnit null when it should not be! {nameof(Clicker)}");
+                            }
 
                             CurrentUnit.GetComponent<SelectAttack>().FindTargets();
                             CurrentUnit.HideOptions();
                             SelectingAction = true;
-                            return;
-                           
+                            return;                           
                         }
 
                         else if(rhInfo.collider.GetComponent<Pathnode>() != null 

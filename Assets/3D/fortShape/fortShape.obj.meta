@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 0e7e60bf035437b4d893dae9cb90b951
+guid: 8c08dce849c095e459a267a6d87cb659
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: fortUVD512_defaultPolygonShader
-    second: {fileID: 2100000, guid: b2937b50a9cec3249af54f55a6cccf3b, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0

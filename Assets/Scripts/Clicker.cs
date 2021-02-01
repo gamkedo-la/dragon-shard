@@ -23,6 +23,11 @@ public class Clicker : MonoBehaviour
                 bool didHit = Physics.Raycast(toMouse, out rhInfo, 50.0f);
                 if (didHit)
                 {
+                    if (CurrentUnit != null)
+                    {
+                        CurrentUnit.HideOptions();
+                    }
+
                     if (rhInfo.collider.gameObject.GetComponent<Unit>() != null
                         && rhInfo.collider.gameObject.GetComponent<Unit>().Owner == GetComponent<Players>().CurrentTurn
                         && SelectingAction == false)

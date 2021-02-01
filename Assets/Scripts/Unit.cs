@@ -19,7 +19,7 @@ public class Unit : MonoBehaviour
     {
 
         Options = transform.Find("Action Menu").gameObject;
-        GM = GameObject.Find("Main Camera").GetComponent<Players>();
+        GM = Camera.main.GetComponent<Players>();
         Click = GM.thisClicker;
         
     }

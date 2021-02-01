@@ -46,7 +46,7 @@ public class Pathfinding : MonoBehaviour
     void Start()
     {
         Grid = GameObject.Find("Grid").transform;
-        thisClicker = GetComponent<Unit>().Click;
+        thisClicker = Camera.main.GetComponent<Clicker>();
         
         MP = MovePoints;
         RaycastHit rhInfo;

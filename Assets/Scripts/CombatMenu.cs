@@ -64,9 +64,12 @@ public class CombatMenu : MonoBehaviour
 
         if(noMelee == true)
         {
-            AttackButton1.GetComponent<AttackButton>().Populate(Aggressor.GetComponent<Attack>().RangedDamage,
+            float DF = Aggressor.GetComponent<Attack>().RangedDamage * Aggressor.GetComponent<Attack>().DamageMod;
+            float DFD = Defender.GetComponent<Attack>().RangedDamage * Defender.GetComponent<Attack>().DamageMod;
+
+            AttackButton1.GetComponent<AttackButton>().Populate((int)DF,
                 Aggressor.GetComponent<Attack>().RangedAttacks,
-                Defender.GetComponent<Attack>().RangedDamage,
+                (int)DFD,
                 Defender.GetComponent<Attack>().RangedAttacks, 
                 "Ranged",
                 Aggressor.GetComponent<Attack>().RangedName, 
@@ -76,9 +79,12 @@ public class CombatMenu : MonoBehaviour
         }
         else
         {
-            AttackButton1.GetComponent<AttackButton>().Populate(Aggressor.GetComponent<Attack>().MeleeDamage,
+            float DF = Aggressor.GetComponent<Attack>().MeleeDamage * Aggressor.GetComponent<Attack>().DamageMod;
+            float DFD = Defender.GetComponent<Attack>().MeleeDamage * Defender.GetComponent<Attack>().DamageMod;
+
+            AttackButton1.GetComponent<AttackButton>().Populate((int)DF,
                 Aggressor.GetComponent<Attack>().MeleeAttacks,
-                Defender.GetComponent<Attack>().MeleeDamage,
+                (int)DFD,
                 Defender.GetComponent<Attack>().MeleeAttacks,                
                 "Melee",
                 Aggressor.GetComponent<Attack>().MeleeName,
@@ -126,12 +132,15 @@ public class CombatMenu : MonoBehaviour
     public void AB1()
     {
 
+        
+
         if(noMelee == true)
         {
-
-            Aggressor.GetComponent<Attack>().thisDamage = Aggressor.GetComponent<Attack>().RangedDamage;
+            float DF = Aggressor.GetComponent<Attack>().RangedDamage * Aggressor.GetComponent<Attack>().DamageMod;
+            Aggressor.GetComponent<Attack>().thisDamage = (int)DF;
             Aggressor.GetComponent<Attack>().thisAttack = Aggressor.GetComponent<Attack>().RangedAttacks;
 
+            DF = Defender.GetComponent<Attack>().RangedDamage * Defender.GetComponent<Attack>().DamageMod;
             Defender.GetComponent<Attack>().thisDamage = Defender.GetComponent<Attack>().RangedDamage;
             Defender.GetComponent<Attack>().thisAttack = Defender.GetComponent<Attack>().RangedAttacks;
 
@@ -142,18 +151,23 @@ public class CombatMenu : MonoBehaviour
         else
         {
 
-            Aggressor.GetComponent<Attack>().thisDamage = Aggressor.GetComponent<Attack>().MeleeDamage;
+            float DF = Aggressor.GetComponent<Attack>().MeleeDamage * Aggressor.GetComponent<Attack>().DamageMod;
+            Aggressor.GetComponent<Attack>().thisDamage = (int)DF;
             Aggressor.GetComponent<Attack>().thisAttack = Aggressor.GetComponent<Attack>().MeleeAttacks;
 
+            DF = Defender.GetComponent<Attack>().MeleeDamage * Defender.GetComponent<Attack>().DamageMod;
             Defender.GetComponent<Attack>().thisDamage = Defender.GetComponent<Attack>().MeleeDamage;
             Defender.GetComponent<Attack>().thisAttack = Defender.GetComponent<Attack>().MeleeAttacks;
 
-            
+
 
             Aggressor.GetComponent<Attack>().Target = Defender.GetComponent<HitPoints>();
 
 
         }
+
+        float AD =
+
         Aggressor.GetComponent<Attack>().EnemyDef = Defender.GetComponent<Attack>().CurrentDef;
         Aggressor.GetComponent<Pathfinding>().MovePoints = 0;
         Cancel();
@@ -163,9 +177,11 @@ public class CombatMenu : MonoBehaviour
     public void AB2()
     {
 
-        Aggressor.GetComponent<Attack>().thisDamage = Aggressor.GetComponent<Attack>().RangedDamage;
+        float DF = Aggressor.GetComponent<Attack>().RangedDamage * Aggressor.GetComponent<Attack>().DamageMod;
+        Aggressor.GetComponent<Attack>().thisDamage = (int)DF;
         Aggressor.GetComponent<Attack>().thisAttack = Aggressor.GetComponent<Attack>().RangedAttacks;
 
+        DF = Defender.GetComponent<Attack>().RangedDamage * Defender.GetComponent<Attack>().DamageMod;
         Defender.GetComponent<Attack>().thisDamage = Defender.GetComponent<Attack>().RangedDamage;
         Defender.GetComponent<Attack>().thisAttack = Defender.GetComponent<Attack>().RangedAttacks;
 

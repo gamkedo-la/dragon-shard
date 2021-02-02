@@ -8,6 +8,8 @@ TagManager:
   - map
   - move button
   - attack button
+  - DamageBuffButton
+  - DefenseBuffButton
   layers:
   - Default
   - TransparentFX

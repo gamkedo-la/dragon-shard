@@ -128,10 +128,9 @@ MonoBehaviour:
   Target: {fileID: 0}
   thisAttack: 0
   thisDamage: 0
-  timer: 0
-  turn: 1
-  counter: 0
-  enemyCounter: 0
+  moddedDamage: 0
+  DamageMod: 1
+  ModLength: 0
   EnemyDef: 0
   GrassDef: 40
   ForestDef: 50
@@ -140,6 +139,9 @@ MonoBehaviour:
   HillsDef: 50
   CastleDef: 60
   CurrentDef: 0
+  DefMod: 1
+  DModLength: 0
+  moddedDef: 0
   MeleeName: Spear
   RangedName: Throw Rock
 --- !u!114 &7926924879536991
@@ -167,6 +169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649798015398837492}
+  - component: {fileID: 4642207425775353996}
   m_Layer: 0
   m_Name: Action Menu
   m_TagString: Untagged
@@ -181,7 +184,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2110409302615645008}
-  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalRotation: {x: 0, y: 0.9063079, z: 0.42261827, w: 0}
   m_LocalPosition: {x: 0, y: 1.5, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -189,7 +192,20 @@ Transform:
   - {fileID: 5823972455582642290}
   m_Father: {fileID: 8331741792303336479}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -50, y: 180, z: 0}
+--- !u!114 &4642207425775353996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110409302615645008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae71ed0f554db474ea8726dfbdd8d082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
 --- !u!1 &3596791971324297309
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,13 +231,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3596791971324297309}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1649798015398837492}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!212 &152099959074744301
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -405,7 +421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6644336496712324029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2, y: 0, z: 0}
+  m_LocalPosition: {x: -0.2, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 1649798015398837492}

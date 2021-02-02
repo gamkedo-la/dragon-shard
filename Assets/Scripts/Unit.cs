@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class Unit : MonoBehaviour
 {
     public int Owner;
@@ -22,6 +23,11 @@ public class Unit : MonoBehaviour
         GM = Camera.main.GetComponent<Players>();
         Click = GM.thisClicker;
         
+        if(Options.GetComponent<LookAt>() != null)
+        {
+
+            Options.GetComponent<LookAt>().Target = Camera.main.gameObject;
+        }
     }
 
     // Update is called once per frame
@@ -34,6 +40,7 @@ public class Unit : MonoBehaviour
     {
 
         GetComponent<Pathfinding>().TurnStart();
+        GetComponent<Attack>().TurnStart();
 
 
     }

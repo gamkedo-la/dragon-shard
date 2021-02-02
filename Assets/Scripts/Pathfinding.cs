@@ -49,17 +49,8 @@ public class Pathfinding : MonoBehaviour
         thisClicker = Camera.main.GetComponent<Clicker>();
         
         MP = MovePoints;
-        RaycastHit rhInfo;
-        bool didHit = Physics.Raycast(transform.position, Vector3.down, out rhInfo, 20.0f);
-        if (didHit)
-        {
-            CurrentLocation = rhInfo.collider.gameObject;
-            CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = gameObject;
-            transform.position = CurrentLocation.transform.position;
 
-            transform.Rotate(-90, 0, 0);
-
-        }
+        PlaceUnit();
 
         GetComponent<Attack>().SetDef();
 
@@ -112,8 +103,24 @@ public class Pathfinding : MonoBehaviour
                 tempN.y = transform.position.y;
 
             }
+        }
+    }
+
+    public void PlaceUnit()
+    {
+
+        RaycastHit rhInfo;
+        bool didHit = Physics.Raycast(transform.position, Vector3.down, out rhInfo, 20.0f);
+        if (didHit)
+        {
+            CurrentLocation = rhInfo.collider.gameObject;
+            CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = gameObject;
+            transform.position = CurrentLocation.transform.position;
+
+            transform.rotation = Quaternion.identity;
 
         }
+
 
     }
 

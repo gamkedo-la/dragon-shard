@@ -74,6 +74,23 @@ public class Clicker : MonoBehaviour
                             return;                           
                         }
 
+                        else if(rhInfo.collider.gameObject.tag == "DamageBuffButton")
+                        {
+
+                            CurrentUnit.GetComponent<HumanMagic>().BuffAttack();
+                            CurrentUnit.HideOptions();
+                            return;
+                        }
+
+                        else if (rhInfo.collider.gameObject.tag == "DefenseBuffButton")
+                        {
+
+                            CurrentUnit.GetComponent<HumanMagic>().BuffDeffense();
+                            CurrentUnit.HideOptions();
+                            return;
+                        }
+
+
                         else if(rhInfo.collider.GetComponent<Pathnode>() != null 
                             && rhInfo.collider.GetComponent<Pathnode>().CurrentOccupant == null 
                             && CurrentUnit != null
@@ -126,6 +143,11 @@ public class Clicker : MonoBehaviour
     public void Clear()
     {
         Debug.Log("clear");
+        if(CurrentUnit != null)
+        {
+            CurrentUnit.HideOptions();
+        }
+
         CurrentUnit = null;
         EndPoint = null;
         ActionInProgress = false;

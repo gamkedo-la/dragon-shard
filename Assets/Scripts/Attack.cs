@@ -14,11 +14,15 @@ public class Attack : MonoBehaviour
 
     public int thisAttack;
     public int thisDamage;
+    public bool moddedDamage = false;
 
-    public float timer = 0;
-    public bool turn = true;
-    public int counter = 0;
-    public int enemyCounter = 0;
+    public float DamageMod = 1;
+    public int ModLength;
+
+    private float timer = 0;
+    private bool turn = true;
+    private int counter = 0;
+    private int enemyCounter = 0;
 
     public float EnemyDef;
 
@@ -32,6 +36,11 @@ public class Attack : MonoBehaviour
 
     public int CurrentDef;
 
+    public float DefMod = 1;
+    public int DModLength;
+
+    public bool moddedDef = false;
+
     public string MeleeName;
     public string RangedName;
 
@@ -40,6 +49,48 @@ public class Attack : MonoBehaviour
     void Start()
     {
         
+    }
+
+    public void TurnStart()
+    {
+
+        if(DamageMod != 1)
+        {
+            ModLength -= 1;
+            if(ModLength <= 0)
+            {
+                DamageMod = 1;
+                moddedDamage = false;
+            }
+        }
+
+        if(DefMod != 1)
+        {
+            DModLength -= 1;
+            if(DModLength <= 0)
+            {
+                DefMod = 1;
+                moddedDef = false;
+                SetDef();
+            }
+        }
+    }
+
+    public void ModDamage(float mod, int length)
+    {
+        DamageMod = mod;
+        ModLength = length;
+        moddedDamage = true;
+
+    }
+
+    public void ModDef(float mod, int length)
+    {
+        DefMod = mod;
+        DModLength = length;
+        moddedDef = true;
+        SetDef();
+
     }
 
     // Update is called once per frame
@@ -89,18 +140,9 @@ public class Attack : MonoBehaviour
 
                     timer = 1.0f;
 
-
                 }
-
-
-
-
             }
-
-
         }
-
-
     }
 
 
@@ -117,8 +159,6 @@ public class Attack : MonoBehaviour
 
             Enemy.TakeDamage(D);
         }
-
-
     }
 
     public void SetDef()
@@ -154,10 +194,9 @@ public class Attack : MonoBehaviour
 
         }
 
+        float CD = CurrentDef * DefMod;
+        CurrentDef = (int)CD;
 
     }
-
-
-
 
 }

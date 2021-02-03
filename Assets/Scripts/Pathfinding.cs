@@ -235,19 +235,32 @@ public class Pathfinding : MonoBehaviour
 
             if (node.GetComponent<Tile>().GetTile() == TileType.grass)
             {
-
                 node.GetComponent<Pathnode>().SetMPRequired(Grass);
             }
 
             if (node.GetComponent<Tile>().GetTile() == TileType.forest)
             {
-
                 node.GetComponent<Pathnode>().SetMPRequired(Forest);
             }
+
             if (node.GetComponent<Tile>().GetTile() == TileType.water)
             {
-
                 node.GetComponent<Pathnode>().SetMPRequired(Water);
+            }
+
+            if (node.GetComponent<Tile>().GetTile() == TileType.hills)
+            {
+                node.GetComponent<Pathnode>().SetMPRequired(Hills);
+            }
+
+            if (node.GetComponent<Tile>().GetTile() == TileType.castle)
+            {
+                node.GetComponent<Pathnode>().SetMPRequired(Castle);
+            }
+
+            if (node.GetComponent<Tile>().GetTile() == TileType.sand)
+            {
+                node.GetComponent<Pathnode>().SetMPRequired(Sand);
             }
 
         }

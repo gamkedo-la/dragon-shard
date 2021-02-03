@@ -16,8 +16,9 @@ public class LookAt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        transform.LookAt(Target.transform);
-
+        if (Target != null)
+        {
+            transform.LookAt(Target.transform);
+        }
     }
 }

@@ -12,6 +12,8 @@ public class Tracker : MonoBehaviour
     public List<GameObject> Enemies = new List<GameObject>();
     public List<GameObject> MyUnits = new List<GameObject>();
 
+    public GameObject[] MUArray;
+
 
     private List<GameObject> Checked = new List<GameObject>();
     private List<GameObject> ToCheck = new List<GameObject>();
@@ -28,6 +30,8 @@ public class Tracker : MonoBehaviour
     GameObject CurrentUnit;
 
     bool ActionInprogress = false;
+
+    public int i;
 
     // Start is called before the first frame update
     void Start()
@@ -51,10 +55,13 @@ public class Tracker : MonoBehaviour
                 {
 
                     MyUnits.Add(U);
+                    U.GetComponent<Unit>().controlledByAI = true;
+                    U.GetComponent<Unit>().AIOverlord = gameObject;
 
                 }
             }
         }
+        MUArray = MyUnits.ToArray();
     }
 
     // Update is called once per frame
@@ -71,19 +78,31 @@ public class Tracker : MonoBehaviour
 
         if (GM.CurrentTurn == P)
         {
+            i = 0;
             foreach (GameObject U in MyUnits)
             {
 
-                U.GetComponent<Pathfinding>().GenerateMovementOptions();
-                U.GetComponent<Pathfinding>().MoveTo(FindDestination(U));
-
+                U.GetComponent<Unit>().AIActionTaken = false;
 
             }
+            NextUnit();
+        }
+    }
 
+    public void NextUnit()
+    {
 
+        if(i >= MUArray.Length)
+        {
 
+            GM.EndCurrentTurn();
+            return;
 
         }
+
+        MUArray[i].GetComponent<Pathfinding>().GenerateMovementOptions();
+        MUArray[i].GetComponent<Pathfinding>().MoveTo(FindDestination(MUArray[i]));
+        MUArray[i].GetComponent<Unit>().AIActionTaken = true;
 
 
     }
@@ -91,6 +110,29 @@ public class Tracker : MonoBehaviour
 
     public GameObject FindDestination(GameObject U)
     {
+
+        bool a = false;
+
+        foreach(GameObject t in U.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)
+        {
+            if (t.GetComponent<Pathnode>().CurrentOccupant != null)
+            {
+                if (t.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != P)
+                {
+                    a = true;
+
+                }
+            }
+
+        }
+
+        if(a == true)
+        {
+
+            //start combat here
+            return null;
+
+        }
 
         ToCheck.Clear();
         Checked.Clear();

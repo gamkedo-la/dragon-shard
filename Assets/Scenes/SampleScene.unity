@@ -12013,8 +12013,10 @@ MonoBehaviour:
   Grid: {fileID: 4485186325739660041}
   Enemies: []
   MyUnits: []
+  MUArray: []
   CanMoveTo: []
   CanAttack: []
+  i: 0
 --- !u!4 &527501968
 Transform:
   m_ObjectHideFlags: 0
@@ -17988,6 +17990,7 @@ MonoBehaviour:
   thisClicker: {fileID: 963194229}
   AIPlayers:
   - {fileID: 527501966}
+  EndTurnButton: {fileID: 1502895181}
 --- !u!1 &969382004
 GameObject:
   m_ObjectHideFlags: 0
@@ -27160,17 +27163,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1502895186}
-        m_MethodName: SetColors
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1502895184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33471,6 +33463,105 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 719126759}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2056952358
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1482913979014513225, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_Name
+      value: Spearguy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5399569925440596132, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5399569925440596132, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.4651866
+      objectReference: {fileID: 0}
+    - target: {fileID: 5399569925440596132, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7241291557752397142, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: Owner
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.028
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2a666b238fb227b46a35b5d57320b464, type: 3}
 --- !u!1 &2059230189 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3458714714561766421, guid: c582789d9c263bf4b94171af9688643f,
@@ -38774,6 +38865,9 @@ MonoBehaviour:
   Click: {fileID: 0}
   Options: {fileID: 0}
   UnitName: Archer
+  controlledByAI: 0
+  AIActionTaken: 0
+  AIOverlord: {fileID: 0}
 --- !u!4 &8331741791405412425
 Transform:
   m_ObjectHideFlags: 0

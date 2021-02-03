@@ -86,11 +86,43 @@ public class Pathfinding : MonoBehaviour
                     ThisMove.Clear();
                     thisClicker.Clear();
 
+
+
+
+
                     Vector3 temp = transform.position;
                     
                     transform.position = temp;
 
                     t = 0;
+
+                    if (GetComponent<Unit>().controlledByAI == true)
+                    {
+                        /*
+                        bool c = false;
+
+                        foreach(GameObject T in CurrentLocation.GetComponent<Tile>().Adjacent)
+                        {
+
+                            if(T.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != GetComponent<Unit>().Owner)
+                            {
+                                c = true;
+
+                            }
+
+                        }
+
+                        if(c == true)
+                        {
+
+                            //initiate combat here
+                        }
+                        */
+
+
+                        GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().i++;
+                        GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
+                    }
 
                     return;
 

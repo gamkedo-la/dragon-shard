@@ -13,6 +13,8 @@ public class Players : MonoBehaviour
 
     public List<GameObject> AIPlayers = new List<GameObject>();
 
+    public GameObject EndTurnButton;
+
     private void Start()
     {
         thisClicker.GetComponent<Clicker>();
@@ -58,7 +60,7 @@ public class Players : MonoBehaviour
 
             AI.GetComponent<Tracker>().TurnStart();
         }
-
+        EndTurnButton.GetComponent<UIColors>().SetColors();
 
     }
 

@@ -15,6 +15,11 @@ public class Unit : MonoBehaviour
 
     //public MovementStat[] movementStats;
 
+    public bool controlledByAI;
+    public bool AIActionTaken = false;
+
+    public GameObject AIOverlord;
+
     // Start is called before the first frame update
     void Start()
     {

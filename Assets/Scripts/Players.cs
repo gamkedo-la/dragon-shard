@@ -11,6 +11,7 @@ public class Players : MonoBehaviour
 
     public Clicker thisClicker;
 
+    public List<GameObject> AIPlayers = new List<GameObject>();
 
     private void Start()
     {
@@ -38,6 +39,9 @@ public class Players : MonoBehaviour
     public void EndCurrentTurn()
     {
         thisClicker.Clear();
+
+
+
         CurrentTurn += 1;
         if(CurrentTurn >= ThisGame.Length)
         {
@@ -48,6 +52,11 @@ public class Players : MonoBehaviour
         {
             U.GetComponent<Unit>().TurnStart();
 
+        }
+        foreach(GameObject AI in AIPlayers)
+        {
+
+            AI.GetComponent<Tracker>().TurnStart();
         }
 
 

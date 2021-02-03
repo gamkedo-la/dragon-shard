@@ -23,6 +23,12 @@ public class Tracker : MonoBehaviour
 
     private List<GameObject> PotentialTargets = new List<GameObject>();
 
+    GameObject Destination;
+
+    GameObject CurrentUnit;
+
+    bool ActionInprogress = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,12 +61,29 @@ public class Tracker : MonoBehaviour
     void Update()
     {
         
+
+
+
     }
 
     public void TurnStart()
     {
 
+        if (GM.CurrentTurn == P)
+        {
+            foreach (GameObject U in MyUnits)
+            {
 
+                U.GetComponent<Pathfinding>().GenerateMovementOptions();
+                U.GetComponent<Pathfinding>().MoveTo(FindDestination(U));
+
+
+            }
+
+
+
+
+        }
 
 
     }
@@ -143,10 +166,12 @@ public class Tracker : MonoBehaviour
 
         foreach( GameObject T in CanAttack)
         {
-            if(T.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != P)
+            if(T.GetComponent<Pathnode>().CurrentOccupant != null)
             {
-                PotentialTargets.Add(T.GetComponent<Pathnode>().CurrentOccupant);
-
+                if (Enemies.Contains(T.GetComponent<Pathnode>().CurrentOccupant) == true)
+                {
+                    PotentialTargets.Add(T.GetComponent<Pathnode>().CurrentOccupant);
+                }
             }
 
         }
@@ -182,7 +207,7 @@ public class Tracker : MonoBehaviour
 
         if (T.GetComponent<Pathnode>().CurrentOccupant != null)
         {
-            if (T.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != GetComponent<Unit>().Owner)
+            if (T.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != P)
             {
                 T.GetComponent<Pathnode>().MPRemain = -1;
 
@@ -269,7 +294,7 @@ public class Tracker : MonoBehaviour
     public GameObject AStar(GameObject U)
     {
 
-
+        return null;
 
 
     }

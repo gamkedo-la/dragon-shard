@@ -178,10 +178,25 @@ public class Tracker : MonoBehaviour
 
         if(PotentialTargets.Count > 0)
         {
+            List<GameObject> EndPoints = new List<GameObject>();
+            foreach(GameObject G in PotentialTargets)
+            {
 
-            GameObject[] G = PotentialTargets.ToArray();
+                foreach (GameObject tt in G.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)
+                {
 
-            return G[Random.Range(0, G.Length)];
+                    if (CanMoveTo.Contains(tt))
+                    {
+                        EndPoints.Add(tt);
+
+                    }
+
+                }
+
+            }
+            GameObject[] T = EndPoints.ToArray();
+
+            return T[Random.Range(0, T.Length)];
 
         }
         else

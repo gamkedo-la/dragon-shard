@@ -23,8 +23,9 @@ public class Tracker : MonoBehaviour
 
     public List<GameObject> CanAttack = new List<GameObject>();
 
+    public List<GameObject> EndPoints = new List<GameObject>();
 
-    private List<GameObject> PotentialTargets = new List<GameObject>();
+    public List<GameObject> PotentialTargets = new List<GameObject>();
 
     GameObject Destination;
 
@@ -140,6 +141,7 @@ public class Tracker : MonoBehaviour
         CanMoveTo.Clear();
         CanAttack.Clear();
         PotentialTargets.Clear();
+        EndPoints.Clear();
 
         foreach (Transform node in Grid)
         {
@@ -223,7 +225,7 @@ public class Tracker : MonoBehaviour
 
         if(PotentialTargets.Count > 0)
         {
-            List<GameObject> EndPoints = new List<GameObject>();
+
             foreach(GameObject G in PotentialTargets)
             {
 
@@ -281,27 +283,30 @@ public class Tracker : MonoBehaviour
                     }
                 }
 
-                EndPoints.Sort(delegate (GameObject x, GameObject y)
-                {
-                    return x.GetComponent<Tile>().AIDefense.CompareTo(y.GetComponent<Tile>().AIDefense);
-                });
-
-                GameObject[] EP = EndPoints.ToArray();
+                int floor = 0;
 
                 List<GameObject> temp = new List<GameObject>();
 
+                foreach(GameObject x in EndPoints)
+                {
+                    if(x.GetComponent<Tile>().AIDefense > floor)
+                    {
+                        floor = x.GetComponent<Tile>().AIDefense;
+                    }
+                }
+
+
                 foreach(GameObject q in EndPoints)
                 {
-                    if(q.GetComponent<Tile>().AIDefense < EP[0].GetComponent<Tile>().AIDefense)
+                    if(q.GetComponent<Tile>().AIDefense < floor)
                     {
                         temp.Add(q);
                     }
-
                 }
+
                 foreach(GameObject q in temp)
                 {
                     EndPoints.Remove(q);
-
                 }
 
                 temp.Clear();
@@ -310,32 +315,35 @@ public class Tracker : MonoBehaviour
                 {
                     GameObject[] f = EndPoints.ToArray();
                     return f[0];
-
                 }
+
                 else
                 {
-                    EndPoints.Sort(delegate (GameObject x, GameObject y)
-                    {
-                        return x.GetComponent<Pathnode>().MPRemain.CompareTo(y.GetComponent<Pathnode>().MPRemain);
-                    });
+                    floor = 0;
 
-                    GameObject[] f = EndPoints.ToArray();
+                    foreach (GameObject x in EndPoints)
+                    {
+                        if (x.GetComponent<Pathnode>().MPRemain > floor)
+                        {
+                            floor = x.GetComponent<Pathnode>().MPRemain;
+
+                        }
+
+                    }
+
 
                     foreach (GameObject q in EndPoints)
                     {
-                        if (q.GetComponent<Pathnode>().MPRemain < EP[0].GetComponent<Pathnode>().MPRemain)
+                        if (q.GetComponent<Tile>().AIDefense < floor)
                         {
                             temp.Add(q);
                         }
-
                     }
 
                     foreach (GameObject q in temp)
                     {
                         EndPoints.Remove(q);
-
                     }
-
                     temp.Clear();
 
                     GameObject[] h = EndPoints.ToArray();

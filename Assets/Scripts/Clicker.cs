@@ -10,139 +10,139 @@ public class Clicker : MonoBehaviour
 
     public bool ActionInProgress = false;
 
+    public bool AIturn;
+
 
     // Update is called once per frame
     void Update()
     {
-        if (ActionInProgress == false)
+        if (AIturn == false)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (ActionInProgress == false)
             {
-                Ray toMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit rhInfo;
-                bool didHit = Physics.Raycast(toMouse, out rhInfo, 50.0f);
-                if (didHit)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    if (CurrentUnit != null)
+                    Ray toMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit rhInfo;
+                    bool didHit = Physics.Raycast(toMouse, out rhInfo, 50.0f);
+                    if (didHit)
                     {
-                        CurrentUnit.HideOptions();
-                    }
-
-                    if (rhInfo.collider.gameObject.GetComponent<Unit>() != null
-                        && rhInfo.collider.gameObject.GetComponent<Unit>().Owner == GetComponent<Players>().CurrentTurn
-                        && SelectingAction == false)
-                    {
-
-                        //Debug.Log(rhInfo.collider.name + " . . " + rhInfo.point);
-                        CurrentUnit = rhInfo.collider.GetComponent<Unit>();
-
                         if (CurrentUnit != null)
                         {
-                            CurrentUnit.DisplayOptions();
-                            return;
-
-                        }
-                        else
-                        {
-
-                            //Debug.Log("clicked on empty space");
-                        }
-
-                    }
-                    else
-                    {
-                        if(rhInfo.collider.gameObject.tag == "move button")
-                        {
                             CurrentUnit.HideOptions();
-                            CurrentUnit.GetComponent<Pathfinding>().GenerateMovementOptions();
-                            SelectingAction = true;
-                            return;
-
-
                         }
 
-                        else if(rhInfo.collider.gameObject.tag == "attack button")
-                        {
-                            if(CurrentUnit == null)
-                            {
-                                Debug.LogError($"CurrentUnit null when it should not be! {nameof(Clicker)}");
-                            }
-
-                            CurrentUnit.GetComponent<SelectAttack>().FindTargets();
-                            CurrentUnit.HideOptions();
-                            SelectingAction = true;
-                            return;                           
-                        }
-
-                        else if(rhInfo.collider.gameObject.tag == "DamageBuffButton")
+                        if (rhInfo.collider.gameObject.GetComponent<Unit>() != null
+                            && rhInfo.collider.gameObject.GetComponent<Unit>().Owner == GetComponent<Players>().CurrentTurn
+                            && SelectingAction == false)
                         {
 
-                            CurrentUnit.GetComponent<HumanMagic>().BuffAttack();
-                            CurrentUnit.HideOptions();
-                            return;
-                        }
+                            //Debug.Log(rhInfo.collider.name + " . . " + rhInfo.point);
+                            CurrentUnit = rhInfo.collider.GetComponent<Unit>();
 
-                        else if (rhInfo.collider.gameObject.tag == "DefenseBuffButton")
-                        {
-
-                            CurrentUnit.GetComponent<HumanMagic>().BuffDeffense();
-                            CurrentUnit.HideOptions();
-                            return;
-                        }
-
-
-                        else if(rhInfo.collider.GetComponent<Pathnode>() != null 
-                            && rhInfo.collider.GetComponent<Pathnode>().CurrentOccupant == null 
-                            && CurrentUnit != null
-                            && SelectingAction == true
-                            && CurrentUnit.GetComponent<Pathfinding>().CanMoveTo.Contains(rhInfo.collider.gameObject))
-                        {
-                            Debug.Log(rhInfo.collider.name + " . . " + rhInfo.point);
-                            EndPoint = rhInfo.collider.gameObject;
-                            CurrentUnit.GetComponent<Pathfinding>().MoveTo(EndPoint);
-                            SelectingAction = false;
-                            ActionInProgress = true;
-                            return;
-                        }
-                       
-                        else if(CurrentUnit != null
-                            && CurrentUnit.GetComponent<SelectAttack>().ValidTargets.Contains(rhInfo.collider.gameObject) == true
-                            && SelectingAction == true
-                            && rhInfo.collider.gameObject.GetComponent<HitPoints>() != null)
-                        {
-
-                            Debug.Log(CurrentUnit.name + " is fighting " + rhInfo.collider.name);
-                            CurrentUnit.GetComponent<SelectAttack>().InitiateCombat(rhInfo.collider.gameObject);
-                            SelectingAction = false;
-                            ActionInProgress = true;
-                            //return;
-
-
-
-                        }
-
-
-
-                        else
-                        {
                             if (CurrentUnit != null)
                             {
-                                CurrentUnit.HideOptions();
+                                CurrentUnit.DisplayOptions();
+                                return;
+
                             }
-                            Clear();
+                            else
+                            {
+
+                                //Debug.Log("clicked on empty space");
+                            }
+
+                        }
+                        else
+                        {
+                            if (rhInfo.collider.gameObject.tag == "move button")
+                            {
+                                CurrentUnit.HideOptions();
+                                CurrentUnit.GetComponent<Pathfinding>().GenerateMovementOptions();
+                                SelectingAction = true;
+                                return;
+
+
+                            }
+
+                            else if (rhInfo.collider.gameObject.tag == "attack button")
+                            {
+                                if (CurrentUnit == null)
+                                {
+                                    Debug.LogError($"CurrentUnit null when it should not be! {nameof(Clicker)}");
+                                }
+
+                                CurrentUnit.GetComponent<SelectAttack>().FindTargets();
+                                CurrentUnit.HideOptions();
+                                SelectingAction = true;
+                                return;
+                            }
+
+                            else if (rhInfo.collider.gameObject.tag == "DamageBuffButton")
+                            {
+
+                                CurrentUnit.GetComponent<HumanMagic>().BuffAttack();
+                                CurrentUnit.HideOptions();
+                                return;
+                            }
+
+                            else if (rhInfo.collider.gameObject.tag == "DefenseBuffButton")
+                            {
+
+                                CurrentUnit.GetComponent<HumanMagic>().BuffDeffense();
+                                CurrentUnit.HideOptions();
+                                return;
+                            }
+
+
+                            else if (rhInfo.collider.GetComponent<Pathnode>() != null
+                                && rhInfo.collider.GetComponent<Pathnode>().CurrentOccupant == null
+                                && CurrentUnit != null
+                                && SelectingAction == true
+                                && CurrentUnit.GetComponent<Pathfinding>().CanMoveTo.Contains(rhInfo.collider.gameObject))
+                            {
+                                Debug.Log("moving to" + rhInfo.collider.name + " . . " + rhInfo.point);
+                                EndPoint = rhInfo.collider.gameObject;
+                                CurrentUnit.GetComponent<Pathfinding>().MoveTo(EndPoint);
+                                SelectingAction = false;
+                                ActionInProgress = true;
+                                return;
+                            }
+
+                            else if (CurrentUnit != null
+                                && CurrentUnit.GetComponent<SelectAttack>().ValidTargets.Contains(rhInfo.collider.gameObject) == true
+                                && SelectingAction == true
+                                && rhInfo.collider.gameObject.GetComponent<HitPoints>() != null)
+                            {
+
+                                Debug.Log(CurrentUnit.name + " is fighting " + rhInfo.collider.name);
+                                CurrentUnit.GetComponent<SelectAttack>().InitiateCombat(rhInfo.collider.gameObject);
+                                SelectingAction = false;
+                                ActionInProgress = true;
+                                //return;
+
+                            }
+
+
+
+                            else
+                            {
+                                if (CurrentUnit != null)
+                                {
+                                    CurrentUnit.HideOptions();
+                                }
+                                Clear();
+                            }
                         }
                     }
-
                 }
-
             }
         }
-
     }
 
     public void Clear()
     {
-        Debug.Log("clear");
+        //Debug.Log("clear");
         if(CurrentUnit != null)
         {
             CurrentUnit.HideOptions();

@@ -23,6 +23,10 @@ public class Tile : MonoBehaviour
     public GameObject HILLS;
     public GameObject CASTLE;
 
+    [HideInInspector]
+    public int AIDefense;
+
+
     [SerializeField]
     public GameObject Current;
 

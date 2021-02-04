@@ -15,6 +15,8 @@ public class Players : MonoBehaviour
 
     public GameObject EndTurnButton;
 
+    bool AIturn;
+
     private void Start()
     {
         thisClicker.GetComponent<Clicker>();
@@ -31,37 +33,62 @@ public class Players : MonoBehaviour
                     ThisGame[i].Units.Add(U);
 
                 }
-
-            }
-            
-        }
-    }
-
-
-    public void EndCurrentTurn()
-    {
-        thisClicker.Clear();
-
-
-
-        CurrentTurn += 1;
-        if(CurrentTurn >= ThisGame.Length)
-        {
-            CurrentTurn = 0;
-
-        }
-        foreach(GameObject U in ThisGame[CurrentTurn].Units)
-        {
-            U.GetComponent<Unit>().TurnStart();
-
+            }            
         }
         foreach(GameObject AI in AIPlayers)
         {
-
-            AI.GetComponent<Tracker>().TurnStart();
+            ThisGame[AI.GetComponent<Tracker>().P].ControlledByAI = true;
         }
-        EndTurnButton.GetComponent<UIColors>().SetColors();
+    }
 
+    public void ETB()
+    {
+
+
+        if (AIturn == false)
+        {
+            EndCurrentTurn();
+        }
+
+    }
+
+    public void EndCurrentTurn()
+    {
+
+            thisClicker.Clear();
+
+
+
+            CurrentTurn += 1;
+            if (CurrentTurn >= ThisGame.Length)
+            {
+                CurrentTurn = 0;
+
+            }
+            foreach (GameObject U in ThisGame[CurrentTurn].Units)
+            {
+                U.GetComponent<Unit>().TurnStart();
+
+            }
+            foreach (GameObject AI in AIPlayers)
+            {
+
+                AI.GetComponent<Tracker>().TurnStart();
+            }
+            EndTurnButton.GetComponent<UIColors>().SetColors();
+
+            if(ThisGame[CurrentTurn].ControlledByAI == true)
+            {
+                AIturn = true;
+                thisClicker.AIturn = true;
+            }
+            else
+            {
+                AIturn = false;
+                thisClicker.AIturn = false;
+            }
+
+        
     }
 
 
@@ -72,6 +99,8 @@ public class Players : MonoBehaviour
         public Color thisColor;
 
         public int Gold;
+
+        public bool ControlledByAI;
 
         public List<GameObject> Units;
 

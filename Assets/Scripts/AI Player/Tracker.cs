@@ -227,7 +227,7 @@ public class Tracker : MonoBehaviour
                 foreach (GameObject tt in G.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)
                 {
 
-                    if (CanMoveTo.Contains(tt))
+                    if (CanMoveTo.Contains(tt) && tt.GetComponent<Pathnode>().CurrentOccupant == null)
                     {
                         EndPoints.Add(tt);
 
@@ -236,9 +236,20 @@ public class Tracker : MonoBehaviour
                 }
 
             }
-            GameObject[] T = EndPoints.ToArray();
 
-            return T[Random.Range(0, T.Length)];
+
+            if (EndPoints.Count >= 1)
+            {
+                GameObject[] T = EndPoints.ToArray();
+                return T[Random.Range(0, T.Length)];
+
+            }
+            else
+            {
+
+                return AStar(U);
+            }
+            
 
         }
         else

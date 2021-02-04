@@ -22,13 +22,13 @@ public class HitPoints : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Experience attacker)
     {
 
-        
+
 
         CurrentHP -= damage;
         Vector3 temp = transform.position;
@@ -47,7 +47,7 @@ public class HitPoints : MonoBehaviour
             T.GetComponent<DamageText>().TColor = Color.green;
 
         }
-        if(damage == 0)
+        if (damage == 0)
         {
 
             T.GetComponent<DamageText>().TColor = Color.white;
@@ -55,22 +55,28 @@ public class HitPoints : MonoBehaviour
         }
 
 
-        
+
         if (CurrentHP > MaxHP)
         {
             CurrentHP = MaxHP;
         }
-        if(CurrentHP <= 0)
+        if (CurrentHP <= 0)
         {
-
-            Death();
+            Death(attacker);
         }
 
     }
 
-    public void Death()
+    public void Death(Experience otherUnit)
     {
         //pre death stuff
+        var experience = GetComponent<Experience>().GetExpBonus();
+
+        if (otherUnit != null)
+        {
+            otherUnit.RewardExp(experience);
+        }
+
         Destroy(gameObject);
 
     }

@@ -44,30 +44,31 @@ public class Attack : MonoBehaviour
     public string MeleeName;
     public string RangedName;
 
-
+    private Experience attacker;
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (attacker == null)
+            attacker = GetComponent<Experience>();
     }
 
     public void TurnStart()
     {
 
-        if(DamageMod != 1)
+        if (DamageMod != 1)
         {
             ModLength -= 1;
-            if(ModLength <= 0)
+            if (ModLength <= 0)
             {
                 DamageMod = 1;
                 moddedDamage = false;
             }
         }
 
-        if(DefMod != 1)
+        if (DefMod != 1)
         {
             DModLength -= 1;
-            if(DModLength <= 0)
+            if (DModLength <= 0)
             {
                 DefMod = 1;
                 moddedDef = false;
@@ -97,36 +98,36 @@ public class Attack : MonoBehaviour
     void Update()
     {
 
-        
-        if(Target != null)
+
+        if (Target != null)
         {
 
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
-                if(turn == true)
+                if (turn == true)
                 {
-                    if(counter >= thisAttack)
+                    if (counter >= thisAttack)
                     {
-                        if(enemyCounter >= Target.GetComponent<Attack>().thisAttack)
+                        if (enemyCounter >= Target.GetComponent<Attack>().thisAttack)
                         {
                             Target = null;
                             return;
 
                         }
-                            turn = false;
+                        turn = false;
                         return;
 
                     }
                     Att(Target, thisDamage, EnemyDef);
                     turn = false;
-                    counter ++;
+                    counter++;
 
                     timer = 1.0f;
 
 
                 }
-                else if(turn == false)
+                else if (turn == false)
                 {
                     if (enemyCounter >= Target.GetComponent<Attack>().thisAttack)
                     {
@@ -136,7 +137,7 @@ public class Attack : MonoBehaviour
                     }
                     Target.GetComponent<Attack>().Att(GetComponent<HitPoints>(), Target.GetComponent<Attack>().thisDamage, CurrentDef);
                     turn = true;
-                    enemyCounter ++;
+                    enemyCounter++;
 
                     timer = 1.0f;
 
@@ -152,18 +153,18 @@ public class Attack : MonoBehaviour
 
         if (R < Chance)
         {
-            Enemy.TakeDamage(0);
+            Enemy.TakeDamage(0, attacker);
         }
         else
         {
 
-            Enemy.TakeDamage(D);
+            Enemy.TakeDamage(D, attacker);
         }
     }
 
     public void SetDef()
     {
-        if(GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().GetTile() == TileType.forest)
+        if (GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().GetTile() == TileType.forest)
         {
             CurrentDef = ForestDef;
 

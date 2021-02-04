@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Tracker : MonoBehaviour
 {
     public int P;
@@ -137,6 +138,8 @@ public class Tracker : MonoBehaviour
         ToCheck.Clear();
         Checked.Clear();
         CanMoveTo.Clear();
+        CanAttack.Clear();
+        PotentialTargets.Clear();
 
         foreach (Transform node in Grid)
         {
@@ -240,8 +243,106 @@ public class Tracker : MonoBehaviour
 
             if (EndPoints.Count >= 1)
             {
-                GameObject[] T = EndPoints.ToArray();
-                return T[Random.Range(0, T.Length)];
+                //GameObject[] T = EndPoints.ToArray();
+                //return T[Random.Range(0, T.Length)];
+
+                foreach(GameObject T in EndPoints)
+                {
+
+                    if (T.GetComponent<Tile>().thisTile == TileType.forest)
+                    {
+                        T.GetComponent<Tile>().AIDefense = U.GetComponent<Attack>().ForestDef;
+
+                    }
+                    if (T.GetComponent<Tile>().thisTile == TileType.grass)
+                    {
+                        T.GetComponent<Tile>().AIDefense = U.GetComponent<Attack>().GrassDef;
+
+                    }
+                    if (T.GetComponent<Tile>().thisTile == TileType.hills)
+                    {
+                        T.GetComponent<Tile>().AIDefense = U.GetComponent<Attack>().HillsDef;
+
+                    }
+                    if (T.GetComponent<Tile>().thisTile == TileType.water)
+                    {
+                        T.GetComponent<Tile>().AIDefense = U.GetComponent<Attack>().WaterDef;
+
+                    }
+                    if (T.GetComponent<Tile>().thisTile == TileType.sand)
+                    {
+                        T.GetComponent<Tile>().AIDefense = U.GetComponent<Attack>().SandDef;
+
+                    }
+                    if (T.GetComponent<Tile>().thisTile == TileType.castle)
+                    {
+                        T.GetComponent<Tile>().AIDefense = U.GetComponent<Attack>().CastleDef;
+
+                    }
+                }
+
+                EndPoints.Sort(delegate (GameObject x, GameObject y)
+                {
+                    return x.GetComponent<Tile>().AIDefense.CompareTo(y.GetComponent<Tile>().AIDefense);
+                });
+
+                GameObject[] EP = EndPoints.ToArray();
+
+                List<GameObject> temp = new List<GameObject>();
+
+                foreach(GameObject q in EndPoints)
+                {
+                    if(q.GetComponent<Tile>().AIDefense < EP[0].GetComponent<Tile>().AIDefense)
+                    {
+                        temp.Add(q);
+                    }
+
+                }
+                foreach(GameObject q in temp)
+                {
+                    EndPoints.Remove(q);
+
+                }
+
+                temp.Clear();
+
+                if(EndPoints.Count == 1)
+                {
+                    GameObject[] f = EndPoints.ToArray();
+                    return f[0];
+
+                }
+                else
+                {
+                    EndPoints.Sort(delegate (GameObject x, GameObject y)
+                    {
+                        return x.GetComponent<Pathnode>().MPRemain.CompareTo(y.GetComponent<Pathnode>().MPRemain);
+                    });
+
+                    GameObject[] f = EndPoints.ToArray();
+
+                    foreach (GameObject q in EndPoints)
+                    {
+                        if (q.GetComponent<Pathnode>().MPRemain < EP[0].GetComponent<Pathnode>().MPRemain)
+                        {
+                            temp.Add(q);
+                        }
+
+                    }
+
+                    foreach (GameObject q in temp)
+                    {
+                        EndPoints.Remove(q);
+
+                    }
+
+                    temp.Clear();
+
+                    GameObject[] h = EndPoints.ToArray();
+
+                    return h[Random.Range(0, EndPoints.Count)];
+
+                }
 
             }
             else

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1117157654202168859}
   - component: {fileID: 6755382982479406960}
   - component: {fileID: 495920427478457281}
+  - component: {fileID: 3831568177699150315}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Unit
@@ -163,6 +164,33 @@ MonoBehaviour:
   CurrentHP: 50
   DamageText: {fileID: 1682866155419517283, guid: 4efa638b120ee6c4ba42a799d94e4519,
     type: 3}
+--- !u!114 &3831568177699150315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326778582721280727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c2a8380ae03e4047a5e30f2ea431f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitLevel: 1
+  experience: 0
+  expBonus: 30
+  expNeededForNextLevel: 100
+  expThresholdGrowthRate: 1.2
+  growthRateModifier: 1.2
+  levelModInterval: 5
+  attackBonus: 0
+  healthBonus: 0
+  defenseBonus: 0
+  hitPoints: {fileID: 495920427478457281}
+  unitAttributes: {fileID: 6755382982479406960}
+  LevelUpMeleeDamage: 0
+  LevelUpRangedDamage: 1
+  LevelUpHp: 1
 --- !u!1 &1996319950913430478
 GameObject:
   m_ObjectHideFlags: 0

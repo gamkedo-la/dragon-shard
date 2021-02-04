@@ -14,18 +14,21 @@ public class Experience : MonoBehaviour
 
     [Header("Experience Modifiers")]
     [SerializeField] float expNeededForNextLevel;
-    [SerializeField] float expThresholdGrowthRate;
-    [SerializeField] float growthRateModifier; // modify level up threshold by this much
-    [SerializeField] [Range(1, 10)] int levelModInterval; // number of levels before becomes harder to level up
+    [SerializeField] [Range(1.0f, 10f)] float expThresholdGrowthRate = 1.2f;
+    [SerializeField] [Range(1.0f, 10f)] float growthRateModifier = 1.2f; // modify level up threshold by this much
+    [SerializeField] [Range(1, 10)] int levelModInterval = 5; // number of levels before becomes harder to level up
 
     [Header("Level Up Bonuses")]
-    [SerializeField] float attackBonus;
-    [SerializeField] float healthBonus;
-    [SerializeField] float defenseBonus;
+    [SerializeField] [Range(1.0f, 10f)] float attackBonus;
+    [SerializeField] [Range(1.0f, 10f)] float healthBonus;
+    [SerializeField] [Range(1.0f, 10f)] float defenseBonus;
 
     [Header("References")]
     [SerializeField] HitPoints hitPoints;
     [SerializeField] Attack unitAttributes;
+    public bool LevelUpMeleeDamage = true;
+    public bool LevelUpRangedDamage = true;
+    public bool LevelUpHp = true;
 
     void Start()
     {
@@ -71,6 +74,33 @@ public class Experience : MonoBehaviour
     {
         ++unitLevel;
 
+        if (unitLevel % levelModInterval == 0)
+        {
+            ApplyRateChange(expThresholdGrowthRate, growthRateModifier);
+            ApplyRateChange(attackBonus, growthRateModifier);
+            ApplyRateChange(healthBonus, growthRateModifier);
+            ApplyRateChange(defenseBonus, growthRateModifier);
+        }
 
+        ApplyRateChange(expNeededForNextLevel, expThresholdGrowthRate);
+
+        ApplyLevelUpBonus();
+    }
+
+    private void ApplyLevelUpBonus()
+    {
+        if (LevelUpMeleeDamage)
+            ApplyRateChange(unitAttributes.MeleeDamage, attackBonus);
+
+        if (LevelUpRangedDamage)
+            ApplyRateChange(unitAttributes.RangedDamage, attackBonus);
+
+        if (LevelUpHp)
+            ApplyRateChange(hitPoints.MaxHP, healthBonus);
+    }
+
+    private void ApplyRateChange(float toModify, float modifier)
+    {
+        toModify *= modifier;
     }
 }

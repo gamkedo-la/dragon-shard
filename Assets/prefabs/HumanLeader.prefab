@@ -381,6 +381,7 @@ GameObject:
   - component: {fileID: 1937839944953023897}
   - component: {fileID: 4736303764555510056}
   - component: {fileID: 2102801751838278362}
+  - component: {fileID: -2102637886013102682}
   m_Layer: 0
   m_Name: HumanLeader
   m_TagString: Unit
@@ -422,6 +423,9 @@ MonoBehaviour:
   Click: {fileID: 0}
   Options: {fileID: 0}
   UnitName: Spearguy
+  controlledByAI: 0
+  AIActionTaken: 0
+  AIOverlord: {fileID: 0}
 --- !u!114 &8637479996409298681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,6 +546,33 @@ MonoBehaviour:
   DamBuffStrength: 1.3
   DefuffLength: 1
   DefBuffStrength: 1.2
+--- !u!114 &-2102637886013102682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6139193788195213374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c2a8380ae03e4047a5e30f2ea431f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitLevel: 1
+  experience: 0
+  expBonus: 50
+  expNeededForNextLevel: 100
+  expThresholdGrowthRate: 1.2
+  growthRateModifier: 1.2
+  levelModInterval: 5
+  attackBonus: 0
+  healthBonus: 0
+  defenseBonus: 0
+  hitPoints: {fileID: 4736303764555510056}
+  unitAttributes: {fileID: 1937839944953023897}
+  LevelUpMeleeDamage: 1
+  LevelUpRangedDamage: 1
+  LevelUpHp: 1
 --- !u!1 &6696637439083268391
 GameObject:
   m_ObjectHideFlags: 0

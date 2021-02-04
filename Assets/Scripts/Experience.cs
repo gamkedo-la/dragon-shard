@@ -6,7 +6,7 @@ using UnityEngine;
 public class Experience : MonoBehaviour
 {
     [Header("Unit Properties")]
-    [SerializeField] int unitLevel;
+    [SerializeField] int unitLevel = 1;
     [SerializeField] float experience;
 
     [Header("Gives Exp if Killed")]

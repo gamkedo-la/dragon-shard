@@ -58,7 +58,9 @@ public class Attack : MonoBehaviour
     [HideInInspector]
     public bool MeleePrimary = false;
 
+    public float DefenseLevelBuff = 1;
 
+    public float AttackLevelBuff = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -75,22 +77,22 @@ public class Attack : MonoBehaviour
     public void TurnStart()
     {
         
-        if (DamageMod != 1)
+        if (DamageMod != AttackLevelBuff)
         {
             ModLength -= 1;
             if (ModLength <= 0)
             {
-                DamageMod = 1;
+                DamageMod = AttackLevelBuff;
                 moddedDamage = false;
             }
         }
 
-        if (DefMod != 1)
+        if (DefMod != DefenseLevelBuff)
         {
             DModLength -= 1;
             if (DModLength <= 0)
             {
-                DefMod = 1;
+                DefMod = DefenseLevelBuff;
                 moddedDef = false;
                 SetDef();
             }
@@ -99,7 +101,7 @@ public class Attack : MonoBehaviour
 
     public void ModDamage(float mod, int length)
     {
-        DamageMod = mod;
+        DamageMod += mod;
         ModLength = length;
         moddedDamage = true;
 
@@ -107,7 +109,7 @@ public class Attack : MonoBehaviour
 
     public void ModDef(float mod, int length)
     {
-        DefMod = mod;
+        DefMod += mod;
         DModLength = length;
         moddedDef = true;
         SetDef();

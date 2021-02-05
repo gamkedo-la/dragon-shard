@@ -24,6 +24,7 @@ public class AICombat : MonoBehaviour
 
     public void LocateTarget(GameObject U)
     {
+        Debug.Log("locate target called for " + U.name);
         PotentialTargets.Clear();
         FinalTarget = null;
         foreach (GameObject G in U.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)
@@ -132,41 +133,46 @@ public class AICombat : MonoBehaviour
 
         }
 
-        if(U.GetComponent<Attack>().MeleePrimary == true)
+        if (FinalTarget != null)
         {
+            if (U.GetComponent<Attack>().MeleePrimary == true)
+            {
 
-            float DF = U.GetComponent<Attack>().MeleeDamage * U.GetComponent<Attack>().DamageMod;
-            U.GetComponent<Attack>().thisDamage = (int)DF;
-            U.GetComponent<Attack>().thisAttack = U.GetComponent<Attack>().MeleeAttacks;
+                float DF = U.GetComponent<Attack>().MeleeDamage * U.GetComponent<Attack>().DamageMod;
+                U.GetComponent<Attack>().thisDamage = (int)DF;
+                U.GetComponent<Attack>().thisAttack = U.GetComponent<Attack>().MeleeAttacks;
 
-            DF = FinalTarget.GetComponent<Attack>().MeleeDamage * FinalTarget.GetComponent<Attack>().DamageMod;
-            FinalTarget.GetComponent<Attack>().thisDamage = (int)DF;
-            FinalTarget.GetComponent<Attack>().thisAttack = FinalTarget.GetComponent<Attack>().MeleeAttacks;
+                DF = FinalTarget.GetComponent<Attack>().MeleeDamage * FinalTarget.GetComponent<Attack>().DamageMod;
+                FinalTarget.GetComponent<Attack>().thisDamage = (int)DF;
+                FinalTarget.GetComponent<Attack>().thisAttack = FinalTarget.GetComponent<Attack>().MeleeAttacks;
 
-            U.GetComponent<Attack>().EnemyDef = FinalTarget.GetComponent<Attack>().CurrentDef;
+                U.GetComponent<Attack>().EnemyDef = FinalTarget.GetComponent<Attack>().CurrentDef;
 
-            U.GetComponent<Attack>().Target = FinalTarget.GetComponent<HitPoints>();
+                U.GetComponent<Attack>().Target = FinalTarget.GetComponent<HitPoints>();
+
+            }
+            else
+            {
+                float DF = U.GetComponent<Attack>().RangedDamage * U.GetComponent<Attack>().DamageMod;
+                U.GetComponent<Attack>().thisDamage = (int)DF;
+                U.GetComponent<Attack>().thisAttack = U.GetComponent<Attack>().RangedAttacks;
+
+                DF = FinalTarget.GetComponent<Attack>().RangedDamage * FinalTarget.GetComponent<Attack>().DamageMod;
+                FinalTarget.GetComponent<Attack>().thisDamage = (int)DF;
+                FinalTarget.GetComponent<Attack>().thisAttack = FinalTarget.GetComponent<Attack>().RangedAttacks;
+
+
+
+                U.GetComponent<Attack>().EnemyDef = FinalTarget.GetComponent<Attack>().CurrentDef;
+
+                U.GetComponent<Attack>().Target = FinalTarget.GetComponent<HitPoints>();
+
+            }
+
 
         }
-        else
-        {
-            float DF = U.GetComponent<Attack>().RangedDamage * U.GetComponent<Attack>().DamageMod;
-            U.GetComponent<Attack>().thisDamage = (int)DF;
-            U.GetComponent<Attack>().thisAttack = U.GetComponent<Attack>().RangedAttacks;
 
-            DF = FinalTarget.GetComponent<Attack>().RangedDamage * FinalTarget.GetComponent<Attack>().DamageMod;
-            FinalTarget.GetComponent<Attack>().thisDamage = (int)DF;
-            FinalTarget.GetComponent<Attack>().thisAttack = FinalTarget.GetComponent<Attack>().RangedAttacks;
-
-
-
-            U.GetComponent<Attack>().EnemyDef = FinalTarget.GetComponent<Attack>().CurrentDef;
-
-            U.GetComponent<Attack>().Target = FinalTarget.GetComponent<HitPoints>();
-
-        }
-
-
-
+        PotentialTargets.Clear();
+        FinalTarget = null;
     }
 }

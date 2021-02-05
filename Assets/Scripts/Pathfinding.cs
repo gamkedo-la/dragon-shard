@@ -69,7 +69,7 @@ public class Pathfinding : MonoBehaviour
             if(t >= 1)
             {
                 CurrentLocation = Path[Path.Length - 1 - step];
-                CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = gameObject;
+                Path[Path.Length - 1 - step].GetComponent<Pathnode>().CurrentOccupant = gameObject;
                 Path[Path.Length - step].GetComponent<Pathnode>().CurrentOccupant = null;
                 MovePoints -= CurrentLocation.GetComponent<Pathnode>().GetMPRequired();
 

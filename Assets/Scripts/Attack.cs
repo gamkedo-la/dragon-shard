@@ -12,7 +12,7 @@ public class Attack : MonoBehaviour
     public int RangedAttacks;
     public int RangedDamage;
 
-    [HideInInspector]
+    //[HideInInspector]
     public HitPoints Target;
 
     [HideInInspector]
@@ -76,7 +76,11 @@ public class Attack : MonoBehaviour
 
     public void TurnStart()
     {
-        
+        timer = 0;
+        turn = true;
+        counter = 0;
+        enemyCounter = 0;
+
         if (DamageMod != AttackLevelBuff)
         {
             ModLength -= 1;

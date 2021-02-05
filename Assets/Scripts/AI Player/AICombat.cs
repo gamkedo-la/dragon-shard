@@ -7,7 +7,7 @@ public class AICombat : MonoBehaviour
 
     public List<GameObject> PotentialTargets = new List<GameObject>();
 
-    GameObject FinalTarget;
+    public GameObject FinalTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,8 @@ public class AICombat : MonoBehaviour
 
     public void LocateTarget(GameObject U)
     {
-
+        PotentialTargets.Clear();
+        FinalTarget = null;
         foreach (GameObject G in U.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)
         {
 

@@ -113,28 +113,28 @@ public class Tracker : MonoBehaviour
     public GameObject FindDestination(GameObject U)
     {
 
-        bool a = false;
+        //bool a = false;
 
-        foreach(GameObject t in U.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)
-        {
-            if (t.GetComponent<Pathnode>().CurrentOccupant != null)
-            {
-                if (t.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != P)
-                {
-                    a = true;
+        //foreach(GameObject t in U.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)
+        //{
+        //    if (t.GetComponent<Pathnode>().CurrentOccupant != null)
+        //    {
+        //        if (t.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != P)
+        //        {
+        //            a = true;
 
-                }
-            }
+        //        }
+        //    }
 
-        }
+        //}
 
-        if(a == true)
-        {
+        //if(a == true)
+        //{
 
-            //start combat here
-            return null;
+        //    //start combat here
+        //    return null;
 
-        }
+        //}
 
         ToCheck.Clear();
         Checked.Clear();
@@ -314,7 +314,16 @@ public class Tracker : MonoBehaviour
                 if(EndPoints.Count == 1)
                 {
                     GameObject[] f = EndPoints.ToArray();
-                    return f[0];
+                    if(f[0] == U.GetComponent<Pathfinding>().CurrentLocation)
+                    {
+                        GetComponent<AICombat>().LocateTarget(U);
+                        return null;
+
+                    }
+                    else
+                    {
+                        return f[0];
+                    }
                 }
 
                 else
@@ -346,10 +355,41 @@ public class Tracker : MonoBehaviour
                     }
                     temp.Clear();
 
-                    GameObject[] h = EndPoints.ToArray();
+                    bool c = false;
 
-                    return h[Random.Range(0, EndPoints.Count)];
+                    foreach(GameObject G in EndPoints)
+                    {
+                        if(G == U.GetComponent<Pathfinding>().CurrentLocation)
+                        {
+                            c = true;
+                        }
 
+                    }
+
+                    if (c == true)
+                    {
+                        GetComponent<AICombat>().LocateTarget(U);
+                        return null;
+
+                    }
+                    else
+                    {
+
+                        GameObject[] h = EndPoints.ToArray();
+
+                        GameObject i = h[Random.Range(0, EndPoints.Count)];
+
+                        if (i == U.GetComponent<Pathfinding>().CurrentLocation)
+                        {
+                            GetComponent<AICombat>().LocateTarget(U);
+                            return null;
+
+                        }
+                        else
+                        {
+                            return i;
+                        }
+                    }
                 }
 
             }

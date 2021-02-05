@@ -35,6 +35,16 @@ public class Tracker : MonoBehaviour
 
     public int i;
 
+    public GameObject[] f;
+    public GameObject N;
+    public GameObject EndPoint;
+
+    public GameObject[] Path;
+    public GameObject[] FinalPath;
+
+    public List<GameObject> ThisMove = new List<GameObject>();
+    public List<GameObject> Alternatives = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,28 +123,28 @@ public class Tracker : MonoBehaviour
     public GameObject FindDestination(GameObject U)
     {
 
-        //bool a = false;
+        bool a = false;
 
-        //foreach(GameObject t in U.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)
-        //{
-        //    if (t.GetComponent<Pathnode>().CurrentOccupant != null)
-        //    {
-        //        if (t.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != P)
-        //        {
-        //            a = true;
+        foreach(GameObject t in U.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)
+        {
+            if (t.GetComponent<Pathnode>().CurrentOccupant != null)
+            {
+                if (t.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != P)
+                {
+                    a = true;
 
-        //        }
-        //    }
+                }
+            }
 
-        //}
+        }
 
-        //if(a == true)
-        //{
+        if(a == true)
+        {
 
-        //    //start combat here
-        //    return null;
+            //start combat here
+            return null;
 
-        //}
+        }
 
         ToCheck.Clear();
         Checked.Clear();
@@ -220,28 +230,20 @@ public class Tracker : MonoBehaviour
                     PotentialTargets.Add(T.GetComponent<Pathnode>().CurrentOccupant);
                 }
             }
-
         }
 
         if(PotentialTargets.Count > 0)
         {
-
             foreach(GameObject G in PotentialTargets)
             {
-
                 foreach (GameObject tt in G.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)
                 {
-
                     if (CanMoveTo.Contains(tt) && tt.GetComponent<Pathnode>().CurrentOccupant == null)
                     {
                         EndPoints.Add(tt);
-
                     }
-
                 }
-
             }
-
 
             if (EndPoints.Count >= 1)
             {
@@ -279,7 +281,6 @@ public class Tracker : MonoBehaviour
                     if (T.GetComponent<Tile>().thisTile == TileType.castle)
                     {
                         T.GetComponent<Tile>().AIDefense = U.GetComponent<Attack>().CastleDef;
-
                     }
                 }
 
@@ -294,7 +295,6 @@ public class Tracker : MonoBehaviour
                         floor = x.GetComponent<Tile>().AIDefense;
                     }
                 }
-
 
                 foreach(GameObject q in EndPoints)
                 {
@@ -335,11 +335,8 @@ public class Tracker : MonoBehaviour
                         if (x.GetComponent<Pathnode>().MPRemain > floor)
                         {
                             floor = x.GetComponent<Pathnode>().MPRemain;
-
                         }
-
                     }
-
 
                     foreach (GameObject q in EndPoints)
                     {
@@ -363,7 +360,6 @@ public class Tracker : MonoBehaviour
                         {
                             c = true;
                         }
-
                     }
 
                     if (c == true)
@@ -391,25 +387,16 @@ public class Tracker : MonoBehaviour
                         }
                     }
                 }
-
             }
             else
             {
-
-                return AStar(U);
-            }
-            
-
+                return LongRange(U);
+            }            
         }
         else
         {
-
-            return AStar(U);
-
-
+            return LongRange(U);
         }
-
-
     }
 
     void FindAvailableTiles(GameObject T)
@@ -508,13 +495,160 @@ public class Tracker : MonoBehaviour
 
     }
 
-    public GameObject AStar(GameObject U)
+    public GameObject LongRange(GameObject U)
     {
+        List<GameObject> LongTermPlan = new List<GameObject>();
 
-        return null;
 
+        int temp = U.GetComponent<Pathfinding>().MovePoints;
 
+        U.GetComponent<Pathfinding>().MovePoints = 1000;
+        U.GetComponent<Pathfinding>().GenerateMovementOptions();
+
+        U.GetComponent<Pathfinding>().MovePoints = temp;
+
+        foreach(GameObject T in U.GetComponent<Pathfinding>().CanMoveTo)
+        {
+            foreach(GameObject TT in T.GetComponent<Tile>().Adjacent)
+            {
+                if (TT.GetComponent<Pathnode>().CurrentOccupant != null)
+                {
+                    if(TT.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != P)
+                    {
+                        LongTermPlan.Add(T);
+                    }
+                }
+            }
+        }
+
+        temp = 0;
+        
+        foreach(GameObject T in LongTermPlan)
+        {
+            if(T.GetComponent<Pathnode>().MPRemain > temp)
+            {
+                temp = T.GetComponent<Pathnode>().MPRemain;
+            }
+        }
+
+        List<GameObject> garbage = new List<GameObject>();
+
+        foreach(GameObject T in LongTermPlan)
+        {
+            if(T.GetComponent<Pathnode>().MPRemain < temp)
+            {
+                garbage.Add(T);
+            }
+        }
+
+        f = LongTermPlan.ToArray();
+
+        N = f[Random.Range(0, f.Length)];
+
+        EndPoint = N;
+
+        ThisMove = new List<GameObject>();
+
+        int j = 0;
+
+        while (N.GetComponent<Pathnode>().Previous != null)
+        {
+
+            ThisMove.Add(N.GetComponent<Pathnode>().Previous);
+            N = N.GetComponent<Pathnode>().Previous;
+
+        }
+
+        //Debug.Log("creating Path");
+        Path = new GameObject[ThisMove.Count+1];
+        //Debug.Log("Path created successfully");
+        Path.SetValue(EndPoint, j);
+        j++;
+
+        N = EndPoint;
+
+        while (N.GetComponent<Pathnode>().Previous != null)
+        {
+
+            Path.SetValue(N.GetComponent<Pathnode>().Previous, j);
+            j++;
+            N = N.GetComponent<Pathnode>().Previous;
+
+        }
+
+        U.GetComponent<Pathfinding>().GenerateMovementOptions();
+
+        FinalPath = new GameObject[U.GetComponent<Pathfinding>().MovePoints];
+
+        int l = 0;
+
+        for(int k = 0; k < Path.Length; k++)
+        {
+
+            if(Path[k].GetComponent<Pathnode>().MPRemain <= 0)
+            {
+                FinalPath.SetValue(Path[k], l);
+                l++;
+            }
+
+        }
+
+        l = 0;
+        if(FinalPath[l].GetComponent<Pathnode>().MPRemain < 0)
+        {
+            l++;
+        }
+
+        EndPoint = FinalPath[l];
+        
+
+        if (EndPoint.GetComponent<Pathnode>().CurrentOccupant != null)
+        {
+            Debug.Log("finding alternate route");
+            Alternatives = new List<GameObject>();
+
+            foreach (GameObject T in EndPoint.GetComponent<Tile>().Adjacent)
+            {
+                if (T.GetComponent<Pathnode>().MPRemain >= 0)
+                {
+                    Alternatives.Add(T);
+                }
+            }
+            
+            temp = 10;
+
+            foreach (GameObject T in Alternatives)
+            {
+                if (T.GetComponent<Pathnode>().MPRemain < temp)
+                {
+                    temp = T.GetComponent<Pathnode>().MPRemain;
+                }
+            }
+
+            garbage.Clear();
+
+            foreach (GameObject T in Alternatives)
+            {
+                if (T.GetComponent<Pathnode>().MPRemain > temp)
+                {
+                    garbage.Add(T);
+                }
+                if(T.GetComponent<Pathnode>().CurrentOccupant != null)
+                {
+                    garbage.Add(T);
+                }
+            }
+
+            foreach (GameObject T in garbage)
+            {
+                Alternatives.Remove(T);
+            }
+
+            Alternatives.Remove(EndPoint);
+
+            GameObject[] q = Alternatives.ToArray();
+            EndPoint = q[Random.Range(0, q.Length)];            
+        }
+        return EndPoint;        
     }
-
-
 }

@@ -24,7 +24,7 @@ public class AICombat : MonoBehaviour
 
     public void LocateTarget(GameObject U)
     {
-        Debug.Log("locate target called for " + U.name);
+        //Debug.Log("locate target called for " + U.name);
         PotentialTargets.Clear();
         FinalTarget = null;
         foreach (GameObject G in U.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)

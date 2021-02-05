@@ -332,7 +332,7 @@ public class Pathfinding : MonoBehaviour
     public void MoveTo(GameObject EndPoint)
     {
 
-        if(CanMoveTo.Contains(EndPoint) == false)
+        if(CanMoveTo.Contains(EndPoint) == false || EndPoint == null)
         {
 
             Checked.Clear();
@@ -341,7 +341,20 @@ public class Pathfinding : MonoBehaviour
             ThisMove.Clear();
             thisClicker.Clear();
 
-            Debug.Log("invalid destination");
+            if (GetComponent<Unit>().controlledByAI == true)
+            {                
+                GetComponent<Unit>().AIOverlord.GetComponent<AICombat>().LocateTarget(gameObject);
+            }            
+            
+            if (EndPoint == null)
+            {
+                Debug.Log("EndPoint = null");
+            }
+            else
+            {
+                Debug.Log("invalid destination " + EndPoint.name);
+            }
+
             return;
         }
 

@@ -120,8 +120,8 @@ public class Pathfinding : MonoBehaviour
                         */
 
 
-                        GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().i++;
-                        GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
+                        GetComponent<Unit>().AIOverlord.GetComponent<AICombat>().LocateTarget(gameObject);
+
                     }
 
                     return;

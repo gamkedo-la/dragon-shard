@@ -141,7 +141,7 @@ public class CombatMenu : MonoBehaviour
             Aggressor.GetComponent<Attack>().thisAttack = Aggressor.GetComponent<Attack>().RangedAttacks;
 
             DF = Defender.GetComponent<Attack>().RangedDamage * Defender.GetComponent<Attack>().DamageMod;
-            Defender.GetComponent<Attack>().thisDamage = Defender.GetComponent<Attack>().RangedDamage;
+            Defender.GetComponent<Attack>().thisDamage = (int)DF;
             Defender.GetComponent<Attack>().thisAttack = Defender.GetComponent<Attack>().RangedAttacks;
 
             Aggressor.GetComponent<Attack>().Target = Defender.GetComponent<HitPoints>();
@@ -156,7 +156,7 @@ public class CombatMenu : MonoBehaviour
             Aggressor.GetComponent<Attack>().thisAttack = Aggressor.GetComponent<Attack>().MeleeAttacks;
 
             DF = Defender.GetComponent<Attack>().MeleeDamage * Defender.GetComponent<Attack>().DamageMod;
-            Defender.GetComponent<Attack>().thisDamage = Defender.GetComponent<Attack>().MeleeDamage;
+            Defender.GetComponent<Attack>().thisDamage = (int)DF;
             Defender.GetComponent<Attack>().thisAttack = Defender.GetComponent<Attack>().MeleeAttacks;
 
 
@@ -165,8 +165,6 @@ public class CombatMenu : MonoBehaviour
 
 
         }
-
-        float AD =
 
         Aggressor.GetComponent<Attack>().EnemyDef = Defender.GetComponent<Attack>().CurrentDef;
         Aggressor.GetComponent<Pathfinding>().MovePoints = 0;
@@ -182,7 +180,7 @@ public class CombatMenu : MonoBehaviour
         Aggressor.GetComponent<Attack>().thisAttack = Aggressor.GetComponent<Attack>().RangedAttacks;
 
         DF = Defender.GetComponent<Attack>().RangedDamage * Defender.GetComponent<Attack>().DamageMod;
-        Defender.GetComponent<Attack>().thisDamage = Defender.GetComponent<Attack>().RangedDamage;
+        Defender.GetComponent<Attack>().thisDamage = (int)DF;
         Defender.GetComponent<Attack>().thisAttack = Defender.GetComponent<Attack>().RangedAttacks;
 
         Aggressor.GetComponent<Attack>().Target = Defender.GetComponent<HitPoints>();

@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-
+    public string MeleeName;
     public int MeleeAttacks;
     public int MeleeDamage;
+
+    public string RangedName;
     public int RangedAttacks;
     public int RangedDamage;
 
+    [HideInInspector]
     public HitPoints Target;
 
+    [HideInInspector]
     public int thisAttack;
+    [HideInInspector]
     public int thisDamage;
+    [HideInInspector]
     public bool moddedDamage = false;
 
+    [HideInInspector]
     public float DamageMod = 1;
+    [HideInInspector]
     public int ModLength;
 
     private float timer = 0;
@@ -24,8 +32,8 @@ public class Attack : MonoBehaviour
     private int counter = 0;
     private int enemyCounter = 0;
 
+    [HideInInspector]
     public float EnemyDef;
-
 
     public int GrassDef;
     public int ForestDef;
@@ -34,27 +42,39 @@ public class Attack : MonoBehaviour
     public int HillsDef;
     public int CastleDef;
 
+    [HideInInspector]
     public int CurrentDef;
 
+    [HideInInspector]
     public float DefMod = 1;
+    [HideInInspector]
     public int DModLength;
 
+    [HideInInspector]
     public bool moddedDef = false;
 
-    public string MeleeName;
-    public string RangedName;
-
     private Experience attacker;
+
+    [HideInInspector]
+    public bool MeleePrimary = false;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         if (attacker == null)
             attacker = GetComponent<Experience>();
+
+        if((MeleeAttacks * MeleeDamage) > (RangedAttacks * RangedDamage))
+        {
+            MeleePrimary = true;
+        }
     }
 
     public void TurnStart()
     {
-
+        
         if (DamageMod != 1)
         {
             ModLength -= 1;
@@ -97,11 +117,8 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         if (Target != null)
         {
-
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
@@ -112,7 +129,15 @@ public class Attack : MonoBehaviour
                         if (enemyCounter >= Target.GetComponent<Attack>().thisAttack)
                         {
                             Target = null;
-                            return;
+
+                            if (GetComponent<Unit>().controlledByAI == true)
+                            {
+                                GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().i++;
+                                GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
+
+                            }
+
+                                return;
 
                         }
                         turn = false;
@@ -122,10 +147,7 @@ public class Attack : MonoBehaviour
                     Att(Target, thisDamage, EnemyDef);
                     turn = false;
                     counter++;
-
                     timer = 1.0f;
-
-
                 }
                 else if (turn == false)
                 {
@@ -140,13 +162,11 @@ public class Attack : MonoBehaviour
                     enemyCounter++;
 
                     timer = 1.0f;
-
                 }
             }
         }
     }
-
-
+    
     public void Att(HitPoints Enemy, int D, float Chance)
     {
         int R = Random.Range(1, 101);
@@ -157,7 +177,6 @@ public class Attack : MonoBehaviour
         }
         else
         {
-
             Enemy.TakeDamage(D, attacker);
         }
     }

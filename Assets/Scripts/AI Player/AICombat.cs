@@ -149,6 +149,8 @@ public class AICombat : MonoBehaviour
                 U.GetComponent<Attack>().EnemyDef = FinalTarget.GetComponent<Attack>().CurrentDef;
 
                 U.GetComponent<Attack>().Target = FinalTarget.GetComponent<HitPoints>();
+                U.transform.LookAt(FinalTarget.transform);
+                FinalTarget.transform.LookAt(U.transform);
 
             }
             else
@@ -166,6 +168,8 @@ public class AICombat : MonoBehaviour
                 U.GetComponent<Attack>().EnemyDef = FinalTarget.GetComponent<Attack>().CurrentDef;
 
                 U.GetComponent<Attack>().Target = FinalTarget.GetComponent<HitPoints>();
+                U.transform.LookAt(FinalTarget.transform);
+                FinalTarget.transform.LookAt(U.transform);
 
             }
 

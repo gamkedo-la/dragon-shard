@@ -20,6 +20,8 @@ public class Unit : MonoBehaviour
 
     public GameObject AIOverlord;
 
+    GameObject Armor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,10 @@ public class Unit : MonoBehaviour
         Options = transform.Find("Action Menu").gameObject;
         GM = Camera.main.GetComponent<Players>();
         Click = GM.thisClicker;
-        
+        Armor = transform.Find("model").gameObject;
+        Armor.GetComponent<ArmorColor>().AssignColor(GM.ThisGame[Owner].thisMaterial);
+
+
         if(Options.GetComponent<LookAt>() != null)
         {
 

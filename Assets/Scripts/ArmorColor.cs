@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ArmorColor : MonoBehaviour
 {
-
+    public List<GameObject> ColoredPieces = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -16,10 +16,18 @@ public class ArmorColor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-#if UNITY_EDITOR
-        GetComponent<SpriteRenderer>().color = 
-            GameObject.Find("Main Camera").GetComponent<Players>().
-            ThisGame[transform.parent.gameObject.GetComponent<Unit>().Owner].thisColor;
-#endif
+
     }
+
+    public void AssignColor(Material M)
+    {
+        foreach(GameObject G in ColoredPieces)
+        {
+            G.GetComponent<MeshRenderer>().material = M;
+
+        }
+
+
+    }
+
 }

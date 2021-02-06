@@ -104,6 +104,8 @@ public class Players : MonoBehaviour
 
         public List<GameObject> Units;
 
+        public Material thisMaterial;
+
     }
 
 }

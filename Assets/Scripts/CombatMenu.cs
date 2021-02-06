@@ -168,6 +168,10 @@ public class CombatMenu : MonoBehaviour
 
         Aggressor.GetComponent<Attack>().EnemyDef = Defender.GetComponent<Attack>().CurrentDef;
         Aggressor.GetComponent<Pathfinding>().MovePoints = 0;
+
+        Aggressor.transform.LookAt(Defender.transform);
+        Defender.transform.LookAt(Aggressor.transform);
+
         Cancel();
 
     }
@@ -188,6 +192,9 @@ public class CombatMenu : MonoBehaviour
         Aggressor.GetComponent<Attack>().EnemyDef = Defender.GetComponent<Attack>().CurrentDef;
 
         Aggressor.GetComponent<Pathfinding>().MovePoints = 0;
+        Aggressor.transform.LookAt(Defender.transform);
+
+        Defender.transform.LookAt(Aggressor.transform);
 
         Cancel();
     }

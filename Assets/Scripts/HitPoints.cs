@@ -32,7 +32,7 @@ public class HitPoints : MonoBehaviour
 
         CurrentHP -= damage;
         Vector3 temp = transform.position;
-        temp.y = .5f;
+        temp.y = .3f;
 
         GameObject T = Instantiate(DamageText, temp, Quaternion.identity);
         T.GetComponent<DamageText>().dam = damage;

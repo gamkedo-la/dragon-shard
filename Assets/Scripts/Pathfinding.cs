@@ -133,6 +133,7 @@ public class Pathfinding : MonoBehaviour
                 tempP.y = transform.position.y;
                 tempN = Path[Path.Length - step - 1].transform.position;
                 tempN.y = transform.position.y;
+                transform.LookAt(tempN);
 
             }
         }
@@ -394,6 +395,8 @@ public class Pathfinding : MonoBehaviour
         tempP.y = transform.position.y;
         tempN = Path[Path.Length - 2].transform.position;
         tempN.y = transform.position.y;
+
+        transform.LookAt(tempN);
 
         moving = true;
         thisClicker.ActionInProgress = true;

@@ -127,10 +127,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MeleeName: Dagger
   MeleeAttacks: 2
-  MeleeDamage: 5
+  MeleeDamage: 3
   RangedName: Arrows
-  RangedAttacks: 1
-  RangedDamage: 2
+  RangedAttacks: 2
+  RangedDamage: 5
   Target: {fileID: 0}
   thisAttack: 0
   thisDamage: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   MeleePrimary: 0
   DefenseLevelBuff: 1
   AttackLevelBuff: 1
+  AttackedThisTurn: 0
 --- !u!114 &495920427478457281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,8 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541726d8a2db6f7499eb6c2600f01069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 50
-  CurrentHP: 50
+  MaxHP: 40
+  CurrentHP: 40
   DamageText: {fileID: 1682866155419517283, guid: 4efa638b120ee6c4ba42a799d94e4519,
     type: 3}
 --- !u!114 &3831568177699150315

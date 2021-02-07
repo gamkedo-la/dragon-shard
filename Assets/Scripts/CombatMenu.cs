@@ -7,8 +7,10 @@ public class CombatMenu : MonoBehaviour
 {
     public Text AggName;
     public Text AggDef;
+    public Text AggHP;
     public Text DefName;
     public Text DefDef;
+    public Text DefHP;
 
     public Image AggColor;
     public Image DefColor;
@@ -48,9 +50,11 @@ public class CombatMenu : MonoBehaviour
 
         AggName.text = Aggressor.GetComponent<Unit>().UnitName;
         AggDef.text = "Defense: " + Aggressor.GetComponent<Attack>().CurrentDef.ToString() + "%";
+        AggHP.text = "HP: " + Aggressor.GetComponent<HitPoints>().CurrentHP.ToString() + "/" + Aggressor.GetComponent<HitPoints>().MaxHP.ToString();
 
         DefName.text = Defender.GetComponent<Unit>().UnitName;
         DefDef.text = "Defense: " + Defender.GetComponent<Attack>().CurrentDef.ToString() + "%";
+        DefHP.text = "HP: " + Defender.GetComponent<HitPoints>().CurrentHP.ToString() + "/" + Defender.GetComponent<HitPoints>().MaxHP.ToString();
 
         AggColor.color = Aggressor.GetComponent<Unit>().GM.ThisGame[Aggressor.GetComponent<Unit>().Owner].thisColor;
 

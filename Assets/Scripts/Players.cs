@@ -67,8 +67,10 @@ public class Players : MonoBehaviour
             }
             foreach (GameObject U in ThisGame[CurrentTurn].Units)
             {
-                U.GetComponent<Unit>().TurnStart();
-
+                if (U != null)
+                {
+                    U.GetComponent<Unit>().TurnStart();
+                }
             }
             foreach (GameObject AI in AIPlayers)
             {

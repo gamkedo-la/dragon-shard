@@ -138,7 +138,7 @@ public class Attack : MonoBehaviour
 
                             if (GetComponent<Unit>().controlledByAI == true)
                             {
-                                GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().i++;
+
                                 GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
 
                             }

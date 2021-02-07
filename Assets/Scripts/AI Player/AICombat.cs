@@ -41,7 +41,7 @@ public class AICombat : MonoBehaviour
 
         if (PotentialTargets.Count == 0)
         {
-            GetComponent<Tracker>().i++;
+
             GetComponent<Tracker>().NextUnit();
             return;
         }
@@ -74,9 +74,9 @@ public class AICombat : MonoBehaviour
                 }
             }
 
-            foreach (GameObject PT in PotentialTargets)
+            foreach (GameObject PT in temp)
             {
-                if (temp.Contains(PT) == true)
+                if (PotentialTargets.Contains(PT) == true)
                 {
                     PotentialTargets.Remove(PT);
                 }

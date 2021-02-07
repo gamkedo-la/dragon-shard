@@ -14,8 +14,7 @@ public class Tracker : MonoBehaviour
     public List<GameObject> MyUnits = new List<GameObject>();
 
     public GameObject[] MUArray;
-
-
+      
     private List<GameObject> Checked = new List<GameObject>();
     private List<GameObject> ToCheck = new List<GameObject>();
 
@@ -33,7 +32,7 @@ public class Tracker : MonoBehaviour
 
     bool ActionInprogress = false;
 
-    public int i;
+    public int i = 0;
 
     public GameObject[] f;
     public GameObject N;
@@ -48,12 +47,12 @@ public class Tracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i<GM.ThisGame.Length; i++)
+        for(int k = 0; k<GM.ThisGame.Length; k++)
         {
-            if(P != i)
+            if(P != k)
             {
 
-                foreach(GameObject U in GM.ThisGame[i].Units)
+                foreach(GameObject U in GM.ThisGame[k].Units)
                 {
 
                     Enemies.Add(U);
@@ -63,7 +62,7 @@ public class Tracker : MonoBehaviour
             else
             {
 
-                foreach (GameObject U in GM.ThisGame[i].Units)
+                foreach (GameObject U in GM.ThisGame[k].Units)
                 {
 
                     MyUnits.Add(U);
@@ -90,12 +89,13 @@ public class Tracker : MonoBehaviour
 
         if (GM.CurrentTurn == P)
         {
-            i = 0;
+            i = -1;
             foreach (GameObject U in MyUnits)
             {
-
-                U.GetComponent<Unit>().AIActionTaken = false;
-
+                if (U != null)
+                {
+                    U.GetComponent<Unit>().AIActionTaken = false;
+                }
             }
             NextUnit();
         }
@@ -103,7 +103,7 @@ public class Tracker : MonoBehaviour
 
     public void NextUnit()
     {
-
+        i++;
         if(i >= MUArray.Length)
         {
 
@@ -111,11 +111,17 @@ public class Tracker : MonoBehaviour
             return;
 
         }
+        if (MUArray[i] != null)
+        {
 
-        MUArray[i].GetComponent<Pathfinding>().GenerateMovementOptions();
-        MUArray[i].GetComponent<Pathfinding>().MoveTo(FindDestination(MUArray[i]));
-        MUArray[i].GetComponent<Unit>().AIActionTaken = true;
-
+            MUArray[i].GetComponent<Pathfinding>().GenerateMovementOptions();
+            MUArray[i].GetComponent<Pathfinding>().MoveTo(FindDestination(MUArray[i]));
+            MUArray[i].GetComponent<Unit>().AIActionTaken = true;
+        }
+        else
+        {
+            NextUnit();
+        }
 
     }
 

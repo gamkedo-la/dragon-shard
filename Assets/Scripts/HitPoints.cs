@@ -70,6 +70,18 @@ public class HitPoints : MonoBehaviour
     public void Death(Experience otherUnit)
     {
         //pre death stuff
+        
+        if(GetComponent<Unit>().AIOverlord != null)
+        {
+            GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
+
+        }
+        if(otherUnit.GetComponent<Unit>().AIOverlord != null)
+        {
+            otherUnit.GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
+
+        }
+
         var experience = GetComponent<Experience>().GetExpBonus();
 
         if (otherUnit != null)

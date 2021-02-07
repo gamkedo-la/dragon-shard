@@ -62,6 +62,8 @@ public class Attack : MonoBehaviour
 
     public float AttackLevelBuff = 1;
 
+    public bool AttackedThisTurn = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +78,7 @@ public class Attack : MonoBehaviour
 
     public void TurnStart()
     {
+        AttackedThisTurn = false;
         timer = 0;
         turn = true;
         counter = 0;
@@ -176,6 +179,7 @@ public class Attack : MonoBehaviour
     public void Att(HitPoints Enemy, int D, float Chance)
     {
         int R = Random.Range(1, 101);
+        AttackedThisTurn = true;
 
         if (R < Chance)
         {

@@ -36,7 +36,6 @@ public class Clicker : MonoBehaviour
                             && rhInfo.collider.gameObject.GetComponent<Unit>().Owner == GetComponent<Players>().CurrentTurn
                             && SelectingAction == false)
                         {
-
                             //Debug.Log(rhInfo.collider.name + " . . " + rhInfo.point);
                             CurrentUnit = rhInfo.collider.GetComponent<Unit>();
 
@@ -48,7 +47,6 @@ public class Clicker : MonoBehaviour
                             }
                             else
                             {
-
                                 //Debug.Log("clicked on empty space");
                             }
 
@@ -62,7 +60,6 @@ public class Clicker : MonoBehaviour
                                 SelectingAction = true;
                                 return;
 
-
                             }
 
                             else if (rhInfo.collider.gameObject.tag == "attack button")
@@ -72,15 +69,23 @@ public class Clicker : MonoBehaviour
                                     Debug.LogError($"CurrentUnit null when it should not be! {nameof(Clicker)}");
                                 }
 
-                                CurrentUnit.GetComponent<SelectAttack>().FindTargets();
-                                CurrentUnit.HideOptions();
-                                SelectingAction = true;
+                                if (CurrentUnit.GetComponent<Attack>().AttackedThisTurn == false)
+                                {
+                                    CurrentUnit.GetComponent<SelectAttack>().FindTargets();
+                                    CurrentUnit.HideOptions();
+                                    SelectingAction = true;
+                                }
+
+                                else
+                                {
+                                    Clear();
+                                }
+
                                 return;
                             }
 
                             else if (rhInfo.collider.gameObject.tag == "DamageBuffButton")
                             {
-
                                 CurrentUnit.GetComponent<HumanMagic>().BuffAttack();
                                 CurrentUnit.HideOptions();
                                 return;
@@ -88,7 +93,6 @@ public class Clicker : MonoBehaviour
 
                             else if (rhInfo.collider.gameObject.tag == "DefenseBuffButton")
                             {
-
                                 CurrentUnit.GetComponent<HumanMagic>().BuffDeffense();
                                 CurrentUnit.HideOptions();
                                 return;
@@ -123,8 +127,6 @@ public class Clicker : MonoBehaviour
 
                             }
 
-
-
                             else
                             {
                                 if (CurrentUnit != null)
@@ -157,8 +159,5 @@ public class Clicker : MonoBehaviour
         {
             TTT.gameObject.GetComponent<Pathnode>().ResetPath();
         }
-
-
     }
-
 }

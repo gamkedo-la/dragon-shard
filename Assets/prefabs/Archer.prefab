@@ -125,8 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd69a3b68a5d1c45bc86c49b4ec863e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleeName: Dagger
   MeleeAttacks: 2
   MeleeDamage: 5
+  RangedName: Arrows
   RangedAttacks: 1
   RangedDamage: 2
   Target: {fileID: 0}
@@ -146,8 +148,9 @@ MonoBehaviour:
   DefMod: 1
   DModLength: 0
   moddedDef: 0
-  MeleeName: Dagger
-  RangedName: Arrows
+  MeleePrimary: 0
+  DefenseLevelBuff: 1
+  AttackLevelBuff: 1
 --- !u!114 &495920427478457281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,6 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c1164201053e71428fbe62471079589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColoredPieces: []
 --- !u!1 &6390424486765063197
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,6 +426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 848227833771796116}
   - component: {fileID: 2612488013126598748}
+  - component: {fileID: 555878859}
   m_Layer: 0
   m_Name: model
   m_TagString: Untagged
@@ -493,6 +498,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &555878859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390424486765063197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c1164201053e71428fbe62471079589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ColoredPieces: []
 --- !u!1 &6541646308218645283
 GameObject:
   m_ObjectHideFlags: 0

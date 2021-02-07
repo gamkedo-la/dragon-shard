@@ -70,13 +70,17 @@ public class HitPoints : MonoBehaviour
     public void Death(Experience otherUnit)
     {
         //pre death stuff
-        
-        if(GetComponent<Unit>().AIOverlord != null)
+
+        GetComponent<Unit>().GM.ThisGame[GetComponent<Unit>().Owner].Units.Remove(gameObject);
+
+        GetComponent<Pathfinding>().CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = null;
+
+        if(GetComponent<Unit>().AIOverlord != null && GetComponent<Unit>().Owner == GetComponent<Unit>().GM.CurrentTurn)
         {
             GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
 
         }
-        if(otherUnit.GetComponent<Unit>().AIOverlord != null)
+        if(otherUnit.GetComponent<Unit>().AIOverlord != null && otherUnit.GetComponent<Unit>().Owner == otherUnit.GetComponent<Unit>().GM.CurrentTurn)
         {
             otherUnit.GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
 

@@ -9,6 +9,8 @@ public class Unit : MonoBehaviour
     public Players GM;
     public Clicker Click;
 
+    public int Alliance;
+
     public GameObject Options;
 
     public string UnitName;

@@ -31,6 +31,7 @@ public class Players : MonoBehaviour
                 if(U.GetComponent<Unit>().Owner == i)
                 {
                     ThisGame[i].Units.Add(U);
+                    U.GetComponent<Unit>().Alliance = ThisGame[i].Alliance;
 
                 }
             }            
@@ -100,7 +101,7 @@ public class Players : MonoBehaviour
         
         public Color thisColor;
 
-        public int Gold;
+        public int Alliance;
 
         public bool ControlledByAI;
 

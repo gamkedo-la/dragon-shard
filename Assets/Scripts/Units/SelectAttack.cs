@@ -46,7 +46,7 @@ public class SelectAttack : MonoBehaviour
         {
             if(T.GetComponent<Pathnode>().CurrentOccupant != null)
             {
-                if(T.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != GetComponent<Unit>().Owner)
+                if(T.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Alliance != GetComponent<Unit>().Alliance)
                 {
                     ValidTargets.Add(T.GetComponent<Pathnode>().CurrentOccupant);
                     TargetLocations.Add(T);

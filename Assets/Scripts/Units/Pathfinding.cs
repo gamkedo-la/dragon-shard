@@ -169,7 +169,7 @@ public class Pathfinding : MonoBehaviour
 
         if (T.GetComponent<Pathnode>().CurrentOccupant != null)
         {
-            if (T.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != GetComponent<Unit>().Owner)
+            if (T.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Alliance != GetComponent<Unit>().Alliance)
             {
                 T.GetComponent<Pathnode>().MPRemain = -1;
 

@@ -98,6 +98,24 @@ public class Clicker : MonoBehaviour
                                 return;
                             }
 
+                            else if (rhInfo.collider.gameObject.tag == "DwarfMortarButton")
+                            {
+                                if (CurrentUnit.GetComponent<Attack>().AttackedThisTurn == false)
+                                {
+                                    CurrentUnit.GetComponent<DwarfMortarAttack>().FindTargets();
+                                    CurrentUnit.HideOptions();
+                                    SelectingAction = true;
+                                }
+
+                                else
+                                {
+                                    Clear();
+                                }
+                                
+
+                                return;
+                            }
+
 
                             else if (rhInfo.collider.GetComponent<Pathnode>() != null
                                 && rhInfo.collider.GetComponent<Pathnode>().CurrentOccupant == null
@@ -114,6 +132,7 @@ public class Clicker : MonoBehaviour
                             }
 
                             else if (CurrentUnit != null
+                                && CurrentUnit.GetComponent<SelectAttack>() != null
                                 && CurrentUnit.GetComponent<SelectAttack>().ValidTargets.Contains(rhInfo.collider.gameObject) == true
                                 && SelectingAction == true
                                 && rhInfo.collider.gameObject.GetComponent<HitPoints>() != null)
@@ -126,6 +145,22 @@ public class Clicker : MonoBehaviour
                                 //return;
 
                             }
+
+                            else if (CurrentUnit != null
+                                && CurrentUnit.GetComponent<DwarfMortarAttack>() != null
+                                && CurrentUnit.GetComponent<DwarfMortarAttack>().Targets.Contains(rhInfo.collider.gameObject) == true
+                                && SelectingAction == true
+                                && rhInfo.collider.gameObject.GetComponent<HitPoints>() != null)
+                            {
+
+                                Debug.Log(CurrentUnit.name + " is fighting " + rhInfo.collider.name);
+                                CurrentUnit.GetComponent<DwarfMortarAttack>().FinalTarget = rhInfo.collider.gameObject;
+                                SelectingAction = false;
+                                ActionInProgress = true;
+                                //return;
+
+                            }
+
 
                             else
                             {

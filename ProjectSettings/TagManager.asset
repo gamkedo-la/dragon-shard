@@ -10,6 +10,7 @@ TagManager:
   - attack button
   - DamageBuffButton
   - DefenseBuffButton
+  - DwarfMortarButton
   layers:
   - Default
   - TransparentFX

@@ -18168,12 +18168,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ThisGame:
   - thisColor: {r: 1, g: 0, b: 0, a: 1}
-    Gold: 0
+    Alliance: 0
     ControlledByAI: 0
     Units: []
     thisMaterial: {fileID: 2100000, guid: 2bb29e86f77f7c34a8eeb02fd002eae6, type: 2}
   - thisColor: {r: 0, g: 0.4651866, b: 1, a: 1}
-    Gold: 0
+    Alliance: 1
     ControlledByAI: 0
     Units: []
     thisMaterial: {fileID: 2100000, guid: 6c30f0c78fe43df49b990f3ebca33082, type: 2}
@@ -25555,21 +25555,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spearguy (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925146671997168782, guid: 2a666b238fb227b46a35b5d57320b464,
-        type: 3}
-      propertyPath: Grass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925146671997168782, guid: 2a666b238fb227b46a35b5d57320b464,
-        type: 3}
-      propertyPath: Water
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925146671997168782, guid: 2a666b238fb227b46a35b5d57320b464,
-        type: 3}
-      propertyPath: Forest
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8331741792303336479, guid: 2a666b238fb227b46a35b5d57320b464,
         type: 3}
@@ -38764,6 +38749,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9abb6b757559de9429095ca2cd6f1ea3, type: 3}
+--- !u!1001 &2404004379984034324
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4342629907704417408, guid: 3b110eda92173ba4cb1bbf8de2dda729,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342629907704417408, guid: 3b110eda92173ba4cb1bbf8de2dda729,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342629907704417408, guid: 3b110eda92173ba4cb1bbf8de2dda729,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.586
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342629907704417408, guid: 3b110eda92173ba4cb1bbf8de2dda729,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.019
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342629907704417408, guid: 3b110eda92173ba4cb1bbf8de2dda729,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342629907704417408, guid: 3b110eda92173ba4cb1bbf8de2dda729,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342629907704417408, guid: 3b110eda92173ba4cb1bbf8de2dda729,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342629907704417408, guid: 3b110eda92173ba4cb1bbf8de2dda729,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342629907704417408, guid: 3b110eda92173ba4cb1bbf8de2dda729,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342629907704417408, guid: 3b110eda92173ba4cb1bbf8de2dda729,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342629907704417408, guid: 3b110eda92173ba4cb1bbf8de2dda729,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588778937792250582, guid: 3b110eda92173ba4cb1bbf8de2dda729,
+        type: 3}
+      propertyPath: m_Name
+      value: DwarfMortarlauncher
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3b110eda92173ba4cb1bbf8de2dda729, type: 3}
 --- !u!4 &4485186325739660041 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3182721917500673896, guid: 60bb25b1ff8128349bc2ef94780ee3e9,

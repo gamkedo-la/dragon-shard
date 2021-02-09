@@ -436,6 +436,7 @@ MonoBehaviour:
   Owner: 0
   GM: {fileID: 0}
   Click: {fileID: 0}
+  Alliance: 0
   Options: {fileID: 0}
   UnitName: Spearguy
   controlledByAI: 0
@@ -532,6 +533,7 @@ MonoBehaviour:
   MeleePrimary: 0
   DefenseLevelBuff: 1
   AttackLevelBuff: 1
+  AttackedThisTurn: 0
 --- !u!114 &4736303764555510056
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class Clicker : MonoBehaviour
     public bool AIturn;
 
     public bool DwarfFireWaveTargeting = false;
+    public bool DwarfFireballTargeting = false;
 
     // Update is called once per frame
     void Update()
@@ -138,6 +139,16 @@ public class Clicker : MonoBehaviour
                             {
                                 DwarfFireWaveTargeting = true;
                                 CurrentUnit.HideOptions();
+                                SelectingAction = true;
+                                return;
+                            }
+
+                            else if (rhInfo.collider.gameObject.tag == "FireballButton")
+                            {
+                                DwarfFireballTargeting = true;
+                                CurrentUnit.GetComponent<SelectAttack>().FindTargets();
+                                CurrentUnit.HideOptions();
+                                SelectingAction = true;
                                 return;
                             }
 
@@ -178,7 +189,8 @@ public class Clicker : MonoBehaviour
                                 && CurrentUnit.GetComponent<SelectAttack>() != null
                                 && CurrentUnit.GetComponent<SelectAttack>().ValidTargets.Contains(rhInfo.collider.gameObject) == true
                                 && SelectingAction == true
-                                && rhInfo.collider.gameObject.GetComponent<HitPoints>() != null)
+                                && rhInfo.collider.gameObject.GetComponent<HitPoints>() != null
+                                && DwarfFireballTargeting == false)
                             {
 
                                 Debug.Log(CurrentUnit.name + " is fighting " + rhInfo.collider.name);
@@ -200,6 +212,23 @@ public class Clicker : MonoBehaviour
                                 CurrentUnit.GetComponent<DwarfMortarAttack>().FinalTarget = rhInfo.collider.gameObject;
                                 SelectingAction = false;
                                 ActionInProgress = true;
+                                //return;
+
+                            }
+
+                            else if (CurrentUnit != null
+                                && CurrentUnit.GetComponent<DwarfMagic>() != null
+                                && CurrentUnit.GetComponent<SelectAttack>().ValidTargets.Contains(rhInfo.collider.gameObject) == true
+                                && SelectingAction == true
+                                && rhInfo.collider.gameObject.GetComponent<HitPoints>() != null
+                                && DwarfFireballTargeting == true)
+                            {
+
+                                Debug.Log(CurrentUnit.name + " cast fireball at " + rhInfo.collider.name);
+                                CurrentUnit.GetComponent<DwarfMagic>().CastFireball(rhInfo.collider.gameObject);
+                                SelectingAction = false;
+                                DwarfFireWaveTargeting = false;
+                               
                                 //return;
 
                             }

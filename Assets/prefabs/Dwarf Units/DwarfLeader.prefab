@@ -1838,3 +1838,4 @@ MonoBehaviour:
   Origin: {fileID: 0}
   AoE: []
   FireWaveDamage: 5
+  FireBallDamage: 10

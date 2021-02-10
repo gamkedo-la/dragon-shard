@@ -10,6 +10,14 @@ public class DwarfMagic : MonoBehaviour
     public List<GameObject> AoE = new List<GameObject>();
 
     public int FireWaveDamage;
+    public int FireBallDamage;
+
+
+    float fireballAnimLength = 0;
+
+    float timer = 0;
+
+    GameObject FTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +28,19 @@ public class DwarfMagic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(timer >= 0)
+        {
+            timer -= Time.deltaTime;
+            if(timer <= 0)
+            {
+                if (FTarget != null)
+                {
+                    GetComponent<Attack>().Att(FTarget.GetComponent<HitPoints>(), FireBallDamage, 0);
+                    GetComponent<Unit>().Click.Clear();
+                    FTarget = null;
+                }
+            }
+        }
     }
 
     public void TargetFireWave(GameObject G)
@@ -102,5 +122,12 @@ public class DwarfMagic : MonoBehaviour
         GetComponent<Unit>().Click.Clear();
         return;
     }
+
+
+    public void CastFireball(GameObject G)
+    {
+        FTarget = G;   
+        timer = fireballAnimLength;
+    }  
 
 }

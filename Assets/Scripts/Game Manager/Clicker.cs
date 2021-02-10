@@ -12,10 +12,46 @@ public class Clicker : MonoBehaviour
 
     public bool AIturn;
 
+    public bool DwarfFireWaveTargeting = false;
 
     // Update is called once per frame
     void Update()
     {
+        if(DwarfFireWaveTargeting == true)
+        {
+            Ray toMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rhInfo;
+            bool didHit = Physics.Raycast(toMouse, out rhInfo, 50.0f);
+            if (didHit)
+            {
+
+                if (rhInfo.collider.gameObject.tag == "map")
+                {
+                    CurrentUnit.GetComponent<DwarfMagic>().TargetFireWave(rhInfo.collider.gameObject);
+                }
+                else if(rhInfo.collider.gameObject.tag == "Unit")
+                {
+                    CurrentUnit.GetComponent<DwarfMagic>().TargetFireWave(rhInfo.collider.gameObject.GetComponent<Pathfinding>().CurrentLocation);
+                }
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    DwarfFireWaveTargeting = false;
+                    if (rhInfo.collider.gameObject.tag == "map")
+                    {
+                        CurrentUnit.GetComponent<DwarfMagic>().CastFireWave(rhInfo.collider.gameObject);
+                    }
+                    else if (rhInfo.collider.gameObject.tag == "Unit")
+                    {
+                        CurrentUnit.GetComponent<DwarfMagic>().CastFireWave(rhInfo.collider.gameObject.GetComponent<Pathfinding>().CurrentLocation);
+                    }
+                }
+            }
+            return;
+
+        }
+
+
         if (AIturn == false)
         {
             if (ActionInProgress == false)
@@ -94,6 +130,13 @@ public class Clicker : MonoBehaviour
                             else if (rhInfo.collider.gameObject.tag == "DefenseBuffButton")
                             {
                                 CurrentUnit.GetComponent<HumanMagic>().BuffDeffense();
+                                CurrentUnit.HideOptions();
+                                return;
+                            }
+
+                            else if (rhInfo.collider.gameObject.tag == "FireWaveButton")
+                            {
+                                DwarfFireWaveTargeting = true;
                                 CurrentUnit.HideOptions();
                                 return;
                             }

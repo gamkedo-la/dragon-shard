@@ -11,6 +11,8 @@ TagManager:
   - DamageBuffButton
   - DefenseBuffButton
   - DwarfMortarButton
+  - FireWaveButton
+  - FireballButton
   layers:
   - Default
   - TransparentFX

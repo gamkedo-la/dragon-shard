@@ -56,7 +56,7 @@ MonoBehaviour:
   Click: {fileID: 0}
   Alliance: 0
   Options: {fileID: 0}
-  UnitName: Spearguy
+  UnitName: Human Cavalry
   controlledByAI: 0
   AIActionTaken: 0
   AIOverlord: {fileID: 0}

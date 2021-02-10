@@ -176,12 +176,12 @@ public class Attack : MonoBehaviour
         }
     }
     
-    public void Att(HitPoints Enemy, int D, float Chance)
+    public void Att(HitPoints Enemy, int D, float Def)
     {
         int R = Random.Range(1, 101);
         AttackedThisTurn = true;
 
-        if (R < Chance)
+        if (R < Def)
         {
             Enemy.TakeDamage(0, attacker);
         }

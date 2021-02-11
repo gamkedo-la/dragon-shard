@@ -24,6 +24,8 @@ public class Unit : MonoBehaviour
 
     GameObject Armor;
 
+    public bool ActedThisTurn = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,7 +53,7 @@ public class Unit : MonoBehaviour
 
     public void TurnStart()
     {
-
+        ActedThisTurn = false;
         GetComponent<Pathfinding>().TurnStart();
         GetComponent<Attack>().TurnStart();
 

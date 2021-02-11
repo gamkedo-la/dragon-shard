@@ -92,15 +92,23 @@ public class Clicker : MonoBehaviour
                         {
                             if (rhInfo.collider.gameObject.tag == "move button")
                             {
-                                CurrentUnit.HideOptions();
-                                CurrentUnit.GetComponent<Pathfinding>().GenerateMovementOptions();
-                                SelectingAction = true;
+                                if (CurrentUnit.ActedThisTurn == false)
+                                {
+                                    CurrentUnit.HideOptions();
+                                    CurrentUnit.GetComponent<Pathfinding>().GenerateMovementOptions();
+                                    SelectingAction = true;
+                                }
+                                else
+                                {
+                                    Clear();
+                                }
                                 return;
 
                             }
 
                             else if (rhInfo.collider.gameObject.tag == "attack button")
                             {
+
                                 if (CurrentUnit == null)
                                 {
                                     Debug.LogError($"CurrentUnit null when it should not be! {nameof(Clicker)}");
@@ -123,32 +131,62 @@ public class Clicker : MonoBehaviour
 
                             else if (rhInfo.collider.gameObject.tag == "DamageBuffButton")
                             {
-                                CurrentUnit.GetComponent<HumanMagic>().BuffAttack();
-                                CurrentUnit.HideOptions();
+                                if (CurrentUnit.ActedThisTurn == false)
+                                {
+                                    CurrentUnit.GetComponent<HumanMagic>().BuffAttack();
+                                    CurrentUnit.HideOptions();
+
+                                }
+                                else
+                                {
+                                    Clear();
+                                }
                                 return;
                             }
 
                             else if (rhInfo.collider.gameObject.tag == "DefenseBuffButton")
                             {
-                                CurrentUnit.GetComponent<HumanMagic>().BuffDeffense();
-                                CurrentUnit.HideOptions();
+                                if (CurrentUnit.ActedThisTurn == false)
+                                {
+                                    CurrentUnit.GetComponent<HumanMagic>().BuffDeffense();
+                                    CurrentUnit.HideOptions();
+
+                                }
+                                else
+                                {
+                                    Clear();
+                                }
                                 return;
                             }
 
                             else if (rhInfo.collider.gameObject.tag == "FireWaveButton")
                             {
-                                DwarfFireWaveTargeting = true;
-                                CurrentUnit.HideOptions();
-                                SelectingAction = true;
+                                if (CurrentUnit.ActedThisTurn == false)
+                                {
+                                    DwarfFireWaveTargeting = true;
+                                    CurrentUnit.HideOptions();
+                                    SelectingAction = true;
+                                }
+                                else
+                                {
+                                    Clear();
+                                }
                                 return;
                             }
 
                             else if (rhInfo.collider.gameObject.tag == "FireballButton")
                             {
-                                DwarfFireballTargeting = true;
-                                CurrentUnit.GetComponent<SelectAttack>().FindTargets();
-                                CurrentUnit.HideOptions();
-                                SelectingAction = true;
+                                if (CurrentUnit.ActedThisTurn == false)
+                                {
+                                    DwarfFireballTargeting = true;
+                                    CurrentUnit.GetComponent<SelectAttack>().FindTargets();
+                                    CurrentUnit.HideOptions();
+                                    SelectingAction = true;
+                                }
+                                else
+                                {
+                                    Clear();
+                                }
                                 return;
                             }
 
@@ -197,6 +235,7 @@ public class Clicker : MonoBehaviour
                                 CurrentUnit.GetComponent<SelectAttack>().InitiateCombat(rhInfo.collider.gameObject);
                                 SelectingAction = false;
                                 ActionInProgress = true;
+                                
                                 //return;
 
                             }
@@ -212,6 +251,7 @@ public class Clicker : MonoBehaviour
                                 CurrentUnit.GetComponent<DwarfMortarAttack>().FinalTarget = rhInfo.collider.gameObject;
                                 SelectingAction = false;
                                 ActionInProgress = true;
+                                
                                 //return;
 
                             }
@@ -228,6 +268,7 @@ public class Clicker : MonoBehaviour
                                 CurrentUnit.GetComponent<DwarfMagic>().CastFireball(rhInfo.collider.gameObject);
                                 SelectingAction = false;
                                 DwarfFireWaveTargeting = false;
+
                                
                                 //return;
 

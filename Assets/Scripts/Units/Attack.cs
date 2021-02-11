@@ -180,6 +180,7 @@ public class Attack : MonoBehaviour
     {
         int R = Random.Range(1, 101);
         AttackedThisTurn = true;
+        GetComponent<Unit>().ActedThisTurn = true;
 
         if (R < Def)
         {

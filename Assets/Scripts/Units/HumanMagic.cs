@@ -26,7 +26,7 @@ public class HumanMagic : MonoBehaviour
     public void BuffAttack()
     {
         //INCLUDE SOME KIND OF ANIMATION CALL HERE
-
+        GetComponent<Unit>().ActedThisTurn = true;
         GetComponent<Attack>().ModDamage(DamBuffStrength, DamBuffLength);
 
         foreach(GameObject t in GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)
@@ -46,7 +46,7 @@ public class HumanMagic : MonoBehaviour
     public void BuffDeffense()
     {
         //INCLUDE SOME KIND OF ANIMATION CALL HERE
-
+        GetComponent<Unit>().ActedThisTurn = true;
         GetComponent<Attack>().ModDef(DefBuffStrength, DefuffLength);
 
         foreach (GameObject t in GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)

@@ -109,6 +109,7 @@ public class DwarfMagic : MonoBehaviour
     
     public void CastFireWave(GameObject G)
     {
+        GetComponent<Unit>().ActedThisTurn = true;
         if(G == Origin)
         {
             foreach(GameObject A in AoE)
@@ -126,6 +127,7 @@ public class DwarfMagic : MonoBehaviour
 
     public void CastFireball(GameObject G)
     {
+        GetComponent<Unit>().ActedThisTurn = true;
         FTarget = G;   
         timer = fireballAnimLength;
     }  

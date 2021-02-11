@@ -19,9 +19,9 @@ public class Experience : MonoBehaviour
     [SerializeField] [Range(1, 10)] int levelModInterval = 5; // number of levels before becomes harder to level up
 
     [Header("Level Up Bonuses")]
-    [SerializeField] [Range(1.0f, 1.5f)] float attackBonus = 1.2f;
-    [SerializeField] [Range(1.0f, 1.5f)] float healthBonus = 1.2f;
-    [SerializeField] [Range(1.0f, 1.5f)] float defenseBonus = 1.2f;
+    [SerializeField] [Range(1.01f, 1.5f)] float attackBonus = 1.2f;
+    [SerializeField] [Range(1.01f, 1.5f)] float healthBonus = 1.2f;
+    [SerializeField] [Range(1.01f, 1.5f)] float defenseBonus = 1.2f;
 
     [Header("References")]
     [SerializeField] HitPoints hitPoints;
@@ -29,6 +29,7 @@ public class Experience : MonoBehaviour
     public bool LevelUpMeleeDamage = true;
     public bool LevelUpRangedDamage = true;
     public bool LevelUpHp = true;
+    public bool LevelUpDef = true;
 
     void Start()
     {
@@ -95,12 +96,15 @@ public class Experience : MonoBehaviour
     private void ApplyLevelUpBonus()
     {
         if (LevelUpMeleeDamage)
-            unitAttributes.MeleeDamage = Mathf.FloorToInt(unitAttributes.MeleeDamage * attackBonus);
+            unitAttributes.AttackLevelBuff = Mathf.FloorToInt(unitAttributes.AttackLevelBuff * attackBonus);
 
         if (LevelUpRangedDamage)
             unitAttributes.RangedDamage = Mathf.FloorToInt(unitAttributes.RangedDamage * attackBonus);
 
         if (LevelUpHp)
             hitPoints.MaxHP = Mathf.FloorToInt(hitPoints.MaxHP * healthBonus);
+
+        if (LevelUpDef)
+            unitAttributes.DefenseLevelBuff = Mathf.FloorToInt(unitAttributes.DefenseLevelBuff * defenseBonus);
     }
 }

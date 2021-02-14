@@ -855,7 +855,7 @@ MonoBehaviour:
   MeleeDamage: 3
   RangedName: Throw Hammer
   RangedAttacks: 1
-  RangedDamage: 15
+  RangedDamage: 4
   Target: {fileID: 0}
   thisAttack: 0
   thisDamage: 0

@@ -38,28 +38,28 @@ public class CameraMover : MonoBehaviour
         }
     }
 
-    public void MoveUp(float speed)
+    void MoveUp(float speed)
     {
         Vector3 temp = transform.position;
         temp.z += (speed * Time.deltaTime);
         transform.position = temp;
     }
 
-    public void MoveDown(float speed)
+    void MoveDown(float speed)
     {
         Vector3 temp = transform.position;
         temp.z -= (speed * Time.deltaTime);
         transform.position = temp;
     }
 
-    public void MoveLeft(float speed)
+    void MoveLeft(float speed)
     {
         Vector3 temp = transform.position;
         temp.x -= (speed * Time.deltaTime);
         transform.position = temp;
     }
 
-    public void MoveRight(float speed)
+    void MoveRight(float speed)
     {
         Vector3 temp = transform.position;
         temp.x += (speed * Time.deltaTime);

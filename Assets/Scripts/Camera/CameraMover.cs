@@ -20,19 +20,19 @@ public class CameraMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Up == true)
+        if(Up == true || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             MoveUp(CameraSpeed);
         }
-        if (Down == true)
+        if (Down == true || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             MoveDown(CameraSpeed);
         }
-        if (Left == true)
+        if (Left == true || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             MoveLeft(CameraSpeed);
         }
-        if (Right == true)
+        if (Right == true || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             MoveRight(CameraSpeed);
         }

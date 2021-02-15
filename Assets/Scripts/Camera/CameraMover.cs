@@ -11,10 +11,15 @@ public class CameraMover : MonoBehaviour
 
     public float CameraSpeed;
 
+    public Transform CameraRig;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(CameraRig == null)
+        {
+            Debug.Log("CameraRig not assigned. Look for the Screen Edges object on the UI canvas and assign it there.");
+        }
     }
 
     // Update is called once per frame
@@ -40,30 +45,30 @@ public class CameraMover : MonoBehaviour
 
     void MoveUp(float speed)
     {
-        Vector3 temp = transform.position;
+        Vector3 temp = CameraRig.position;
         temp.z += (speed * Time.deltaTime);
-        transform.position = temp;
+        CameraRig.position = temp;
     }
 
     void MoveDown(float speed)
     {
-        Vector3 temp = transform.position;
+        Vector3 temp = CameraRig.position;
         temp.z -= (speed * Time.deltaTime);
-        transform.position = temp;
+        CameraRig.position = temp;
     }
 
     void MoveLeft(float speed)
     {
-        Vector3 temp = transform.position;
+        Vector3 temp = CameraRig.position;
         temp.x -= (speed * Time.deltaTime);
-        transform.position = temp;
+        CameraRig.position = temp;
     }
 
     void MoveRight(float speed)
     {
-        Vector3 temp = transform.position;
+        Vector3 temp = CameraRig.position;
         temp.x += (speed * Time.deltaTime);
-        transform.position = temp;
+        CameraRig.position = temp;
     }
 
     public void SetUp(bool U)

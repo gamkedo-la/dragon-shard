@@ -4,22 +4,35 @@ using UnityEngine;
 
 public class CameraMover : MonoBehaviour
 {
-    public bool Up;
-    public bool Down;
-    public bool Left;
-    public bool Right;
+    bool Up;
+    bool Down;
+    bool Left;
+    bool Right;
 
     public float CameraSpeed;
 
     public Transform CameraRig;
 
+    public Grid grid;
+
+    public float UpperBound;
+    public float LowerBound;
+    public float LeftBound;
+    public float RightBound;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        if(grid == null)
+        {
+            Debug.Log("grid not assigned to Camera Mover. Look for the Screen Edges object on the UI canvas and assign it there.");
+        }
         if(CameraRig == null)
         {
-            Debug.Log("CameraRig not assigned. Look for the Screen Edges object on the UI canvas and assign it there.");
+            Debug.Log("CameraRig not assigned Camera Mover. Look for the Screen Edges object on the UI canvas and assign it there.");
         }
+        SetBounds();
     }
 
     // Update is called once per frame
@@ -47,6 +60,10 @@ public class CameraMover : MonoBehaviour
     {
         Vector3 temp = CameraRig.position;
         temp.z += (speed * Time.deltaTime);
+        if(temp.z > UpperBound)
+        {
+            temp.z = UpperBound;
+        }
         CameraRig.position = temp;
     }
 
@@ -54,6 +71,10 @@ public class CameraMover : MonoBehaviour
     {
         Vector3 temp = CameraRig.position;
         temp.z -= (speed * Time.deltaTime);
+        if (temp.z < LowerBound)
+        {
+            temp.z = LowerBound;
+        }
         CameraRig.position = temp;
     }
 
@@ -61,6 +82,10 @@ public class CameraMover : MonoBehaviour
     {
         Vector3 temp = CameraRig.position;
         temp.x -= (speed * Time.deltaTime);
+        if (temp.x < LeftBound)
+        {
+            temp.x = LeftBound;
+        }
         CameraRig.position = temp;
     }
 
@@ -68,6 +93,10 @@ public class CameraMover : MonoBehaviour
     {
         Vector3 temp = CameraRig.position;
         temp.x += (speed * Time.deltaTime);
+        if (temp.x > RightBound)
+        {
+            temp.x = RightBound;
+        }
         CameraRig.position = temp;
     }
 
@@ -89,6 +118,14 @@ public class CameraMover : MonoBehaviour
     public void SetRight(bool U)
     {
         Right = U;
+    }
+
+    void SetBounds()
+    {
+        LowerBound = -3.5f;
+        LeftBound = 4.0f;
+        UpperBound = grid.Rows - 10;
+        RightBound = grid.Columns - (5.5f * Mathf.Sqrt(3));
     }
 
 }

@@ -15,10 +15,10 @@ public class CameraMover : MonoBehaviour
 
     public Grid grid;
 
-    public float UpperBound;
-    public float LowerBound;
-    public float LeftBound;
-    public float RightBound;
+    float UpperBound;
+    float LowerBound;
+    float LeftBound;
+    float RightBound;
 
 
     // Start is called before the first frame update

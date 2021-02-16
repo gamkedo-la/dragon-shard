@@ -166,21 +166,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2edf444ad043814a8b3368da07dcb59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThisGame:
-  - thisColor: {r: 1, g: 0, b: 0, a: 1}
-    Alliance: 0
-    ControlledByAI: 0
-    Units: []
-    thisMaterial: {fileID: 2100000, guid: 2bb29e86f77f7c34a8eeb02fd002eae6, type: 2}
-  - thisColor: {r: 0, g: 0.4651866, b: 1, a: 1}
-    Alliance: 1
-    ControlledByAI: 0
-    Units: []
-    thisMaterial: {fileID: 2100000, guid: 6c30f0c78fe43df49b990f3ebca33082, type: 2}
+  ThisGame: []
+  PlayersInThisGame: 1
   CurrentTurn: 0
-  thisClicker: {fileID: 0}
-  AIPlayers:
-  - {fileID: 0}
+  thisClicker: {fileID: 4357955105552232489}
+  AIPlayers: []
   EndTurnButton: {fileID: 0}
 --- !u!1 &540764535584308153
 GameObject:

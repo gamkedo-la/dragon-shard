@@ -47,16 +47,14 @@ public class Tracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GM = Camera.main.GetComponent<Players>();
         for(int k = 0; k<GM.ThisGame.Length; k++)
         {
-            if(P != k)
+            if(P != k && GM.ThisGame[P].Alliance != GM.ThisGame[k].Alliance)
             {
-
-                foreach(GameObject U in GM.ThisGame[k].Units)
+                foreach (GameObject U in GM.ThisGame[k].Units)
                 {
-
-                    Enemies.Add(U);
-
+                    Enemies.Add(U);                    
                 }
             }
             else

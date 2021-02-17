@@ -47,6 +47,7 @@ public class Tracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Grid = GameObject.Find("Grid").transform;
         GM = Camera.main.GetComponent<Players>();
         for(int k = 0; k<GM.ThisGame.Length; k++)
         {

@@ -15,7 +15,7 @@ public class PlayerInfoContainer : MonoBehaviour
 
     public GameObject AIBrain;
 
-    public Transform G;
+    public AddingPlayers AP;
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +57,6 @@ public class PlayerInfoContainer : MonoBehaviour
         GameObject A = Instantiate(AIBrain);
         A.GetComponent<Tracker>().P = P;
         //A.GetComponent<Tracker>().GM = players;
-        A.GetComponent<Tracker>().Grid = G;
         players.AIPlayers.Add(A);
         Debug.Log("created AI");
         return A;
@@ -82,6 +81,13 @@ public class PlayerInfoContainer : MonoBehaviour
     {
         players.ThisGame[PlayerRef].Alliance = i;
 
+    }
+
+    public void DeleteMe()
+    {
+
+        AP.DeletePlayer(PlayerRef, gameObject);
+        Destroy(gameObject);
     }
 
 }

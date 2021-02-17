@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class AddingPlayers : MonoBehaviour
 {
-    public GameObject[] PlayerInfoContainers;
     public Players players;
-    public Transform G;
 
-    public int bookmark = 0;
+    public List<GameObject> PlayerInfoContainers = new List<GameObject>();
+
+    public GameObject PIC;
+
+    public int NumPlayers = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        NumPlayers = 0;
     }
 
     // Update is called once per frame
@@ -23,33 +26,41 @@ public class AddingPlayers : MonoBehaviour
 
     public void AddPlayer()
     {
-        if (bookmark < 4)
-        {
-            PlayerInfoContainers[bookmark].SetActive(true);
-            PlayerInfoContainers[bookmark].GetComponent<PlayerInfoContainer>().SetNumber(bookmark);
-            PlayerInfoContainers[bookmark].GetComponent<PlayerInfoContainer>().players = players;
-            PlayerInfoContainers[bookmark].GetComponent<PlayerInfoContainer>().G = G;
-            bookmark++;
 
+        if (NumPlayers < 4) 
+        {
+            GameObject tempGO = GameObject.Instantiate(PIC, transform);
+            RectTransform rtTemp = tempGO.GetComponent<RectTransform>();
+            rtTemp.localPosition = new Vector2(((rtTemp.rect.width + 15) * NumPlayers) + 10, -10);
+            PIC.GetComponent<PlayerInfoContainer>().SetNumber(NumPlayers);
+            PIC.GetComponent<PlayerInfoContainer>().players = players;
+            PIC.GetComponent<PlayerInfoContainer>().AP = GetComponent<AddingPlayers>();
+
+            NumPlayers++;
+            PlayerInfoContainers.Add(tempGO);
             players.AddPlayer();
-        }
+
+        }        
         else
         {
             Debug.Log("Maximum Players");
         }
     }
 
-    //public void DeletePlayer(int P)
-    //{
-    //    foreach(GameObject G in PlayerInfoContainers)
-    //    {
-    //        if(G.GetComponent<PlayerInfoContainer>().PlayerRef > P)
-    //        {
-    //            G.GetComponent<PlayerInfoContainer>().PlayerRef -= 1;
+    public void DeletePlayer(int P, GameObject F)
+    {
+        PlayerInfoContainers.Remove(F);
 
-    //        }
-
-    //    }
-    //    bookmark -= 1;
-    //}
+        foreach(GameObject G in PlayerInfoContainers)
+        {
+            if(G.GetComponent<PlayerInfoContainer>().PlayerRef > P)
+            {
+                G.GetComponent<PlayerInfoContainer>().SetNumber(G.GetComponent<PlayerInfoContainer>().PlayerRef - 1);
+                RectTransform rtTemp = G.GetComponent<RectTransform>();
+                rtTemp.localPosition = new Vector2(rtTemp.localPosition.x - rtTemp.rect.width - 15, -10);
+            }
+        }
+        players.DeletePlayer(P);
+        NumPlayers--;
+    }
 }

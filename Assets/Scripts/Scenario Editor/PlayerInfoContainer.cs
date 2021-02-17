@@ -26,15 +26,17 @@ public class PlayerInfoContainer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Debug.Log(PlayerRef);
     }
 
     public void SetNumber(int N)
     {
+
         PlayerRef = N;
         number.text = "Player " + (PlayerRef + 1);
+        Debug.Log("number set " + PlayerRef);
+
     }
-    
     public void SetAI(bool on)
     {
         if(on == true)

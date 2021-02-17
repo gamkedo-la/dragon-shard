@@ -29,16 +29,19 @@ public class AddingPlayers : MonoBehaviour
 
         if (NumPlayers < 4) 
         {
-            GameObject tempGO = GameObject.Instantiate(PIC, transform);
+            GameObject tempGO = Instantiate(PIC, transform);
             RectTransform rtTemp = tempGO.GetComponent<RectTransform>();
             rtTemp.localPosition = new Vector2(((rtTemp.rect.width + 15) * NumPlayers) + 10, -10);
-            PIC.GetComponent<PlayerInfoContainer>().SetNumber(NumPlayers);
-            PIC.GetComponent<PlayerInfoContainer>().players = players;
-            PIC.GetComponent<PlayerInfoContainer>().AP = GetComponent<AddingPlayers>();
+            Debug.Log("setting player number " + NumPlayers);
+            tempGO.GetComponent<PlayerInfoContainer>().SetNumber(NumPlayers);
+            tempGO.GetComponent<PlayerInfoContainer>().players = players;
+            tempGO.GetComponent<PlayerInfoContainer>().AP = GetComponent<AddingPlayers>();
+
 
             NumPlayers++;
             PlayerInfoContainers.Add(tempGO);
             players.AddPlayer();
+            tempGO.GetComponent<PlayerInfoContainer>().SetAlliance(1);
 
         }        
         else

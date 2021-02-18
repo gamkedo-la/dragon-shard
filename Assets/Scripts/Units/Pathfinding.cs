@@ -50,10 +50,19 @@ public class Pathfinding : MonoBehaviour
         
         MP = MovePoints;
 
-        PlaceUnit();
-
+        if (CurrentLocation == null)
+        {
+            RaycastHit rhInfo;
+            bool didHit = Physics.Raycast(transform.position, Vector3.down, out rhInfo, 20.0f);
+            if (didHit)
+            {
+                if (rhInfo.collider.gameObject.GetComponent<Pathnode>() != null)
+                {
+                    PlaceUnit(rhInfo.collider.gameObject);
+                }
+            }
+        }
         GetComponent<Attack>().SetDef();
-
     }
 
     // Update is called once per frame
@@ -139,21 +148,13 @@ public class Pathfinding : MonoBehaviour
         }
     }
 
-    public void PlaceUnit()
+    public void PlaceUnit(GameObject T)
     {
+        CurrentLocation = T;
+        CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = gameObject;
+        transform.position = CurrentLocation.transform.position;
 
-        RaycastHit rhInfo;
-        bool didHit = Physics.Raycast(transform.position, Vector3.down, out rhInfo, 20.0f);
-        if (didHit)
-        {
-            CurrentLocation = rhInfo.collider.gameObject;
-            CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = gameObject;
-            transform.position = CurrentLocation.transform.position;
-
-            transform.rotation = Quaternion.identity;
-
-        }
-
+        transform.rotation = Quaternion.identity;
 
     }
 

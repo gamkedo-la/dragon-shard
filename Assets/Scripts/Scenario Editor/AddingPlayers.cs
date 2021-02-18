@@ -16,6 +16,8 @@ public class AddingPlayers : MonoBehaviour
 
     public Material[] PlayerColors;
 
+    public List<Material> InactiveColors = new List<Material>();
+
     public GameObject ColorsMenu;
 
     public GameObject Active;

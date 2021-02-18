@@ -29,20 +29,16 @@ public class Unit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         Options = transform.Find("Action Menu").gameObject;
         GM = Camera.main.GetComponent<Players>();
         Click = GM.thisClicker;
         Armor = transform.Find("model").gameObject;
-        Armor.GetComponent<ArmorColor>().AssignColor(GM.ThisGame[Owner].thisMaterial);
-
+        SetColor();
 
         if(Options.GetComponent<LookAt>() != null)
         {
-
             Options.GetComponent<LookAt>().Target = Camera.main.gameObject;
         }
-
     }
 
     // Update is called once per frame
@@ -56,45 +52,37 @@ public class Unit : MonoBehaviour
         ActedThisTurn = false;
         GetComponent<Pathfinding>().TurnStart();
         GetComponent<Attack>().TurnStart();
-
-
     }
 
     public void GetClicked()
     {
         if(GM.CurrentTurn == Owner)
         {
-
             DisplayOptions();
-
         }
-
-
-
     }
-
 
     public void DisplayOptions()
     {
         Options.SetActive(true);
-
-
     }
 
     public void HideOptions()
     {
         Options.SetActive(false);
-
     }
 
+    public void SetColor()
+    {
+        Armor.GetComponent<ArmorColor>().AssignColor(GM.ThisGame[Owner].thisMaterial);
+    }
 
     [System.Serializable]
     public struct MovementStat
     {
-
         public TileType T;
         public int MovePointsUsed;
-
-
     }
+
+
 }

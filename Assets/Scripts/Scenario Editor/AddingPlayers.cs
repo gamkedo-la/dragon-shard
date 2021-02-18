@@ -16,6 +16,7 @@ public class AddingPlayers : MonoBehaviour
     public int spacing;
 
     public Material[] PlayerColors;
+    public Image[] ColorSelectButtons;
 
     public List<Material> InactiveColors = new List<Material>();
 
@@ -30,6 +31,8 @@ public class AddingPlayers : MonoBehaviour
     public Dropdown APforUnitPlacement;
 
     List<string> playernums = new List<string>();
+
+    public bool N;
 
     // Start is called before the first frame update
     void Start()
@@ -79,6 +82,7 @@ public class AddingPlayers : MonoBehaviour
             }
 
             Active = tempGO;
+            N = true;
 
             for (int k = 0; k < NumPlayers; k++)
             {
@@ -114,6 +118,13 @@ public class AddingPlayers : MonoBehaviour
                     rtTemp.localPosition = new Vector2(rtTemp.localPosition.x - rtTemp.rect.width - spacing, -10);
                 }
             }
+
+            Color temp = ColorSelectButtons[F.GetComponent<PlayerInfoContainer>().CurrentColor].color;
+            temp.a = 1;
+            ColorSelectButtons[F.GetComponent<PlayerInfoContainer>().CurrentColor].color = temp;
+
+            ColorsBeingUsed.Remove(F.GetComponent<PlayerInfoContainer>().CurrentColor);
+
             players.DeletePlayer(P);
             NumPlayers--;
         }
@@ -129,17 +140,44 @@ public class AddingPlayers : MonoBehaviour
         Active = A;
     }
 
-    public void SelectColor(int c)
+    public void CancelChangeColor()
+    {
+        ColorsMenu.SetActive(false);
+        Active = null;
+    }
+
+    public void NewPlayer(bool b)
     {
 
-        Active.GetComponent<PlayerInfoContainer>().SetColor(PlayerColors[c]);
+        N = b;
+    }
 
-        players.SetColor(Active.GetComponent<PlayerInfoContainer>().PlayerRef, PlayerColors[c]);
+    public void SelectColor(int c)
+    {
+        if (ColorsBeingUsed.Contains(c) == false)
+        {
+            Color temp;
+            if (N == false)
+            {
+                temp = ColorSelectButtons[Active.GetComponent<PlayerInfoContainer>().CurrentColor].color;
+                temp.a = 1;
+                ColorSelectButtons[Active.GetComponent<PlayerInfoContainer>().CurrentColor].color = temp;
 
-        ColorsBeingUsed.Add(c);
+                ColorsBeingUsed.Remove(Active.GetComponent<PlayerInfoContainer>().CurrentColor);
+            }
 
-        Active = null;
-        ColorsMenu.SetActive(false);
+            Active.GetComponent<PlayerInfoContainer>().SetColor(PlayerColors[c], c);
 
+            players.SetColor(Active.GetComponent<PlayerInfoContainer>().PlayerRef, PlayerColors[c]);
+
+            ColorsBeingUsed.Add(c);
+
+            temp = ColorSelectButtons[Active.GetComponent<PlayerInfoContainer>().CurrentColor].color;
+            temp.a = 0.2f;
+            ColorSelectButtons[Active.GetComponent<PlayerInfoContainer>().CurrentColor].color = temp;
+
+            Active = null;
+            ColorsMenu.SetActive(false);
+        }
     }
 }

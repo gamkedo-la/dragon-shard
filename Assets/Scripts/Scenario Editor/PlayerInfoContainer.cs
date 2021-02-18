@@ -21,6 +21,8 @@ public class PlayerInfoContainer : MonoBehaviour
 
     public Image ColorDisplay;
 
+    public int CurrentColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -101,13 +103,16 @@ public class PlayerInfoContainer : MonoBehaviour
     public void OpenColorsMenu()
     {
         AP.OpenColorsMenu(gameObject);
+        AP.NewPlayer(false);
 
     }
 
-    public void SetColor(Material M)
+    public void SetColor(Material M, int i)
     {
+        CurrentColor = i;
         MyColor = M;
         ColorDisplay.color = M.color;
     }
+
 
 }

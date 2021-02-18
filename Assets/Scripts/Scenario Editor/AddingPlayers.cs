@@ -38,12 +38,12 @@ public class AddingPlayers : MonoBehaviour
 
         AddPlayer();
 
-        foreach(GameObject C in PlayerInfoContainers)
-        {
-            Active = C;
-        }
+        //foreach(GameObject C in PlayerInfoContainers)
+        //{
+        //    Active = C;
+        //}
 
-        SelectColor(0);
+        //SelectColor(0);
     }
 
     // Update is called once per frame
@@ -55,7 +55,7 @@ public class AddingPlayers : MonoBehaviour
     public void AddPlayer()
     {
 
-        if (NumPlayers < 4) 
+        if (NumPlayers < 4)
         {
             GameObject tempGO = Instantiate(PIC, Holder);
             RectTransform rtTemp = tempGO.GetComponent<RectTransform>();
@@ -65,8 +65,6 @@ public class AddingPlayers : MonoBehaviour
             tempGO.GetComponent<PlayerInfoContainer>().players = players;
             tempGO.GetComponent<PlayerInfoContainer>().AP = GetComponent<AddingPlayers>();
 
-
-
             NumPlayers++;
             PlayerInfoContainers.Add(tempGO);
             players.AddPlayer();
@@ -75,11 +73,20 @@ public class AddingPlayers : MonoBehaviour
             APforUnitPlacement.ClearOptions();
             playernums.Clear();
 
-            for(int j = 0; j < NumPlayers; j++)
+            for (int j = 0; j < NumPlayers; j++)
             {
-
                 playernums.Add("Player " + (j + 1));
+            }
 
+            Active = tempGO;
+
+            for (int k = 0; k < NumPlayers; k++)
+            {
+                if(ColorsBeingUsed.Contains(k) == false)
+                {
+                    SelectColor(k);
+                    break;
+                }
             }
 
             APforUnitPlacement.AddOptions(playernums);
@@ -128,6 +135,8 @@ public class AddingPlayers : MonoBehaviour
         Active.GetComponent<PlayerInfoContainer>().SetColor(PlayerColors[c]);
 
         players.SetColor(Active.GetComponent<PlayerInfoContainer>().PlayerRef, PlayerColors[c]);
+
+        ColorsBeingUsed.Add(c);
 
         Active = null;
         ColorsMenu.SetActive(false);

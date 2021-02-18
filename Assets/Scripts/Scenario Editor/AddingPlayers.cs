@@ -12,6 +12,16 @@ public class AddingPlayers : MonoBehaviour
 
     public int NumPlayers = 0;
 
+    public int spacing;
+
+    public Material[] PlayerColors;
+
+    public GameObject ColorsMenu;
+
+    public GameObject Active;
+
+    public Transform Holder;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +39,10 @@ public class AddingPlayers : MonoBehaviour
 
         if (NumPlayers < 4) 
         {
-            GameObject tempGO = Instantiate(PIC, transform);
+            GameObject tempGO = Instantiate(PIC, Holder);
             RectTransform rtTemp = tempGO.GetComponent<RectTransform>();
-            rtTemp.localPosition = new Vector2(((rtTemp.rect.width + 15) * NumPlayers) + 10, -10);
-            Debug.Log("setting player number " + NumPlayers);
+            rtTemp.localPosition = new Vector2(((rtTemp.rect.width + spacing) * NumPlayers) + 10, -10);
+            //Debug.Log("setting player number " + NumPlayers);
             tempGO.GetComponent<PlayerInfoContainer>().SetNumber(NumPlayers);
             tempGO.GetComponent<PlayerInfoContainer>().players = players;
             tempGO.GetComponent<PlayerInfoContainer>().AP = GetComponent<AddingPlayers>();
@@ -60,10 +70,28 @@ public class AddingPlayers : MonoBehaviour
             {
                 G.GetComponent<PlayerInfoContainer>().SetNumber(G.GetComponent<PlayerInfoContainer>().PlayerRef - 1);
                 RectTransform rtTemp = G.GetComponent<RectTransform>();
-                rtTemp.localPosition = new Vector2(rtTemp.localPosition.x - rtTemp.rect.width - 15, -10);
+                rtTemp.localPosition = new Vector2(rtTemp.localPosition.x - rtTemp.rect.width - spacing, -10);
             }
         }
         players.DeletePlayer(P);
         NumPlayers--;
+    }
+
+    public void OpenColorsMenu(GameObject A)
+    {
+        ColorsMenu.SetActive(true);
+        Active = A;
+    }
+
+    public void SelectColor(int c)
+    {
+
+        Active.GetComponent<PlayerInfoContainer>().SetColor(PlayerColors[c]);
+
+        players.SetColor(Active.GetComponent<PlayerInfoContainer>().PlayerRef, PlayerColors[c]);
+
+        Active = null;
+        ColorsMenu.SetActive(false);
+
     }
 }

@@ -17,6 +17,10 @@ public class PlayerInfoContainer : MonoBehaviour
 
     public AddingPlayers AP;
 
+    public Material MyColor;
+
+    public Image ColorDisplay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +38,7 @@ public class PlayerInfoContainer : MonoBehaviour
 
         PlayerRef = N;
         number.text = "Player " + (PlayerRef + 1);
-        Debug.Log("number set " + PlayerRef);
+        //Debug.Log("number set " + PlayerRef);
 
     }
     public void SetAI(bool on)
@@ -90,6 +94,18 @@ public class PlayerInfoContainer : MonoBehaviour
 
         AP.DeletePlayer(PlayerRef, gameObject);
         Destroy(gameObject);
+    }
+
+    public void OpenColorsMenu()
+    {
+        AP.OpenColorsMenu(gameObject);
+
+    }
+
+    public void SetColor(Material M)
+    {
+        MyColor = M;
+        ColorDisplay.color = M.color;
     }
 
 }

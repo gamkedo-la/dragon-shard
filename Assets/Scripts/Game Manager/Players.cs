@@ -129,6 +129,13 @@ public class Players : MonoBehaviour
 
     }
 
+    public void SetColor(int P, Material M)
+    {
+        ThisGame[P].thisMaterial = M;
+        ThisGame[P].thisColor = M.color;
+
+    }
+
 
     [System.Serializable]
     public struct Player

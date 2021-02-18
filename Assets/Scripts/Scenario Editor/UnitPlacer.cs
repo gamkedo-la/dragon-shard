@@ -11,6 +11,10 @@ public class UnitPlacer : MonoBehaviour
 
     public GameObject SelectedPlayer;
 
+    int ActivePlayer = 0;
+
+    public AddingPlayers AP;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +53,13 @@ public class UnitPlacer : MonoBehaviour
     {
         GameObject G = Instantiate(Active);
         G.GetComponent<Pathfinding>().PlaceUnit(T);
+        G.GetComponent<Unit>().Owner = ActivePlayer;
         Active = null;
+    }
+
+    public void SetActivePlayer(int A)
+    {
+
+        ActivePlayer = A;
     }
 }

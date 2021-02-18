@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AddingPlayers : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class AddingPlayers : MonoBehaviour
     public GameObject Active;
 
     public Transform Holder;
+
+    public Dropdown APforUnitPlacement;
+
+    List<string> playernums = new List<string>();
 
     // Start is called before the first frame update
     void Start()
@@ -50,10 +55,24 @@ public class AddingPlayers : MonoBehaviour
             tempGO.GetComponent<PlayerInfoContainer>().AP = GetComponent<AddingPlayers>();
 
 
+
             NumPlayers++;
             PlayerInfoContainers.Add(tempGO);
             players.AddPlayer();
             tempGO.GetComponent<PlayerInfoContainer>().SetAlliance(1);
+
+            APforUnitPlacement.ClearOptions();
+            playernums.Clear();
+
+            for(int j = 0; j < NumPlayers; j++)
+            {
+
+                playernums.Add("Player " + (j + 1));
+
+            }
+
+            APforUnitPlacement.AddOptions(playernums);
+            //APforUnitPlacement.itemImage.color = Color.green;
 
         }        
         else

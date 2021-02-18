@@ -6,6 +6,7 @@ public class EditorInterface : MonoBehaviour
 {
     public GameObject ScenarioPropertiesEditor;
     public GameObject TerrainSelector;
+    public GameObject UnitEditor;
 
 
     public Terrain terrain;
@@ -28,12 +29,14 @@ public class EditorInterface : MonoBehaviour
     {
         ScenarioPropertiesEditor.SetActive(false);
         TerrainSelector.SetActive(true);
+        UnitEditor.SetActive(false);
         terrain.PaintingTerrain = true;
 
     }
 
     public void EditUnitsMode()
     {
+        UnitEditor.SetActive(true);
         ScenarioPropertiesEditor.SetActive(false);
         TerrainSelector.SetActive(false);
         terrain.PaintingTerrain = false;
@@ -45,6 +48,7 @@ public class EditorInterface : MonoBehaviour
         ScenarioPropertiesEditor.SetActive(true);
         TerrainSelector.SetActive(false);
         terrain.PaintingTerrain = false;
+        UnitEditor.SetActive(false);
     }
 
 }

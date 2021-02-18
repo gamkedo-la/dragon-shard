@@ -40,13 +40,6 @@ public class AddingPlayers : MonoBehaviour
         NumPlayers = 0;
 
         AddPlayer();
-
-        //foreach(GameObject C in PlayerInfoContainers)
-        //{
-        //    Active = C;
-        //}
-
-        //SelectColor(0);
     }
 
     // Update is called once per frame
@@ -57,13 +50,14 @@ public class AddingPlayers : MonoBehaviour
 
     public void AddPlayer()
     {
-
         if (NumPlayers < 4)
         {
             GameObject tempGO = Instantiate(PIC, Holder);
             RectTransform rtTemp = tempGO.GetComponent<RectTransform>();
             rtTemp.localPosition = new Vector2(((rtTemp.rect.width + spacing) * NumPlayers) + 10, -10);
+
             //Debug.Log("setting player number " + NumPlayers);
+
             tempGO.GetComponent<PlayerInfoContainer>().SetNumber(NumPlayers);
             tempGO.GetComponent<PlayerInfoContainer>().players = players;
             tempGO.GetComponent<PlayerInfoContainer>().AP = GetComponent<AddingPlayers>();
@@ -148,7 +142,6 @@ public class AddingPlayers : MonoBehaviour
 
     public void NewPlayer(bool b)
     {
-
         N = b;
     }
 

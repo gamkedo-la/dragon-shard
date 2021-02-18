@@ -104,6 +104,7 @@ public class Players : MonoBehaviour
             FinalArray[i] = ThisGame[i];
         }
         ThisGame = FinalArray;
+        ThisGame[ThisGame.Length - 1].Units = new List<GameObject>();
 
     }
 
@@ -133,6 +134,11 @@ public class Players : MonoBehaviour
     {
         ThisGame[P].thisMaterial = M;
         ThisGame[P].thisColor = M.color;
+
+        foreach (GameObject U in ThisGame[P].Units)
+        {
+            U.GetComponent<Unit>().SetColor();
+        }    
 
     }
 

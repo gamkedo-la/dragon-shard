@@ -15,10 +15,12 @@ public class UnitPlacer : MonoBehaviour
 
     public AddingPlayers AP;
 
+    public Players players;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        players = Camera.main.GetComponent<Players>();
     }
 
     // Update is called once per frame
@@ -54,6 +56,7 @@ public class UnitPlacer : MonoBehaviour
         GameObject G = Instantiate(Active);
         G.GetComponent<Pathfinding>().PlaceUnit(T);
         G.GetComponent<Unit>().Owner = ActivePlayer;
+        players.ThisGame[ActivePlayer].Units.Add(G);
         Active = null;
     }
 

@@ -19,6 +19,8 @@ public class AddingPlayers : MonoBehaviour
 
     public List<Material> InactiveColors = new List<Material>();
 
+    public List<int> ColorsBeingUsed = new List<int>();
+
     public GameObject ColorsMenu;
 
     public GameObject Active;
@@ -33,6 +35,15 @@ public class AddingPlayers : MonoBehaviour
     void Start()
     {
         NumPlayers = 0;
+
+        AddPlayer();
+
+        foreach(GameObject C in PlayerInfoContainers)
+        {
+            Active = C;
+        }
+
+        SelectColor(0);
     }
 
     // Update is called once per frame
@@ -83,19 +94,26 @@ public class AddingPlayers : MonoBehaviour
 
     public void DeletePlayer(int P, GameObject F)
     {
-        PlayerInfoContainers.Remove(F);
-
-        foreach(GameObject G in PlayerInfoContainers)
+        if (NumPlayers > 1)
         {
-            if(G.GetComponent<PlayerInfoContainer>().PlayerRef > P)
+            PlayerInfoContainers.Remove(F);
+
+            foreach (GameObject G in PlayerInfoContainers)
             {
-                G.GetComponent<PlayerInfoContainer>().SetNumber(G.GetComponent<PlayerInfoContainer>().PlayerRef - 1);
-                RectTransform rtTemp = G.GetComponent<RectTransform>();
-                rtTemp.localPosition = new Vector2(rtTemp.localPosition.x - rtTemp.rect.width - spacing, -10);
+                if (G.GetComponent<PlayerInfoContainer>().PlayerRef > P)
+                {
+                    G.GetComponent<PlayerInfoContainer>().SetNumber(G.GetComponent<PlayerInfoContainer>().PlayerRef - 1);
+                    RectTransform rtTemp = G.GetComponent<RectTransform>();
+                    rtTemp.localPosition = new Vector2(rtTemp.localPosition.x - rtTemp.rect.width - spacing, -10);
+                }
             }
+            players.DeletePlayer(P);
+            NumPlayers--;
         }
-        players.DeletePlayer(P);
-        NumPlayers--;
+        else
+        {
+            Debug.Log("can't delete last player");
+        }
     }
 
     public void OpenColorsMenu(GameObject A)

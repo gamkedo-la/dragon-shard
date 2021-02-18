@@ -91,9 +91,11 @@ public class PlayerInfoContainer : MonoBehaviour
 
     public void DeleteMe()
     {
-
-        AP.DeletePlayer(PlayerRef, gameObject);
-        Destroy(gameObject);
+        if (AP.NumPlayers > 1)
+        {
+            AP.DeletePlayer(PlayerRef, gameObject);
+            Destroy(gameObject);
+        }
     }
 
     public void OpenColorsMenu()

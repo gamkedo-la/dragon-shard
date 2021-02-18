@@ -27,28 +27,58 @@ public class EditorInterface : MonoBehaviour
 
     public void EditTerrainModeOn()
     {
-        ScenarioPropertiesEditor.SetActive(false);
-        TerrainSelector.SetActive(true);
-        UnitEditor.SetActive(false);
+        ScenarioPropertiesEditor.GetComponent<CanvasGroup>().alpha = 0;
+        ScenarioPropertiesEditor.GetComponent<CanvasGroup>().interactable = false;
+        ScenarioPropertiesEditor.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+        UnitEditor.GetComponent<CanvasGroup>().alpha = 0;
+        UnitEditor.GetComponent<CanvasGroup>().interactable = false;
+        UnitEditor.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+        TerrainSelector.GetComponent<CanvasGroup>().alpha = 1;
+        TerrainSelector.GetComponent<CanvasGroup>().interactable = true;
+        TerrainSelector.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
         terrain.PaintingTerrain = true;
 
     }
 
     public void EditUnitsMode()
     {
-        UnitEditor.SetActive(true);
-        ScenarioPropertiesEditor.SetActive(false);
-        TerrainSelector.SetActive(false);
+
+        ScenarioPropertiesEditor.GetComponent<CanvasGroup>().alpha = 0;
+        ScenarioPropertiesEditor.GetComponent<CanvasGroup>().interactable = false;
+        ScenarioPropertiesEditor.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+        UnitEditor.GetComponent<CanvasGroup>().alpha = 1;
+        UnitEditor.GetComponent<CanvasGroup>().interactable = true;
+        UnitEditor.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        TerrainSelector.GetComponent<CanvasGroup>().alpha = 0;
+        TerrainSelector.GetComponent<CanvasGroup>().interactable = false;
+        TerrainSelector.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
         terrain.PaintingTerrain = false;
 
     }
 
     public void EditScenarioMode()
     {
-        ScenarioPropertiesEditor.SetActive(true);
-        TerrainSelector.SetActive(false);
+
+        ScenarioPropertiesEditor.GetComponent<CanvasGroup>().alpha = 1;
+        ScenarioPropertiesEditor.GetComponent<CanvasGroup>().interactable = true;
+        ScenarioPropertiesEditor.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        UnitEditor.GetComponent<CanvasGroup>().alpha = 0;
+        UnitEditor.GetComponent<CanvasGroup>().interactable = false;
+        UnitEditor.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+        TerrainSelector.GetComponent<CanvasGroup>().alpha = 0;
+        TerrainSelector.GetComponent<CanvasGroup>().interactable = false;
+        TerrainSelector.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
         terrain.PaintingTerrain = false;
-        UnitEditor.SetActive(false);
+
     }
 
 }

@@ -15,6 +15,8 @@ public class Clicker : MonoBehaviour
     public bool DwarfFireWaveTargeting = false;
     public bool DwarfFireballTargeting = false;
 
+    public GameObject SelectionRing;
+
     // Update is called once per frame
     void Update()
     {
@@ -75,6 +77,8 @@ public class Clicker : MonoBehaviour
                         {
                             //Debug.Log(rhInfo.collider.name + " . . " + rhInfo.point);
                             CurrentUnit = rhInfo.collider.GetComponent<Unit>();
+
+                            SelectionRing.transform.position = CurrentUnit.GetComponent<Pathfinding>().CurrentLocation.transform.position;
 
                             if (CurrentUnit != null)
                             {
@@ -218,6 +222,7 @@ public class Clicker : MonoBehaviour
                                 Debug.Log("moving to" + rhInfo.collider.name + " . . " + rhInfo.point);
                                 EndPoint = rhInfo.collider.gameObject;
                                 CurrentUnit.GetComponent<Pathfinding>().MoveTo(EndPoint);
+                                SelectionRing.transform.parent = CurrentUnit.transform;
                                 SelectingAction = false;
                                 ActionInProgress = true;
                                 return;
@@ -297,6 +302,8 @@ public class Clicker : MonoBehaviour
         {
             CurrentUnit.HideOptions();
         }
+        SelectionRing.transform.parent = null;
+        SelectionRing.transform.position = new Vector3(0, -.1f, .5f);
 
         CurrentUnit = null;
         EndPoint = null;

@@ -49,25 +49,27 @@ public class Tracker : MonoBehaviour
     {
         Grid = GameObject.Find("Grid").transform;
         GM = Camera.main.GetComponent<Players>();
-        for(int k = 0; k<GM.ThisGame.Length; k++)
+
+        for (int k = 0; k < GM.ThisGame.Length; k++)
         {
-            if(P != k && GM.ThisGame[P].Alliance != GM.ThisGame[k].Alliance)
+            if (P != k)
             {
-                foreach (GameObject U in GM.ThisGame[k].Units)
+
+                if (GM.ThisGame[P].Alliance != GM.ThisGame[k].Alliance)
                 {
-                    Enemies.Add(U);                    
+                    foreach (GameObject U in GM.ThisGame[k].Units)
+                    {
+                        Enemies.Add(U);
+                    }
                 }
             }
             else
             {
-
                 foreach (GameObject U in GM.ThisGame[k].Units)
                 {
-
                     MyUnits.Add(U);
                     U.GetComponent<Unit>().controlledByAI = true;
                     U.GetComponent<Unit>().AIOverlord = gameObject;
-
                 }
             }
         }
@@ -286,6 +288,10 @@ public class Tracker : MonoBehaviour
                     if (T.GetComponent<Tile>().thisTile == TileType.castle)
                     {
                         T.GetComponent<Tile>().AIDefense = U.GetComponent<Attack>().CastleDef;
+                    }
+                    if(T.GetComponent<Tile>().thisTile == TileType.Def)
+                    {
+                        T.GetComponent<Tile>().AIDefense = 40;
                     }
                 }
 

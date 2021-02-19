@@ -688,7 +688,7 @@ MonoBehaviour:
   Click: {fileID: 0}
   Alliance: 0
   Options: {fileID: 0}
-  UnitName: Dwarf Leader
+  UnitName: Dwarf Axe Thrower
   controlledByAI: 0
   AIActionTaken: 0
   AIOverlord: {fileID: 0}

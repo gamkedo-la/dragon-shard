@@ -104,7 +104,7 @@ public class Tile : MonoBehaviour
         if (thisTile == TileType.Def)
         {
             DEFAULT.SetActive(true);
-            Current = default;
+            Current = DEFAULT;
 
             FOREST.SetActive(false);
             WATER.SetActive(false);

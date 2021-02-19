@@ -29,6 +29,7 @@ public class AddingPlayers : MonoBehaviour
     public Transform Holder;
 
     public Dropdown APforUnitPlacement;
+    public Dropdown selectedowner;
 
     List<string> playernums = new List<string>();
 
@@ -37,6 +38,8 @@ public class AddingPlayers : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        players = Camera.main.GetComponent<Players>();
         NumPlayers = 0;
 
         AddPlayer();
@@ -68,6 +71,7 @@ public class AddingPlayers : MonoBehaviour
             tempGO.GetComponent<PlayerInfoContainer>().SetAlliance(1);
 
             APforUnitPlacement.ClearOptions();
+            selectedowner.ClearOptions();
             playernums.Clear();
 
             for (int j = 0; j < NumPlayers; j++)
@@ -88,6 +92,7 @@ public class AddingPlayers : MonoBehaviour
             }
 
             APforUnitPlacement.AddOptions(playernums);
+            selectedowner.AddOptions(playernums);
             //APforUnitPlacement.itemImage.color = Color.green;
 
         }        

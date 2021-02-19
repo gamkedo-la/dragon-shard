@@ -37,11 +37,15 @@ public class Players : MonoBehaviour
 
                 }
             }
+
+            ThisGame[i].thisColor = ThisGame[i].thisMaterial.color;
         }
         foreach (GameObject AI in AIPlayers)
         {
             ThisGame[AI.GetComponent<Tracker>().P].ControlledByAI = true;
         }
+
+        PlayersInThisGame = ThisGame.Length;
     }
 
     public void ETB()
@@ -51,6 +55,10 @@ public class Players : MonoBehaviour
         if (AIturn == false)
         {
             EndCurrentTurn();
+        }
+        else
+        {
+            Debug.Log("ai turn");
         }
 
     }
@@ -106,6 +114,8 @@ public class Players : MonoBehaviour
         ThisGame = FinalArray;
         ThisGame[ThisGame.Length - 1].Units = new List<GameObject>();
 
+        PlayersInThisGame++;
+
     }
 
     public void DeletePlayer(int P)
@@ -127,7 +137,7 @@ public class Players : MonoBehaviour
             }
         }
         ThisGame = FinalArray;
-
+        PlayersInThisGame--;
     }
 
     public void SetColor(int P, Material M)

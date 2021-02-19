@@ -74,7 +74,10 @@ public class Unit : MonoBehaviour
 
     public void SetColor()
     {
-        Armor.GetComponent<ArmorColor>().AssignColor(GM.ThisGame[Owner].thisMaterial);
+        if (Armor.GetComponent<ArmorColor>() != null)
+        {
+            Armor.GetComponent<ArmorColor>().AssignColor(GM.ThisGame[Owner].thisMaterial);
+        }
     }
 
     [System.Serializable]

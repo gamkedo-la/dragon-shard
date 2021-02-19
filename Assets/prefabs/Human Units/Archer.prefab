@@ -57,10 +57,11 @@ MonoBehaviour:
   Click: {fileID: 0}
   Alliance: 0
   Options: {fileID: 0}
-  UnitName: Archer
+  UnitName: Human Archer
   controlledByAI: 0
   AIActionTaken: 0
   AIOverlord: {fileID: 0}
+  ActedThisTurn: 0
 --- !u!114 &3496227508911543312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +197,7 @@ MonoBehaviour:
   LevelUpMeleeDamage: 0
   LevelUpRangedDamage: 1
   LevelUpHp: 1
+  LevelUpDef: 1
 --- !u!1 &1996319950913430478
 GameObject:
   m_ObjectHideFlags: 0

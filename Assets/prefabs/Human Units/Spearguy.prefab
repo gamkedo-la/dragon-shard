@@ -56,10 +56,11 @@ MonoBehaviour:
   Click: {fileID: 0}
   Alliance: 0
   Options: {fileID: 0}
-  UnitName: Spearguy
+  UnitName: Human Spearman
   controlledByAI: 0
   AIActionTaken: 0
   AIOverlord: {fileID: 0}
+  ActedThisTurn: 0
 --- !u!114 &3925146671997168782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +196,7 @@ MonoBehaviour:
   LevelUpMeleeDamage: 1
   LevelUpRangedDamage: 1
   LevelUpHp: 1
+  LevelUpDef: 1
 --- !u!1 &2110409302615645008
 GameObject:
   m_ObjectHideFlags: 0

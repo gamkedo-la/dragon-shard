@@ -442,6 +442,7 @@ MonoBehaviour:
   controlledByAI: 0
   AIActionTaken: 0
   AIOverlord: {fileID: 0}
+  ActedThisTurn: 0
 --- !u!114 &8637479996409298681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +594,7 @@ MonoBehaviour:
   LevelUpMeleeDamage: 1
   LevelUpRangedDamage: 1
   LevelUpHp: 1
+  LevelUpDef: 1
 --- !u!1 &6696637439083268391
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,7 +809,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 87a68f98e55a43a44a5abb2cc6bb7e75, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 69f2672c9e5dde44b919a04e495d30b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

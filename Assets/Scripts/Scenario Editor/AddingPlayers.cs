@@ -64,11 +64,12 @@ public class AddingPlayers : MonoBehaviour
             tempGO.GetComponent<PlayerInfoContainer>().SetNumber(NumPlayers);
             tempGO.GetComponent<PlayerInfoContainer>().players = players;
             tempGO.GetComponent<PlayerInfoContainer>().AP = GetComponent<AddingPlayers>();
+            
 
             NumPlayers++;
             PlayerInfoContainers.Add(tempGO);
             players.AddPlayer();
-            tempGO.GetComponent<PlayerInfoContainer>().SetAlliance(1);
+            tempGO.GetComponent<PlayerInfoContainer>().SetAlliance(NumPlayers - 1);
 
             APforUnitPlacement.ClearOptions();
             selectedowner.ClearOptions();
@@ -94,6 +95,7 @@ public class AddingPlayers : MonoBehaviour
             APforUnitPlacement.AddOptions(playernums);
             selectedowner.AddOptions(playernums);
             //APforUnitPlacement.itemImage.color = Color.green;
+
 
         }        
         else

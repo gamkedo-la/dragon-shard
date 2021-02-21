@@ -23,6 +23,8 @@ public class PlayerInfoContainer : MonoBehaviour
 
     public int CurrentColor;
 
+    public Dropdown Alliance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -88,7 +90,7 @@ public class PlayerInfoContainer : MonoBehaviour
     public void SetAlliance(int i)
     {
         players.ThisGame[PlayerRef].Alliance = i;
-
+        Alliance.value = i;
     }
 
     public void DeleteMe()

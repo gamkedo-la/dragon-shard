@@ -41,6 +41,8 @@ public class Pathfinding : MonoBehaviour
     public int Hills;
     public int Castle;
 
+    public bool slowed = false;
+    public int slowAmt;
 
     // Start is called before the first frame update
     void Start()
@@ -150,6 +152,11 @@ public class Pathfinding : MonoBehaviour
 
     public void PlaceUnit(GameObject T)
     {
+
+        if(CurrentLocation != null)
+        {
+            CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = null;
+        }
         CurrentLocation = T;
         CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = gameObject;
         transform.position = CurrentLocation.transform.position;
@@ -410,6 +417,24 @@ public class Pathfinding : MonoBehaviour
     public void TurnStart()
     {
         MovePoints = MP;
+        if(slowed == true)
+        {
+            MovePoints -= slowAmt;
+            slowed = false;
+        }
+    }
+
+    public void Slow(float percent)
+    {
+        slowed = true;
+
+        float i = MP * percent;
+
+        if (i < 1)
+        {
+            i = 1;
+        }
+        slowAmt = (int)i;
 
     }
 

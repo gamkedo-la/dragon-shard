@@ -15,6 +15,11 @@ public class Clicker : MonoBehaviour
     public bool DwarfFireWaveTargeting = false;
     public bool DwarfFireballTargeting = false;
 
+    public bool ElfSlowTargeting = false;
+    public bool ElfTeleportTargeting = false;
+
+    public bool ElfTeleportTargetingTwo = false;
+
     public GameObject SelectionRing;
 
     // Update is called once per frame
@@ -53,9 +58,71 @@ public class Clicker : MonoBehaviour
             return;
 
         }
+        if(ElfSlowTargeting == true)
+        {
+            Ray toMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rhInfo;
+            bool didHit = Physics.Raycast(toMouse, out rhInfo, 50.0f);
+            if (didHit)
+            {
+
+                if (rhInfo.collider.gameObject.tag == "map")
+                {
+                    CurrentUnit.GetComponent<ElfMagic>().SlowTargeting(rhInfo.collider.gameObject);
+                }
+                else if (rhInfo.collider.gameObject.tag == "Unit")
+                {
+                    CurrentUnit.GetComponent<ElfMagic>().SlowTargeting(rhInfo.collider.gameObject.GetComponent<Pathfinding>().CurrentLocation);
+                }
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    ElfSlowTargeting = false;
+                    if (rhInfo.collider.gameObject.tag == "map")
+                    {
+                        CurrentUnit.GetComponent<ElfMagic>().CastSlow(rhInfo.collider.gameObject);
+                    }
+                    else if (rhInfo.collider.gameObject.tag == "Unit")
+                    {
+                        CurrentUnit.GetComponent<ElfMagic>().CastSlow(rhInfo.collider.gameObject.GetComponent<Pathfinding>().CurrentLocation);
+                    }
+                }
+            }
+            return;
+        }
+
+        if (ElfTeleportTargeting == true)
+        {
+            if (ElfTeleportTargetingTwo == true)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Ray toMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit rhInfo;
+                    bool didHit = Physics.Raycast(toMouse, out rhInfo, 50.0f);
+                    if (didHit)
+                    {
+                        CurrentUnit.GetComponent<ElfMagic>().TeleportUnit(rhInfo.collider.gameObject);
+                    }
+                }
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Ray toMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit rhInfo;
+                    bool didHit = Physics.Raycast(toMouse, out rhInfo, 50.0f);
+                    if (didHit)
+                    {
+                        CurrentUnit.GetComponent<ElfMagic>().TeleportTargetSelected(rhInfo.collider.gameObject);
+                    }
+                }
+            }
+        }
 
 
-        if (AIturn == false)
+        else if (AIturn == false)
         {
             if (ActionInProgress == false)
             {
@@ -177,7 +244,7 @@ public class Clicker : MonoBehaviour
                                 }
                                 return;
                             }
-
+                                                                                 
                             else if (rhInfo.collider.gameObject.tag == "FireballButton")
                             {
                                 if (CurrentUnit.ActedThisTurn == false)
@@ -212,6 +279,38 @@ public class Clicker : MonoBehaviour
                                 return;
                             }
 
+                            else if (rhInfo.collider.gameObject.tag == "SlowButton")
+                            {
+                                if (CurrentUnit.ActedThisTurn == false)
+                                {
+                                    ElfSlowTargeting = true;
+                                    CurrentUnit.HideOptions();
+                                    SelectingAction = true;
+                                }
+                                else
+                                {
+                                    Clear();
+                                }
+                                return;
+                            }
+
+                            else if (rhInfo.collider.gameObject.tag == "TeleportButton")
+                            {
+                                if(CurrentUnit.ActedThisTurn == false)
+                                {
+                                    CurrentUnit.HideOptions();
+                                    CurrentUnit.GetComponent<ElfMagic>().TeleportTargetSelect();
+                                    ElfTeleportTargeting = true;
+                                    SelectingAction = true;
+
+                                }
+                                else
+                                {
+                                    Clear();
+                                }
+
+
+                            }
 
                             else if (rhInfo.collider.GetComponent<Pathnode>() != null
                                 && rhInfo.collider.GetComponent<Pathnode>().CurrentOccupant == null
@@ -309,6 +408,13 @@ public class Clicker : MonoBehaviour
         EndPoint = null;
         ActionInProgress = false;
         SelectingAction = false;
+
+        ElfSlowTargeting = false;
+        ElfTeleportTargeting = false;
+        ElfTeleportTargetingTwo = false;
+
+        DwarfFireballTargeting = false;
+        DwarfFireWaveTargeting = false;
 
         foreach (Transform TTT in GameObject.Find("Grid").transform)
         {

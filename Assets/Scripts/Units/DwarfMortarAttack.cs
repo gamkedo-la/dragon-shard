@@ -27,6 +27,7 @@ public class DwarfMortarAttack : MonoBehaviour
         if (FinalTarget != null)
         {
             timer -= Time.deltaTime;
+            GetComponent<Unit>().ActedThisTurn = true;
 
             GetComponent<Attack>().Att(FinalTarget.GetComponent<HitPoints>(), 
                 GetComponent<Attack>().RangedDamage, 
@@ -95,15 +96,7 @@ public class DwarfMortarAttack : MonoBehaviour
         {
             if (Targets.Contains(F.GetComponent<Pathnode>().CurrentOccupant) == false)
             {
-                if (F.GetComponent<Tile>().Current.GetComponent<Fader>() != null)
-                {
-                    F.GetComponent<Tile>().Current.GetComponent<Fader>().Fade();
-                }
-                else if (F.GetComponent<Tile>().Current.GetComponent<FaderControler>() != null)
-                {
-
-                    F.GetComponent<Tile>().Current.GetComponent<FaderControler>().Fade();
-                }
+                F.GetComponent<Pathnode>().Fade();
             }
         }
 

@@ -27,20 +27,20 @@ public class SelectAttack : MonoBehaviour
 
     public void FindTargets()
     {
-        if(Grid == null)
+
+        ToBeChecked.Clear();
+        ValidTargets.Clear();
+        TargetLocations.Clear();
+
+        if (Grid == null)
         {
             Grid = GetComponent<Pathfinding>().Grid;
-
         }
 
         foreach(GameObject T in GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent)
         {
-
             ToBeChecked.Add(T);
-        }
-
-
-       
+        }       
 
         foreach(GameObject T in ToBeChecked)
         {
@@ -57,38 +57,30 @@ public class SelectAttack : MonoBehaviour
 
         foreach (Transform TTT in Grid)
         {
-
             if (TargetLocations.Contains(TTT.gameObject) == false)
             {
-
                 TTT.GetComponent<Pathnode>().Fade();
-
             }
-
         }
 
     }
 
     public void InitiateCombat(GameObject Enemy)
     {
-
-
         ToBeChecked.Clear();
         ValidTargets.Clear();
         TargetLocations.Clear();
 
+        GetComponent<Unit>().ActedThisTurn = true;
 
         CombatMenu.GetComponent<CombatMenu>().Aggressor = gameObject;
         CombatMenu.GetComponent<CombatMenu>().Defender = Enemy;
         CombatMenu.GetComponent<CombatMenu>().Populate();
 
-
         CombatMenu.GetComponent<CanvasGroup>().alpha = 1;
         CombatMenu.GetComponent<CanvasGroup>().interactable = true;
         CombatMenu.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-
     }
-
 
 }

@@ -73,37 +73,15 @@ public class DwarfMagic : MonoBehaviour
         }
         foreach (Transform T in GetComponent<Pathfinding>().Grid)
         {
-
-            if (T.GetComponent<Tile>().Current.GetComponent<Fader>() != null)
-            {
-                T.GetComponent<Tile>().Current.GetComponent<Fader>().Fade();
-            }
-            if (T.GetComponent<Tile>().Current.GetComponent<FaderControler>() != null)
-            {
-                T.GetComponent<Tile>().Current.GetComponent<FaderControler>().Fade();
-            }               
+            T.GetComponent<Pathnode>().Fade();
             
         }
         foreach(GameObject A in AoE)
         {
-            if (A.GetComponent<Tile>().Current.GetComponent<Fader>() != null)
-            {
-                A.GetComponent<Tile>().Current.GetComponent<Fader>().ResetTile();
-            }
-            if (A.GetComponent<Tile>().Current.GetComponent<FaderControler>() != null)
-            {
-                A.GetComponent<Tile>().Current.GetComponent<FaderControler>().ResetTile();
-            }
+            A.GetComponent<Pathnode>().Unfade();
         }
 
-        if (GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Current.GetComponent<Fader>() != null)
-        {
-            GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Current.GetComponent<Fader>().ResetTile();
-        }
-        if (GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Current.GetComponent<FaderControler>() != null)
-        {
-            GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Current.GetComponent<FaderControler>().ResetTile();
-        }
+        GetComponent<Pathfinding>().CurrentLocation.GetComponent<Pathnode>().Unfade();    
 
     }
     

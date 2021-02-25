@@ -26,6 +26,9 @@ public class TerrainTool : EditorTool
         {
             myTerrain = GameObject.Find("TerrainEditor").GetComponent<Terrain>();
             myGrid = GameObject.Find("Grid").GetComponent<Grid>();
+
+
+            myGrid.FindAllNeighbors();
         }
     }
 

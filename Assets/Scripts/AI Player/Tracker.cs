@@ -44,6 +44,10 @@ public class Tracker : MonoBehaviour
     public List<GameObject> ThisMove = new List<GameObject>();
     public List<GameObject> Alternatives = new List<GameObject>();
 
+    public List<GameObject> LongTermPlan = new List<GameObject>();
+
+    public int LongRangeTemp = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -112,7 +116,7 @@ public class Tracker : MonoBehaviour
             return;
 
         }
-        if (MUArray[i] != null)
+        else if (MUArray[i] != null)
         {
 
             MUArray[i].GetComponent<Pathfinding>().GenerateMovementOptions();
@@ -506,17 +510,24 @@ public class Tracker : MonoBehaviour
 
     }
 
+    /*
+
+        shpere collide, if they are in the bubble take them off the list
+
+        then A* what's left, heuristic can be very simple, vector3.distance
+
+    */
+
     public GameObject LongRange(GameObject U)
     {
-        List<GameObject> LongTermPlan = new List<GameObject>();
+        LongTermPlan.Clear();
 
-
-        int temp = U.GetComponent<Pathfinding>().MovePoints;
+        LongRangeTemp = U.GetComponent<Pathfinding>().MovePoints;
 
         U.GetComponent<Pathfinding>().MovePoints = 1000;
         U.GetComponent<Pathfinding>().GenerateMovementOptions();
 
-        U.GetComponent<Pathfinding>().MovePoints = temp;
+        U.GetComponent<Pathfinding>().MovePoints = LongRangeTemp;
 
         foreach(GameObject T in U.GetComponent<Pathfinding>().CanMoveTo)
         {
@@ -524,6 +535,8 @@ public class Tracker : MonoBehaviour
             {
                 if (TT.GetComponent<Pathnode>().CurrentOccupant != null)
                 {
+                    //deal with alliances
+
                     if(TT.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != P)
                     {
                         LongTermPlan.Add(T);
@@ -532,13 +545,13 @@ public class Tracker : MonoBehaviour
             }
         }
 
-        temp = 0;
+        LongRangeTemp = 0;
         
         foreach(GameObject T in LongTermPlan)
         {
-            if(T.GetComponent<Pathnode>().MPRemain > temp)
+            if(T.GetComponent<Pathnode>().MPRemain > LongRangeTemp)
             {
-                temp = T.GetComponent<Pathnode>().MPRemain;
+                LongRangeTemp = T.GetComponent<Pathnode>().MPRemain;
             }
         }
 
@@ -546,7 +559,7 @@ public class Tracker : MonoBehaviour
 
         foreach(GameObject T in LongTermPlan)
         {
-            if(T.GetComponent<Pathnode>().MPRemain < temp)
+            if(T.GetComponent<Pathnode>().MPRemain < LongRangeTemp)
             {
                 garbage.Add(T);
             }
@@ -593,24 +606,23 @@ public class Tracker : MonoBehaviour
 
         int l = 0;
 
-        for(int k = 0; k < Path.Length; k++)
+        for(int k = Path.Length -1; k >= 0; k--)
         {
 
             if(Path[k].GetComponent<Pathnode>().MPRemain <= 0)
             {
-                FinalPath.SetValue(Path[k], l);
-                l++;
+                EndPoint = Path[k];
+                break;
             }
 
         }
 
-        l = 0;
-        if(FinalPath[l].GetComponent<Pathnode>().MPRemain < 0)
+        if (EndPoint.GetComponent<Pathnode>().MPRemain < 0)
         {
-            l++;
+            EndPoint = EndPoint.GetComponent<Pathnode>().Previous;
         }
 
-        EndPoint = FinalPath[l];
+
         
 
         if (EndPoint.GetComponent<Pathnode>().CurrentOccupant != null)
@@ -625,14 +637,14 @@ public class Tracker : MonoBehaviour
                     Alternatives.Add(T);
                 }
             }
-            
-            temp = 10;
+
+            int LRT = 10;
 
             foreach (GameObject T in Alternatives)
             {
-                if (T.GetComponent<Pathnode>().MPRemain < temp)
+                if (T.GetComponent<Pathnode>().MPRemain < LRT)
                 {
-                    temp = T.GetComponent<Pathnode>().MPRemain;
+                    LRT = T.GetComponent<Pathnode>().MPRemain;
                 }
             }
 
@@ -640,7 +652,7 @@ public class Tracker : MonoBehaviour
 
             foreach (GameObject T in Alternatives)
             {
-                if (T.GetComponent<Pathnode>().MPRemain > temp)
+                if (T.GetComponent<Pathnode>().MPRemain > LongRangeTemp)
                 {
                     garbage.Add(T);
                 }

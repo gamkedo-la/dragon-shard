@@ -44,6 +44,9 @@ public class Pathfinding : MonoBehaviour
     public bool slowed = false;
     public int slowAmt;
 
+    int runs = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,6 +92,7 @@ public class Pathfinding : MonoBehaviour
                 if(Path.Length - 1 - step <= 0)
                 {
                     moving = false;
+                    Debug.Log("checked " + runs + " tiles");
 
                     step = 1;
                     Checked.Clear();
@@ -167,11 +171,15 @@ public class Pathfinding : MonoBehaviour
 
     void FindAvailableTiles(GameObject T)
     {
+
         if (Checked.Contains(T))
         {
             return;
 
         }
+
+        runs++;
+
         Checked.Add(T);
         ToCheck.Remove(T);
 
@@ -264,7 +272,7 @@ public class Pathfinding : MonoBehaviour
 
     public void GenerateMovementOptions()
     {
-
+        
         ToCheck.Clear();
         Checked.Clear();
         CanMoveTo.Clear();
@@ -274,32 +282,34 @@ public class Pathfinding : MonoBehaviour
 
             node.GetComponent<Pathnode>().SetMPRequired(1);
 
-            if (node.GetComponent<Tile>().GetTile() == TileType.grass)
+            TileType tileType = node.GetComponent<Tile>().GetTile();
+
+            if (tileType == TileType.grass)
             {
                 node.GetComponent<Pathnode>().SetMPRequired(Grass);
             }
 
-            if (node.GetComponent<Tile>().GetTile() == TileType.forest)
+            if (tileType == TileType.forest)
             {
                 node.GetComponent<Pathnode>().SetMPRequired(Forest);
             }
 
-            if (node.GetComponent<Tile>().GetTile() == TileType.water)
+            if (tileType == TileType.water)
             {
                 node.GetComponent<Pathnode>().SetMPRequired(Water);
             }
 
-            if (node.GetComponent<Tile>().GetTile() == TileType.hills)
+            if (tileType == TileType.hills)
             {
                 node.GetComponent<Pathnode>().SetMPRequired(Hills);
             }
 
-            if (node.GetComponent<Tile>().GetTile() == TileType.castle)
+            if (tileType == TileType.castle)
             {
                 node.GetComponent<Pathnode>().SetMPRequired(Castle);
             }
 
-            if (node.GetComponent<Tile>().GetTile() == TileType.sand)
+            if (tileType == TileType.sand)
             {
                 node.GetComponent<Pathnode>().SetMPRequired(Sand);
             }
@@ -422,6 +432,7 @@ public class Pathfinding : MonoBehaviour
             MovePoints -= slowAmt;
             slowed = false;
         }
+        runs = 0;
     }
 
     public void Slow(float percent)

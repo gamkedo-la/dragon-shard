@@ -16,7 +16,7 @@ public class HitPoints : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cam = GameObject.Find("Main Camera");
+        Cam = Camera.main.gameObject;
     }
 
     // Update is called once per frame
@@ -78,12 +78,10 @@ public class HitPoints : MonoBehaviour
         if(GetComponent<Unit>().AIOverlord != null && GetComponent<Unit>().Owner == GetComponent<Unit>().GM.CurrentTurn)
         {
             GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
-
         }
         if(otherUnit.GetComponent<Unit>().AIOverlord != null && otherUnit.GetComponent<Unit>().Owner == otherUnit.GetComponent<Unit>().GM.CurrentTurn)
         {
             otherUnit.GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
-
         }
 
         var experience = GetComponent<Experience>().GetExpBonus();
@@ -93,7 +91,8 @@ public class HitPoints : MonoBehaviour
             otherUnit.RewardExp(experience);
         }
 
-        Destroy(gameObject);
+        GetComponent<Unit>().GM.UnitDeath(GetComponent<Unit>());
 
+        Destroy(gameObject);
     }
 }

@@ -140,6 +140,30 @@ public class Players : MonoBehaviour
         PlayersInThisGame--;
     }
 
+    public void UnitDeath(Unit U)
+    {
+        for (int i = 0; i < ThisGame.Length; i++)
+        {
+            if(U.Owner == i)
+            {
+                ThisGame[i].Units.Remove(U.gameObject);
+            }
+        }
+
+        foreach (GameObject AI in AIPlayers)
+        {
+            if (U.Owner == AI.GetComponent<Tracker>().P)
+            {
+                AI.GetComponent<Tracker>().MyUnits.Remove(U.gameObject);
+            }
+            else if(U.Alliance != AI.GetComponent<Tracker>().Team)
+            {
+                AI.GetComponent<Tracker>().Enemies.Remove(U.gameObject);
+            }
+        }
+    }
+
+
     public void SetColor(int P, Material M)
     {
         ThisGame[P].thisMaterial = M;

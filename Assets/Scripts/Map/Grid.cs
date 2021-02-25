@@ -198,6 +198,17 @@ public class Grid : MonoBehaviour
 
     }
 
+    public void ResetAllPathing()
+    {
+        foreach (TileSpace T in GridList)
+        {
+
+            T.T.GetComponent<Pathnode>().MPRemain = -1;
+
+        }
+
+    }
+
     public void ResetGrid()
     {
         foreach(TileSpace tile in GridList)

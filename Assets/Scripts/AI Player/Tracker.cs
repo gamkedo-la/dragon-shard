@@ -6,6 +6,8 @@ using UnityEngine;
 public class Tracker : MonoBehaviour
 {
     public int P;
+
+    public int Team;
     public Players GM;
 
     public Transform Grid;
@@ -48,9 +50,20 @@ public class Tracker : MonoBehaviour
 
     public int LongRangeTemp = 0;
 
+    public GameObject[] EnTemp;
+
+    public List<GameObject> ET = new List<GameObject>();
+
+    public int ii = 0;
+    public GameObject EEEEE;
+
+    public float[] EnTempDist;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        Team = GM.ThisGame[P].Alliance;
         Grid = GameObject.Find("Grid").transform;
         GM = Camera.main.GetComponent<Players>();
 
@@ -58,8 +71,7 @@ public class Tracker : MonoBehaviour
         {
             if (P != k)
             {
-
-                if (GM.ThisGame[P].Alliance != GM.ThisGame[k].Alliance)
+                if (Team != GM.ThisGame[k].Alliance)
                 {
                     foreach (GameObject U in GM.ThisGame[k].Units)
                     {
@@ -118,7 +130,7 @@ public class Tracker : MonoBehaviour
         }
         else if (MUArray[i] != null)
         {
-
+            Grid.GetComponent<Grid>().ResetAllPathing();
             MUArray[i].GetComponent<Pathfinding>().GenerateMovementOptions();
             MUArray[i].GetComponent<Pathfinding>().MoveTo(FindDestination(MUArray[i]));
             MUArray[i].GetComponent<Unit>().AIActionTaken = true;
@@ -133,6 +145,14 @@ public class Tracker : MonoBehaviour
 
     public GameObject FindDestination(GameObject U)
     {
+        ToCheck.Clear();
+        Checked.Clear();
+        CanMoveTo.Clear();
+        CanAttack.Clear();
+        PotentialTargets.Clear();
+        EndPoints.Clear();
+
+        U.GetComponent<Pathfinding>().GenerateMovementOptions();
 
         bool a = false;
 
@@ -146,23 +166,14 @@ public class Tracker : MonoBehaviour
 
                 }
             }
-
         }
 
         if(a == true)
         {
-
-            //start combat here
             return null;
-
         }
 
-        ToCheck.Clear();
-        Checked.Clear();
-        CanMoveTo.Clear();
-        CanAttack.Clear();
-        PotentialTargets.Clear();
-        EndPoints.Clear();
+
 
         foreach (Transform node in Grid)
         {
@@ -518,6 +529,192 @@ public class Tracker : MonoBehaviour
 
     */
 
+
+    public GameObject LongRange(GameObject U)
+    {
+        LongTermPlan.Clear();
+
+        ET.Clear();
+
+        
+
+        foreach(GameObject E in Enemies)
+        {
+            ET.Add(E);
+        }
+
+        foreach (GameObject E in Enemies)
+        {
+            if (ET.Contains(E) == true)
+            {
+                Collider[] A = Physics.OverlapSphere(E.transform.position, 3);
+                foreach (Collider T in A)
+                {
+                    if (Enemies.Contains(T.gameObject) == true
+                        && ET.Contains(T.gameObject) == true
+                        && T.gameObject != E)
+                    {
+                        ET.Remove(T.gameObject);
+                    }
+                }
+            }
+        }
+
+        EnTemp = ET.ToArray();
+
+        EnTempDist = new float[EnTemp.Length];
+
+        for(int z = 0; z < EnTemp.Length; z++)
+        {
+            EnTempDist[z] = AStar(U, EnTemp[z]);
+        }
+               
+        ii = 0;
+        float x = 10000000000000000000;
+               
+        for(int q = 0; q < EnTemp.Length; q++)
+        {
+            if(EnTempDist[q] < x)
+            {
+                ii = q;
+                x = EnTempDist[q];
+            }
+        }
+
+
+        EndPoint = EnTemp[ii].GetComponent<Pathfinding>().CurrentLocation;
+         
+        while(EndPoint.GetComponent<Pathnode>().MPRemain < 0)
+        {
+            EndPoint = EndPoint.GetComponent<Pathnode>().Previous;
+        }
+
+
+       
+
+        return EndPoint;
+    }
+
+
+    public float AStar(GameObject U, GameObject E)
+    {
+        GameObject End = E.GetComponent<Pathfinding>().CurrentLocation;
+
+        GameObject Start = U.GetComponent<Pathfinding>().CurrentLocation;
+
+        List<GameObject> OpenSet = new List<GameObject>();
+        List<GameObject> ClosedSet = new List<GameObject>();
+
+        OpenSet.Add(Start);
+
+        Start.GetComponent<Pathnode>().g = 0;
+
+        foreach (Transform T in Grid)
+        {
+            T.GetComponent<Pathnode>().h = Vector3.Distance(T.position, End.transform.position);
+            T.GetComponent<Pathnode>().f = T.GetComponent<Pathnode>().h;
+        }
+
+        while(OpenSet.Count > 0)
+        {
+            GameObject T = null;
+            float x = 10000000000000000000;
+
+            foreach(GameObject B in OpenSet)
+            {
+                if(B.GetComponent<Pathnode>().f < x)
+                {
+                    x = B.GetComponent<Pathnode>().f;
+                }
+            }
+
+            foreach (GameObject B in OpenSet)
+            {
+                if (B.GetComponent<Pathnode>().f == x)
+                {
+                    T = B;
+                }                
+            }
+
+            if(T == null)
+            {
+                T = U;
+                Debug.Log("big error in A*");
+                return 0;
+            }
+
+            foreach(GameObject TT in T.GetComponent<Tile>().Adjacent)
+            {
+                if (ClosedSet.Contains(TT) == false)
+                {
+
+                    if (TT == End)
+                    {
+                        TT.GetComponent<Pathnode>().g = T.GetComponent<Pathnode>().g + TT.GetComponent<Pathnode>().MPRequired;
+                        TT.GetComponent<Pathnode>().Previous = T;
+                        TT.GetComponent<Pathnode>().MPRemain = -(int)TT.GetComponent<Pathnode>().g;
+                        return TT.GetComponent<Pathnode>().g;
+
+                    }
+
+
+
+                    TT.GetComponent<Pathnode>().Previous = T;
+                    TT.GetComponent<Pathnode>().g = T.GetComponent<Pathnode>().g + TT.GetComponent<Pathnode>().MPRequired;
+                    TT.GetComponent<Pathnode>().f = TT.GetComponent<Pathnode>().h + TT.GetComponent<Pathnode>().g;
+                    TT.GetComponent<Pathnode>().MPRemain = U.GetComponent<Pathfinding>().MovePoints - (int)TT.GetComponent<Pathnode>().g;
+
+                    if(TT.GetComponent<Pathnode>().CurrentOccupant != null)
+                    {
+                        TT.GetComponent<Pathnode>().g = 10000000000000;
+                    }
+
+                    //Debug.Log("name " + TT.name +
+                    //    " previous " + TT.GetComponent<Pathnode>().Previous.name +
+                    //    " g " + TT.GetComponent<Pathnode>().g +
+                    //    " h " + TT.GetComponent<Pathnode>().h +
+                    //    " f " + TT.GetComponent<Pathnode>().f +
+                    //    " MP Remain " + TT.GetComponent<Pathnode>().MPRemain);
+
+
+                    if (OpenSet.Contains(TT) == false)
+                    {
+                        OpenSet.Add(TT);
+                    }
+                }
+            }
+            OpenSet.Remove(T);
+            ClosedSet.Add(T);
+        }
+
+        Debug.Log("A* returned no value. BIG PROBLEM");
+        return 0;
+
+    }
+
+    //public void NoMP()
+    //{
+    //    Debug.Log("no mp has been called");
+    //    if(EEEEE.GetComponent<Pathnode>().MPRemain < 0)
+    //    {
+    //        EEEEE = EEEEE.GetComponent<Pathnode>().Previous;
+    //    }
+
+    //    if(EEEEE.GetComponent<Pathnode>().MPRemain < 0)
+    //    {
+    //        NoMP();
+    //    }
+    //    else
+    //    {
+
+    //        return;
+    //    }
+
+    //}
+
+
+    /*
+
     public GameObject LongRange(GameObject U)
     {
         LongTermPlan.Clear();
@@ -537,7 +734,7 @@ public class Tracker : MonoBehaviour
                 {
                     //deal with alliances
 
-                    if(TT.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != P)
+                    if(TT.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Alliance != Team)
                     {
                         LongTermPlan.Add(T);
                     }
@@ -604,8 +801,6 @@ public class Tracker : MonoBehaviour
 
         FinalPath = new GameObject[U.GetComponent<Pathfinding>().MovePoints];
 
-        int l = 0;
-
         for(int k = Path.Length -1; k >= 0; k--)
         {
 
@@ -620,10 +815,7 @@ public class Tracker : MonoBehaviour
         if (EndPoint.GetComponent<Pathnode>().MPRemain < 0)
         {
             EndPoint = EndPoint.GetComponent<Pathnode>().Previous;
-        }
-
-
-        
+        }        
 
         if (EndPoint.GetComponent<Pathnode>().CurrentOccupant != null)
         {
@@ -673,5 +865,5 @@ public class Tracker : MonoBehaviour
             EndPoint = q[Random.Range(0, q.Length)];            
         }
         return EndPoint;        
-    }
+    }*/
 }

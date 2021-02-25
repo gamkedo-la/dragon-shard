@@ -7,7 +7,9 @@ public class Pathnode : MonoBehaviour
     public GameObject Previous;
     public int MPRemain = 0;
 
-
+    public float f;
+    public float g;
+    public float h;
 
     public GameObject CurrentOccupant = null;
     public int MPRequired = 0;
@@ -26,7 +28,9 @@ public class Pathnode : MonoBehaviour
 
     public void ResetPath()
     {
-
+        f = 0;
+        g = 0;
+        h = 0;
         Previous = null;
         MPRemain = 0;
         Unfade();

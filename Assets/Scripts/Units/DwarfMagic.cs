@@ -48,12 +48,13 @@ public class DwarfMagic : MonoBehaviour
 
         if (G != Origin)
         {
-            Origin = G;
+
             AoE.Clear();
             //Debug.Log("targeting firewave");
 
             if (GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent.Contains(G) == true)
             {
+                Origin = G;
                 AoE.Add(G);
                 foreach (GameObject A in G.GetComponent<Tile>().Adjacent)
                 {
@@ -87,10 +88,11 @@ public class DwarfMagic : MonoBehaviour
     
     public void CastFireWave(GameObject G)
     {
-        GetComponent<Unit>().ActedThisTurn = true;
+
         if(G == Origin)
         {
-            foreach(GameObject A in AoE)
+            GetComponent<Unit>().ActedThisTurn = true;
+            foreach (GameObject A in AoE)
             {
                 if (A.GetComponent<Pathnode>().CurrentOccupant != null)
                 {

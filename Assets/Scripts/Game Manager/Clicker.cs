@@ -81,10 +81,17 @@ public class Clicker : MonoBehaviour
                     if (rhInfo.collider.gameObject.tag == "map")
                     {
                         CurrentUnit.GetComponent<ElfMagic>().CastSlow(rhInfo.collider.gameObject);
+                        return;
                     }
                     else if (rhInfo.collider.gameObject.tag == "Unit")
                     {
                         CurrentUnit.GetComponent<ElfMagic>().CastSlow(rhInfo.collider.gameObject.GetComponent<Pathfinding>().CurrentLocation);
+                        return;
+                    }
+                    else
+                    {
+                        Clear();
+                        return;
                     }
                 }
             }

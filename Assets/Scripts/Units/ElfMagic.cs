@@ -39,12 +39,13 @@ public class ElfMagic : MonoBehaviour
     {
         if (G != Origin)
         {
-            Origin = G;
+            //Origin = G;
             AoE.Clear();
             //Debug.Log("targeting slow spell");
 
             if (GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Adjacent.Contains(G) == true)
             {
+                Origin = G;
                 AoE.Add(G);
                 foreach (GameObject A in G.GetComponent<Tile>().Adjacent)
                 {
@@ -77,9 +78,10 @@ public class ElfMagic : MonoBehaviour
 
     public void CastSlow(GameObject G)
     {
-        GetComponent<Unit>().ActedThisTurn = true;
+
         if (G == Origin)
         {
+            GetComponent<Unit>().ActedThisTurn = true;
             foreach (GameObject A in AoE)
             {
                 if (A.GetComponent<Pathnode>().CurrentOccupant != null)
@@ -89,7 +91,7 @@ public class ElfMagic : MonoBehaviour
             }
         }
         GetComponent<Unit>().Click.Clear();
-        GetComponent<Unit>().ActedThisTurn = true;
+
         return;
 
     }

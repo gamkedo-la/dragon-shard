@@ -32053,11 +32053,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThisDialog:
-  - SpeakerName: Narrator
+  - SpeakerName: Spearguy
     Content: The battle begins!
     Portrait: {fileID: 21300000, guid: 9b7415e79d87db148ae0e641fa4eca7e, type: 3}
     RightSide: 0
-  - SpeakerName: Narrator
+  - SpeakerName: Archer
     Content: I hope you are prepared!
     Portrait: {fileID: 21300000, guid: 79f0c5833df7eb644a5ed8c40f876936, type: 3}
     RightSide: 1

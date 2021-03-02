@@ -28,7 +28,7 @@ public class CombatMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        click = Camera.main.GetComponent<Clicker>();
     }
 
     // Update is called once per frame

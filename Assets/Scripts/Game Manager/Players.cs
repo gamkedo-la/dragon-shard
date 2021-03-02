@@ -19,6 +19,12 @@ public class Players : MonoBehaviour
 
     bool AIturn;
 
+    public List<int> ActiveAlliances = new List<int>();
+
+    int WinningAlliance;
+
+    public EndGameMenu EGM;
+
     private void Start()
     {
 
@@ -27,6 +33,12 @@ public class Players : MonoBehaviour
         for (int i = 0; i < ThisGame.Length; i++)
         {
             ThisGame[i].Units = new List<GameObject>();
+            ThisGame[i].Eliminated = false;
+
+            if(ActiveAlliances.Contains(ThisGame[i].Alliance) == false)
+            {
+                ActiveAlliances.Add(ThisGame[i].Alliance);
+            }
 
             foreach (GameObject U in StartingUnits)
             {
@@ -65,17 +77,24 @@ public class Players : MonoBehaviour
 
     public void EndCurrentTurn()
     {
-
         thisClicker.Clear();
-
-
-
+               
         CurrentTurn += 1;
+
         if (CurrentTurn >= PlayersInThisGame)
         {
             CurrentTurn = 0;
-
         }
+
+        if(ThisGame[CurrentTurn].Eliminated == true)
+        {
+            CurrentTurn += 1;
+            if (CurrentTurn >= PlayersInThisGame)
+            {
+                CurrentTurn = 0;
+            }
+        }
+
         foreach (GameObject U in ThisGame[CurrentTurn].Units)
         {
             if (U != null)
@@ -83,11 +102,12 @@ public class Players : MonoBehaviour
                 U.GetComponent<Unit>().TurnStart();
             }
         }
+
         foreach (GameObject AI in AIPlayers)
         {
-
             AI.GetComponent<Tracker>().TurnStart();
         }
+
         EndTurnButton.GetComponent<UIColors>().SetColors();
 
         if (ThisGame[CurrentTurn].ControlledByAI == true)
@@ -100,7 +120,6 @@ public class Players : MonoBehaviour
             AIturn = false;
             thisClicker.AIturn = false;
         }
-
 
     }
 
@@ -142,11 +161,42 @@ public class Players : MonoBehaviour
 
     public void UnitDeath(Unit U)
     {
-        for (int i = 0; i < ThisGame.Length; i++)
+        bool AllianceDefeat = false;
+
+        ThisGame[U.Owner].Units.Remove(U.gameObject);
+
+        if (ThisGame[U.Owner].Units.Count <= 0)
         {
-            if(U.Owner == i)
+            ThisGame[U.Owner].Eliminated = true;
+
+            AllianceDefeat = true;
+
+            for(int i = 0; i < ThisGame.Length; i++)
             {
-                ThisGame[i].Units.Remove(U.gameObject);
+                if(ThisGame[i].Eliminated == false)
+                {
+                    if(ThisGame[i].Alliance == U.Alliance)
+                    {
+                        AllianceDefeat = false;
+                    }
+
+                }
+
+            }
+            
+        }
+
+        if(AllianceDefeat == true)
+        {
+            ActiveAlliances.Remove(U.Alliance);
+
+            if(ActiveAlliances.Count == 1)
+            {
+                foreach(int j in ActiveAlliances)
+                {
+                    WinningAlliance = j;
+                }
+                GameEnd(WinningAlliance);
             }
         }
 
@@ -161,6 +211,7 @@ public class Players : MonoBehaviour
                 AI.GetComponent<Tracker>().Enemies.Remove(U.gameObject);
             }
         }
+
     }
 
 
@@ -173,6 +224,22 @@ public class Players : MonoBehaviour
         {
             U.GetComponent<Unit>().SetColor();
         }    
+
+    }
+
+    public void GameEnd(int winners)
+    {
+        List<int> WinningPlayers = new List<int>();
+
+        for (int i = 0; i < ThisGame.Length; i++)
+        {
+            if (ThisGame[i].Alliance == winners)
+            {
+                WinningPlayers.Add(i);
+            }
+        }
+
+        EGM.DisplayEndGameMenu(WinningPlayers);
 
     }
 
@@ -190,6 +257,8 @@ public class Players : MonoBehaviour
         public List<GameObject> Units;
 
         public Material thisMaterial;
+
+        public bool Eliminated;
 
     }
 

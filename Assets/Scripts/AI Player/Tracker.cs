@@ -103,6 +103,7 @@ public class Tracker : MonoBehaviour
 
     public void TurnStart()
     {
+        //MUArray = MyUnits.ToArray();
 
         if (GM.CurrentTurn == P)
         {

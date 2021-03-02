@@ -11,6 +11,8 @@ public class Pathnode : MonoBehaviour
     public float g;
     public float h;
 
+    //public GameObject UnitAnchor;
+
     public GameObject CurrentOccupant = null;
     public int MPRequired = 0;
 

@@ -188,7 +188,7 @@ public class Grid : MonoBehaviour
     {
         foreach (TileSpace T in GridList)
         {
-
+            T.T.GetComponent<Tile>().TileUpdate();
             T.T.GetComponent<Tile>().FindNeighbors();
 
         }

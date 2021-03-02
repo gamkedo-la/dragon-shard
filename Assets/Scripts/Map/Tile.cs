@@ -12,6 +12,8 @@ public class Tile : MonoBehaviour
     public int Row;
     public int Column;
 
+    public GameObject UnitAnchor;
+
     [SerializeField]
     public TileType thisTile;
 
@@ -23,6 +25,14 @@ public class Tile : MonoBehaviour
     public GameObject HILLS;
     public GameObject CASTLE;
 
+    public float WH;
+    public float GH;
+    public float FH;
+    public float SH;
+    public float HH;
+    public float CH;
+
+    Vector3 AnchorPos = new Vector3(0, 0, 0);
 
     public int AIDefense;
 
@@ -37,6 +47,7 @@ public class Tile : MonoBehaviour
     {
         FindNeighbors();
         TileUpdate();
+        AnchorPos = transform.position;
     }
 
     public void SetTile(TileType t)
@@ -60,7 +71,7 @@ public class Tile : MonoBehaviour
 
     public void TileUpdate()
     {
-
+        AnchorPos = transform.position;
 
         if (thisTile == TileType.forest)
         {
@@ -73,6 +84,9 @@ public class Tile : MonoBehaviour
             SAND.SetActive(false);
             HILLS.SetActive(false);
             CASTLE.SetActive(false);
+
+            AnchorPos.y += FH;
+            UnitAnchor.transform.position = AnchorPos;
 
         }
         if (thisTile == TileType.water)
@@ -87,6 +101,9 @@ public class Tile : MonoBehaviour
             HILLS.SetActive(false);
             CASTLE.SetActive(false);
 
+            AnchorPos.y += WH;
+            UnitAnchor.transform.position = AnchorPos;
+
         }
         if (thisTile == TileType.grass)
         {
@@ -100,6 +117,9 @@ public class Tile : MonoBehaviour
             HILLS.SetActive(false);
             CASTLE.SetActive(false);
 
+            AnchorPos.y += GH;
+            UnitAnchor.transform.position = AnchorPos;
+
         }
         if (thisTile == TileType.Def)
         {
@@ -112,6 +132,8 @@ public class Tile : MonoBehaviour
             SAND.SetActive(false);
             HILLS.SetActive(false);
             CASTLE.SetActive(false);
+
+            UnitAnchor.transform.position = AnchorPos;
 
         }
 
@@ -127,6 +149,9 @@ public class Tile : MonoBehaviour
             HILLS.SetActive(false);
             CASTLE.SetActive(false);
 
+            AnchorPos.y += SH;
+            UnitAnchor.transform.position = AnchorPos;
+
         }
         if (thisTile == TileType.hills)
         {
@@ -140,6 +165,9 @@ public class Tile : MonoBehaviour
             GRASS.SetActive(false);
             CASTLE.SetActive(false);
 
+            AnchorPos.y += HH;
+            UnitAnchor.transform.position = AnchorPos;
+
         }
         if (thisTile == TileType.castle)
         {
@@ -152,6 +180,9 @@ public class Tile : MonoBehaviour
             SAND.SetActive(false);
             HILLS.SetActive(false);
             GRASS.SetActive(false);
+
+            AnchorPos.y += CH;
+            UnitAnchor.transform.position = AnchorPos;
 
         }
 

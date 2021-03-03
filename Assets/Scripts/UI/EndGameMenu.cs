@@ -48,6 +48,19 @@ public class EndGameMenu : MonoBehaviour
 
     }
 
+    public void DisplayEndGameMenu(bool HumanVictory)
+    {
+        if(HumanVictory == true)
+        {
+            W.text = "You are victorious";
+        }
+        else
+        {
+            W.text = "You have been defeated";
+        }
+
+    }
+
     public void LoadNextLevel()
     {
         SceneManager.LoadScene(NextLevel);

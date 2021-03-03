@@ -25,8 +25,15 @@ public class Players : MonoBehaviour
 
     public EndGameMenu EGM;
 
+    public int HumanPlayersCount;
+
+    public bool SinglePlayer = false;
+
+    int Human;
+
     private void Start()
     {
+
 
         GameObject[] StartingUnits = GameObject.FindGameObjectsWithTag("Unit");
 
@@ -55,6 +62,21 @@ public class Players : MonoBehaviour
         foreach (GameObject AI in AIPlayers)
         {
             ThisGame[AI.GetComponent<Tracker>().P].ControlledByAI = true;
+        }
+
+        HumanPlayersCount = ThisGame.Length - AIPlayers.Count;
+
+        if(HumanPlayersCount == 1)
+        {
+            SinglePlayer = true;
+            for (int i = 0; i < ThisGame.Length; i++)
+            {
+                if(ThisGame[i].ControlledByAI == false)
+                {
+                    Human = i;
+                }
+            }
+
         }
 
         PlayersInThisGame = ThisGame.Length;

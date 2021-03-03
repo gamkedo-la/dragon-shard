@@ -9,6 +9,12 @@ public class DialogEvent : MonoBehaviour
     public DialogUI DialogBox;
 
     int Bookmark = 0;
+    
+    public bool EndOfLevel = false;
+
+    [Header("Only for if this dialog is at the end of the level")]
+    public bool PlayerVictory;
+    public EndGameMenu EGM;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +43,11 @@ public class DialogEvent : MonoBehaviour
             DialogBox.ToggleVisible(false);
             DialogBox.dialogEvent = null;
             Camera.main.GetComponent<Clicker>().ActionInProgress = false;
+
+            if(EndOfLevel == true)
+            {
+                EGM.DisplayEndGameMenu(PlayerVictory);
+            }
 
         }
 

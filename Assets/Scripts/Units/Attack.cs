@@ -141,9 +141,7 @@ public class Attack : MonoBehaviour
 
                             if (GetComponent<Unit>().controlledByAI == true)
                             {
-
                                 GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
-
                             }
 
                                 return;
@@ -228,6 +226,12 @@ public class Attack : MonoBehaviour
         float CD = CurrentDef * DefMod;
         CurrentDef = (int)CD;
 
+    }
+
+    public void InteruptCombat()
+    {
+        counter = 100;
+        enemyCounter = 100;
     }
 
 }

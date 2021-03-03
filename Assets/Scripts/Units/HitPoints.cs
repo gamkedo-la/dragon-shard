@@ -13,10 +13,15 @@ public class HitPoints : MonoBehaviour
 
     GameObject Cam;
 
+    public GameObject Attckr;
+
+    HPLevelDialogTrigger dt;
+
     // Start is called before the first frame update
     void Start()
     {
         Cam = Camera.main.gameObject;
+        dt = GetComponent<HPLevelDialogTrigger>();
     }
 
     // Update is called once per frame
@@ -27,9 +32,7 @@ public class HitPoints : MonoBehaviour
 
     public void TakeDamage(int damage, Experience attacker)
     {
-
-
-
+        Attckr = attacker.gameObject;
         CurrentHP -= damage;
         Vector3 temp = transform.position;
         temp.y = .3f;
@@ -41,19 +44,15 @@ public class HitPoints : MonoBehaviour
 
         T.GetComponent<DamageText>().TColor = Color.red;
 
-        if (damage < -0)
+        if (damage < 0)
         {
-
             T.GetComponent<DamageText>().TColor = Color.green;
-
         }
         if (damage == 0)
         {
-
             T.GetComponent<DamageText>().TColor = Color.white;
             T.GetComponent<DamageText>().FSize = 300;
         }
-
 
 
         if (CurrentHP > MaxHP)
@@ -63,6 +62,13 @@ public class HitPoints : MonoBehaviour
         if (CurrentHP <= 0)
         {
             Death(attacker);
+        }
+
+        if(CurrentHP <= dt.HPTriggerLevel)
+        {
+            dt.thisDialog.NextLine();
+            GetComponent<Attack>().InteruptCombat();
+            Attckr.GetComponent<Attack>().InteruptCombat();
         }
 
     }

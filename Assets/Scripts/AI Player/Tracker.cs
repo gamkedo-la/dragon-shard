@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Tracker : MonoBehaviour
 {
-    public bool Passive;
+    public bool Passive = false;
 
     public int P;
 
@@ -534,11 +534,15 @@ public class Tracker : MonoBehaviour
 
     public GameObject LongRange(GameObject U)
     {
+
+        if(Passive == true)
+        {
+            return null;
+        }
+
         LongTermPlan.Clear();
 
-        ET.Clear();
-
-        
+        ET.Clear();        
 
         foreach(GameObject E in Enemies)
         {
@@ -583,16 +587,12 @@ public class Tracker : MonoBehaviour
             }
         }
 
-
         EndPoint = EnTemp[ii].GetComponent<Pathfinding>().CurrentLocation;
          
         while(EndPoint.GetComponent<Pathnode>().MPRemain < 0)
         {
             EndPoint = EndPoint.GetComponent<Pathnode>().Previous;
-        }
-
-
-       
+        }       
 
         return EndPoint;
     }
@@ -656,10 +656,7 @@ public class Tracker : MonoBehaviour
                         TT.GetComponent<Pathnode>().Previous = T;
                         TT.GetComponent<Pathnode>().MPRemain = -(int)TT.GetComponent<Pathnode>().g;
                         return TT.GetComponent<Pathnode>().g;
-
                     }
-
-
 
                     TT.GetComponent<Pathnode>().Previous = T;
                     TT.GetComponent<Pathnode>().g = T.GetComponent<Pathnode>().g + TT.GetComponent<Pathnode>().MPRequired;
@@ -677,7 +674,6 @@ public class Tracker : MonoBehaviour
                     //    " h " + TT.GetComponent<Pathnode>().h +
                     //    " f " + TT.GetComponent<Pathnode>().f +
                     //    " MP Remain " + TT.GetComponent<Pathnode>().MPRemain);
-
 
                     if (OpenSet.Contains(TT) == false)
                     {

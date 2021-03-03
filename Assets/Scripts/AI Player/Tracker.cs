@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Tracker : MonoBehaviour
 {
+    public bool Passive;
+
     public int P;
 
     public int Team;
@@ -55,7 +57,6 @@ public class Tracker : MonoBehaviour
     public List<GameObject> ET = new List<GameObject>();
 
     public int ii = 0;
-    public GameObject EEEEE;
 
     public float[] EnTempDist;
 

@@ -157,6 +157,27 @@ public class Players : MonoBehaviour
         }
         ThisGame = FinalArray;
         PlayersInThisGame--;
+
+        GameObject D = null;
+
+        foreach(GameObject A in AIPlayers)
+        {
+            if(A.GetComponent<Tracker>().P == P)
+            {
+                D = A;
+            }
+            if(A.GetComponent<Tracker>().P > P)
+            {
+                A.GetComponent<Tracker>().P--;
+            }
+        }
+
+        if (D != null)
+        {
+            AIPlayers.Remove(D);
+            Destroy(D);
+        }
+
     }
 
     public void UnitDeath(Unit U)

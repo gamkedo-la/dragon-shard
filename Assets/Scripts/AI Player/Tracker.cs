@@ -64,9 +64,10 @@ public class Tracker : MonoBehaviour
     void Start()
     {
 
-        Team = GM.ThisGame[P].Alliance;
+
         Grid = GameObject.Find("Grid").transform;
         GM = Camera.main.GetComponent<Players>();
+        Team = GM.ThisGame[P].Alliance;
 
         for (int k = 0; k < GM.ThisGame.Length; k++)
         {

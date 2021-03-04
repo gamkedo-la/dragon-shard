@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Clicker : MonoBehaviour
 {
@@ -20,12 +21,17 @@ public class Clicker : MonoBehaviour
 
     public bool ElfTeleportTargetingTwo = false;
 
-    public GameObject SelectionRing;
+    public UnitInfo unitInfo;
 
     // Update is called once per frame
     void Update()
     {
-        if(DwarfFireWaveTargeting == true)
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
+        if (DwarfFireWaveTargeting == true)
         {
             Ray toMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rhInfo;
@@ -152,7 +158,7 @@ public class Clicker : MonoBehaviour
                             //Debug.Log(rhInfo.collider.name + " . . " + rhInfo.point);
                             CurrentUnit = rhInfo.collider.GetComponent<Unit>();
 
-                            SelectionRing.transform.position = CurrentUnit.GetComponent<Pathfinding>().CurrentLocation.transform.position;
+
 
                             if (CurrentUnit != null)
                             {
@@ -328,7 +334,7 @@ public class Clicker : MonoBehaviour
                                 Debug.Log("moving to" + rhInfo.collider.name + " . . " + rhInfo.point);
                                 EndPoint = rhInfo.collider.gameObject;
                                 CurrentUnit.GetComponent<Pathfinding>().MoveTo(EndPoint);
-                                SelectionRing.transform.parent = CurrentUnit.transform;
+
                                 SelectingAction = false;
                                 ActionInProgress = true;
                                 return;
@@ -408,8 +414,8 @@ public class Clicker : MonoBehaviour
         {
             CurrentUnit.HideOptions();
         }
-        SelectionRing.transform.parent = null;
-        SelectionRing.transform.position = new Vector3(0, -.1f, .5f);
+
+        unitInfo.DeselectUnit();
 
         CurrentUnit = null;
         EndPoint = null;

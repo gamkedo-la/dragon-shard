@@ -43,7 +43,7 @@ public class Clicker : MonoBehaviour
                 {
                     CurrentUnit.GetComponent<DwarfMagic>().TargetFireWave(rhInfo.collider.gameObject);
                 }
-                else if(rhInfo.collider.gameObject.tag == "Unit")
+                else if (rhInfo.collider.gameObject.tag == "Unit")
                 {
                     CurrentUnit.GetComponent<DwarfMagic>().TargetFireWave(rhInfo.collider.gameObject.GetComponent<Pathfinding>().CurrentLocation);
                 }
@@ -64,7 +64,7 @@ public class Clicker : MonoBehaviour
             return;
 
         }
-        if(ElfSlowTargeting == true)
+        if (ElfSlowTargeting == true)
         {
             Ray toMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rhInfo;
@@ -257,7 +257,7 @@ public class Clicker : MonoBehaviour
                                 }
                                 return;
                             }
-                                                                                 
+
                             else if (rhInfo.collider.gameObject.tag == "FireballButton")
                             {
                                 if (CurrentUnit.ActedThisTurn == false)
@@ -287,7 +287,7 @@ public class Clicker : MonoBehaviour
                                 {
                                     Clear();
                                 }
-                                
+
 
                                 return;
                             }
@@ -309,7 +309,7 @@ public class Clicker : MonoBehaviour
 
                             else if (rhInfo.collider.gameObject.tag == "TeleportButton")
                             {
-                                if(CurrentUnit.ActedThisTurn == false)
+                                if (CurrentUnit.ActedThisTurn == false)
                                 {
                                     CurrentUnit.HideOptions();
                                     CurrentUnit.GetComponent<ElfMagic>().TeleportTargetSelect();
@@ -352,7 +352,7 @@ public class Clicker : MonoBehaviour
                                 CurrentUnit.GetComponent<SelectAttack>().InitiateCombat(rhInfo.collider.gameObject);
                                 SelectingAction = false;
                                 ActionInProgress = true;
-                                
+
                                 //return;
 
                             }
@@ -368,7 +368,7 @@ public class Clicker : MonoBehaviour
                                 CurrentUnit.GetComponent<DwarfMortarAttack>().FinalTarget = rhInfo.collider.gameObject;
                                 SelectingAction = false;
                                 ActionInProgress = true;
-                                
+
                                 //return;
 
                             }
@@ -386,7 +386,7 @@ public class Clicker : MonoBehaviour
                                 SelectingAction = false;
                                 DwarfFireWaveTargeting = false;
 
-                               
+
                                 //return;
 
                             }
@@ -410,12 +410,13 @@ public class Clicker : MonoBehaviour
     public void Clear()
     {
         //Debug.Log("clear");
-        if(CurrentUnit != null)
+        if (CurrentUnit != null)
         {
             CurrentUnit.HideOptions();
         }
 
-        unitInfo.DeselectUnit();
+        if (unitInfo != null)
+            unitInfo.DeselectUnit();
 
         CurrentUnit = null;
         EndPoint = null;

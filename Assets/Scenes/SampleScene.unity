@@ -51791,6 +51791,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6646349985637776895, guid: 6277f90484c1c1741b3c9d60c155fbdb,
         type: 3}
+      propertyPath: unitInfo
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6646349985637776895, guid: 6277f90484c1c1741b3c9d60c155fbdb,
+        type: 3}
       propertyPath: SelectionRing
       value: 
       objectReference: {fileID: 2065479232}

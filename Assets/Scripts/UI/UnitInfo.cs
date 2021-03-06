@@ -34,6 +34,7 @@ public class UnitInfo : MonoBehaviour
     void Start()
     {
         DeselectUnit();
+        Camera.main.GetComponent<Clicker>().unitInfo = this;
     }
 
     // Update is called once per frame

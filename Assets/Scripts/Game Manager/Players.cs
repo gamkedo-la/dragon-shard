@@ -274,6 +274,20 @@ public class Players : MonoBehaviour
 
     public void GameEnd(int winners)
     {
+        if(SinglePlayer == true)
+        {
+            if(ThisGame[Human].Eliminated == false)
+            {
+                EGM.DisplayEndGameMenu(true);
+            }
+            else
+            {
+                EGM.DisplayEndGameMenu(false);
+            }
+            return;
+        }
+
+
         List<int> WinningPlayers = new List<int>();
 
         for (int i = 0; i < ThisGame.Length; i++)

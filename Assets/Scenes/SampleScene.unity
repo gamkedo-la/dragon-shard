@@ -33377,6 +33377,11 @@ PrefabInstance:
       propertyPath: CameraRig
       value: 
       objectReference: {fileID: 540764535465802304}
+    - target: {fileID: 4196609656213252901, guid: 9baf3c15e5cec454bbb1d77ee9c0b44d,
+        type: 3}
+      propertyPath: SelectionRing
+      value: 
+      objectReference: {fileID: 2065479232}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9baf3c15e5cec454bbb1d77ee9c0b44d, type: 3}
 --- !u!114 &1107018776692097406 stripped

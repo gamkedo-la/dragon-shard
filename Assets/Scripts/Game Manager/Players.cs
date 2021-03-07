@@ -103,6 +103,8 @@ public class Players : MonoBehaviour
                
         CurrentTurn += 1;
 
+        Debug.Log("Starting turn for player " + CurrentTurn);
+
         if (CurrentTurn >= PlayersInThisGame)
         {
             CurrentTurn = 0;

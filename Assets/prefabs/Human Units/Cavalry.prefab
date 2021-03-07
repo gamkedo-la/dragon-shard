@@ -83,6 +83,8 @@ MonoBehaviour:
   Sand: 3
   Hills: 2
   Castle: 1
+  slowed: 0
+  slowAmt: 0
 --- !u!136 &7475194005103894580
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -169,6 +171,7 @@ MonoBehaviour:
   CurrentHP: 45
   DamageText: {fileID: 1682866155419517283, guid: 4efa638b120ee6c4ba42a799d94e4519,
     type: 3}
+  Attckr: {fileID: 0}
 --- !u!114 &2719834807147445779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,14 +1278,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6401401715301227258}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6824918866422365814}
   m_Father: {fileID: 8441081319536198246}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3246668446612897347
 MonoBehaviour:
   m_ObjectHideFlags: 0

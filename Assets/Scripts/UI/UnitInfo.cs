@@ -109,7 +109,7 @@ public class UnitInfo : MonoBehaviour
         Hills.text = "Hills: " + U.GetComponent<Attack>().HillsDef + "%";
         Sand.text = "Sand: " + U.GetComponent<Attack>().SandDef + "%";
 
-        SelectionRing.transform.position = SelectedUnit.GetComponent<Pathfinding>().CurrentLocation.transform.position;
+        SelectionRing.transform.position = SelectedUnit.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().UnitAnchor.transform.position;
         SelectionRing.transform.parent = SelectedUnit.transform;
 
         ToggleDefenseInfo(false);

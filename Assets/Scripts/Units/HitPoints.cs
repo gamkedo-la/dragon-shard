@@ -64,11 +64,14 @@ public class HitPoints : MonoBehaviour
             Death(attacker);
         }
 
-        if(CurrentHP <= dt.HPTriggerLevel)
+        if (dt != null)
         {
-            dt.thisDialog.NextLine();
-            GetComponent<Attack>().InteruptCombat();
-            Attckr.GetComponent<Attack>().InteruptCombat();
+            if (CurrentHP <= dt.HPTriggerLevel)
+            {
+                dt.thisDialog.NextLine();
+                GetComponent<Attack>().InteruptCombat();
+                Attckr.GetComponent<Attack>().InteruptCombat();
+            }
         }
 
     }

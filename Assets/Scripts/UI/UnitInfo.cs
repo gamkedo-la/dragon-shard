@@ -14,6 +14,8 @@ public class UnitInfo : MonoBehaviour
     public Text melee;
     public Text ranged;
 
+    public Text Move;
+
     public GameObject SelectedUnit;
 
     public GameObject SelectionRing;
@@ -79,6 +81,14 @@ public class UnitInfo : MonoBehaviour
         HP.text = "HP: " + U.GetComponent<HitPoints>().CurrentHP + "/" + U.GetComponent<HitPoints>().MaxHP;
         CurrentDef.text = "Current Defense: " + U.GetComponent<Attack>().CurrentDef + "%";
 
+        Move.text = "Move Points: " + U.GetComponent<Pathfinding>().MP;
+
+        if (U.GetComponent<Pathfinding>().slowed == true)
+        {
+            Move.text = "Move Points: " + (U.GetComponent<Pathfinding>().MP - U.GetComponent<Pathfinding>().slowAmt) + " (slowed)";
+        }
+
+
         if(U.GetComponent<Attack>().MeleeAttacks > 0)
         {
             melee.text = "Melee: " + U.GetComponent<Attack>().MeleeName + ": " + U.GetComponent<Attack>().MeleeDamage + " Damage, " + U.GetComponent<Attack>().MeleeAttacks + " Attacks";
@@ -102,12 +112,12 @@ public class UnitInfo : MonoBehaviour
 
         D.text = U.GetComponent<Unit>().UnitName + " Defense Info";
 
-        Grass.text = "Grass: " + U.GetComponent<Attack>().GrassDef + "%";
-        Forest.text = "Forest: " + U.GetComponent<Attack>().ForestDef + "%";
-        Water.text = "Water: " + U.GetComponent<Attack>().WaterDef + "%";
-        castle.text = "Castle: " + U.GetComponent<Attack>().CastleDef + "%";
-        Hills.text = "Hills: " + U.GetComponent<Attack>().HillsDef + "%";
-        Sand.text = "Sand: " + U.GetComponent<Attack>().SandDef + "%";
+        Grass.text = "Grass: " + U.GetComponent<Attack>().GrassDef + "% Defense, " + U.GetComponent<Pathfinding>().Grass + " MP";
+        Forest.text = "Forest: " + U.GetComponent<Attack>().ForestDef + "% Defense, " + U.GetComponent<Pathfinding>().Forest + " MP";
+        Water.text = "Water: " + U.GetComponent<Attack>().WaterDef + "% Defense, " + U.GetComponent<Pathfinding>().Water + " MP";
+        castle.text = "Castle: " + U.GetComponent<Attack>().CastleDef + "% Defense, " + U.GetComponent<Pathfinding>().Castle + " MP";
+        Hills.text = "Hills: " + U.GetComponent<Attack>().HillsDef + "% Defense, " + U.GetComponent<Pathfinding>().Hills + " MP";
+        Sand.text = "Sand: " + U.GetComponent<Attack>().SandDef + "% Defense, " + U.GetComponent<Pathfinding>().Sand + " MP";
 
         SelectionRing.transform.position = SelectedUnit.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().UnitAnchor.transform.position;
         SelectionRing.transform.parent = SelectedUnit.transform;

@@ -17,7 +17,8 @@ public class Pathfinding : MonoBehaviour
 
     public int MovePoints;
 
-    int MP;
+    [HideInInspector]
+    public int MP;
 
     private bool moving = false;
 

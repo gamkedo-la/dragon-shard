@@ -23,6 +23,8 @@ public class Clicker : MonoBehaviour
 
     public UnitInfo unitInfo;
 
+    public GameObject grid;
+
     // Update is called once per frame
     void Update()
     {
@@ -430,7 +432,7 @@ public class Clicker : MonoBehaviour
         DwarfFireballTargeting = false;
         DwarfFireWaveTargeting = false;
 
-        foreach (Transform TTT in GameObject.Find("Grid").transform)
+        foreach (Transform TTT in grid.transform)
         {
             TTT.gameObject.GetComponent<Pathnode>().ResetPath();
         }

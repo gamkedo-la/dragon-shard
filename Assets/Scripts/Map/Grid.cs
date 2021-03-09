@@ -13,7 +13,7 @@ public class Grid : MonoBehaviour
 
     public int LC;
 
-
+    public GameObject MinimapCam;
 
     public List<TileSpace> GridList = new List<TileSpace>();
 
@@ -181,6 +181,19 @@ public class Grid : MonoBehaviour
                     }
                 }
             }
+        }
+
+        FindAllNeighbors();
+
+        MinimapCam.transform.position = new Vector3(((Mathf.Sqrt(3) * ((Columns-1))) / 2)/2, 110, Rows/2);
+
+        if (MinimapCam.transform.position.x > MinimapCam.transform.position.z)
+        {
+            MinimapCam.GetComponent<Camera>().orthographicSize = MinimapCam.transform.position.x + .6f;
+        }
+        else
+        {
+            MinimapCam.GetComponent<Camera>().orthographicSize = MinimapCam.transform.position.z;
         }
     }
 

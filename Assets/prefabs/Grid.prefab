@@ -47,6 +47,7 @@ MonoBehaviour:
   Columns: 0
   LR: 0
   LC: 0
+  MinimapCam: {fileID: 0}
   GridList: []
   BaseTile: {fileID: 3458714714561766421, guid: c582789d9c263bf4b94171af9688643f,
     type: 3}

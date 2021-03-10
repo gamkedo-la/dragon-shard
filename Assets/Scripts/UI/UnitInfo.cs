@@ -32,6 +32,11 @@ public class UnitInfo : MonoBehaviour
     public Text Sand;
     public Text Hills;
 
+    public CanvasGroup SI;
+
+    public Text Spell;
+    public Text SpName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +47,33 @@ public class UnitInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(SelectedUnit != null)
+        {
+            Ray toMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rhInfo;
+            bool didHit = Physics.Raycast(toMouse, out rhInfo, 50.0f);
+            if (didHit)
+            {
+                if(rhInfo.collider.gameObject.GetComponent<SpellInfo>() != null)
+                {
+                    SI.alpha = 1;
+                    SI.blocksRaycasts = true;
+                    SI.interactable = true;
+
+                    SpName.text = rhInfo.collider.gameObject.GetComponent<SpellInfo>().SpellName;
+                    Spell.text = rhInfo.collider.gameObject.GetComponent<SpellInfo>().Info;
+                }
+                else
+                {
+                    SI.alpha = 0;
+                    SI.blocksRaycasts = false;
+                    SI.interactable = false;
+                }
+
+            }
+
+        }
+
 
         if (EventSystem.current.IsPointerOverGameObject())
         {

@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 6230602012070604421}
   - component: {fileID: 5593044048300763457}
   - component: {fileID: 3050609769104907237}
+  - component: {fileID: 9153025786397854402}
   m_Layer: 0
   m_Name: defbuff
   m_TagString: DefenseBuffButton
@@ -382,6 +383,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.30000013, z: 0.20000008}
   m_Center: {x: 0, y: 0.00000011920929, z: -0.00000023841858}
+--- !u!114 &9153025786397854402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2726739782807258115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf3ddc63baf14144acd5b3e07a7bfda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpellName: Boost Defense
+  Info: Boost the defense of nearby friendly units for one turn
 --- !u!1 &6139193788195213374
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,6 +476,7 @@ MonoBehaviour:
   CurrentLocation: {fileID: 0}
   CanMoveTo: []
   MovePoints: 3
+  MP: 0
   Grid: {fileID: 0}
   Grass: 1
   Forest: 2
@@ -660,6 +676,7 @@ GameObject:
   - component: {fileID: 7882056007349128665}
   - component: {fileID: 8813653206768466596}
   - component: {fileID: 7670055731464479262}
+  - component: {fileID: 6839258528154758309}
   m_Layer: 0
   m_Name: attbuff
   m_TagString: DamageBuffButton
@@ -744,6 +761,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.20000008}
   m_Center: {x: 0, y: 0.00000011920929, z: -0.00000023841858}
+--- !u!114 &6839258528154758309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7544210897422411166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf3ddc63baf14144acd5b3e07a7bfda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpellName: Boost Damage
+  Info: Boost the damage of nearby friendly units for one turn
 --- !u!1 &8092068497623159338
 GameObject:
   m_ObjectHideFlags: 0

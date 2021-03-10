@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 1287964855421551830}
   - component: {fileID: 9119345432028955342}
   - component: {fileID: 5418768272583530700}
+  - component: {fileID: 242784303642957433}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: FireballButton
@@ -348,6 +349,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.20000008}
   m_Center: {x: 0, y: 0.00000011920929, z: -0.00000023841858}
+--- !u!114 &242784303642957433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2306570694416539402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf3ddc63baf14144acd5b3e07a7bfda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpellName: Fireball
+  Info: Shoot a fireball at target unit
 --- !u!1 &2551781432588711854
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,6 +753,7 @@ GameObject:
   - component: {fileID: 1844999191603479290}
   - component: {fileID: 2183285416611376432}
   - component: {fileID: 1962375814805908647}
+  - component: {fileID: 3923403273157012548}
   m_Layer: 0
   m_Name: Firewave
   m_TagString: FireWaveButton
@@ -822,6 +838,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.30000013, z: 0.20000008}
   m_Center: {x: 0, y: 0.00000011920929, z: -0.00000023841858}
+--- !u!114 &3923403273157012548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4188029644560160762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf3ddc63baf14144acd5b3e07a7bfda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpellName: Firewave
+  Info: Deal fire damage to all units in an area
 --- !u!1 &4400742669790156200
 GameObject:
   m_ObjectHideFlags: 0
@@ -1706,6 +1736,7 @@ MonoBehaviour:
   CurrentLocation: {fileID: 0}
   CanMoveTo: []
   MovePoints: 2
+  MP: 0
   Grid: {fileID: 0}
   Grass: 1
   Forest: 2

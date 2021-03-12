@@ -82,6 +82,11 @@ public class Players : MonoBehaviour
         PlayersInThisGame = ThisGame.Length;
     }
 
+    //public string SaveString()
+    //{
+
+    //}
+
     public void ETB()
     {
 

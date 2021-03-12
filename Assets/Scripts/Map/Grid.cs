@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public class Grid : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class Grid : MonoBehaviour
 
     public GameObject MinimapCam;
 
-    public List<TileSpace> GridList = new List<TileSpace>();
+    public List<GameObject> GridList = new List<GameObject>();
 
 
 
@@ -34,17 +35,67 @@ public class Grid : MonoBehaviour
         
     }
 
+    public string SaveString()
+    {
+        string Result = "";
+
+        Result += Rows.ToString() + ";";
+        Result += Columns.ToString() + ";";
+
+        //Debug.Log(Result);
+
+        foreach (GameObject tileSpace in GridList)
+        {
+
+            Result += tileSpace.GetComponent<Tile>().SaveString();
+
+        }
+
+        return Result;
+    }
+
+    public void LoadString(string map)
+    {
+        string[] splitString = map.Split(';');
+
+        Debug.Log(Convert.ToInt32(splitString[0]));
+        Debug.Log(splitString[1]);
+        Debug.Log(splitString[2]);
+
+        Rows = Convert.ToInt32(splitString[0]);
+        Columns = Convert.ToInt32(splitString[1]);
+
+        CreateGrid();
+
+        string tileData = splitString[2];
+
+        int charAt = 0;
+        foreach (GameObject tileSpace in GridList)
+        {
+
+            
+            if (charAt >= GridList.Count || charAt >= tileData.Length)
+            {
+                Debug.Log("loading error, more tiles than map size");
+            }
+            tileSpace.GetComponent<Tile>().LoadTile(tileData[charAt]);
+            charAt++;
+
+        }
+
+    }
+
 
     public void CreateGrid()
     {
         if (Columns < LC)
         {            
-            foreach(TileSpace tile in GridList.ToArray())
+            foreach(GameObject tile in GridList.ToArray())
             {
-                if(tile.C > Columns)
+                if(tile.GetComponent<Tile>().Column > Columns)
                 {
                     
-                    DestroyImmediate(tile.T);
+                    DestroyImmediate(tile);
                     GridList.Remove(tile);
                 }
             }
@@ -52,12 +103,12 @@ public class Grid : MonoBehaviour
         }
         if(Rows < LR)
         {
-            foreach (TileSpace tile in GridList.ToArray())
+            foreach (GameObject tile in GridList.ToArray())
             {
-                if (tile.R > Rows)
+                if (tile.GetComponent<Tile>().Row > Rows)
                 {
                     
-                    DestroyImmediate(tile.T);
+                    DestroyImmediate(tile);
                     GridList.Remove(tile);
 
                 }
@@ -86,13 +137,8 @@ public class Grid : MonoBehaviour
                         tl.GetComponent<Tile>().Row = j;
                         tl.GetComponent<Tile>().Column = i;
 
-                        TileSpace temp;
 
-                        temp.T = tl;
-                        temp.C = i;
-                        temp.R = j;
-
-                        GridList.Add(temp);
+                        GridList.Add(tl);
                     }
                 }
 
@@ -114,13 +160,7 @@ public class Grid : MonoBehaviour
                         tl.GetComponent<Tile>().Row = j;
                         tl.GetComponent<Tile>().Column = i;
 
-                        TileSpace temp;
-
-                        temp.T = tl;
-                        temp.C = i;
-                        temp.R = j;
-
-                        GridList.Add(temp);
+                        GridList.Add(tl);
                     }
                 }
             }
@@ -144,13 +184,7 @@ public class Grid : MonoBehaviour
                         tl.GetComponent<Tile>().Row = j;
                         tl.GetComponent<Tile>().Column = i;
 
-                        TileSpace temp;
-
-                        temp.T = tl;
-                        temp.C = i;
-                        temp.R = j;
-
-                        GridList.Add(temp);
+                        GridList.Add(tl);
                     }
                 }
 
@@ -171,19 +205,15 @@ public class Grid : MonoBehaviour
                         tl.GetComponent<Tile>().Row = j;
                         tl.GetComponent<Tile>().Column = i;
 
-                        TileSpace temp;
-
-                        temp.T = tl;
-                        temp.C = i;
-                        temp.R = j;
-
-                        GridList.Add(temp);
+                        GridList.Add(tl);
                     }
                 }
             }
         }
 
         FindAllNeighbors();
+
+
 
         MinimapCam.transform.position = new Vector3(((Mathf.Sqrt(3) * ((Columns-1))) / 2)/2, 110, Rows/2);
 
@@ -199,10 +229,10 @@ public class Grid : MonoBehaviour
 
     public void FindAllNeighbors()
     {
-        foreach (TileSpace T in GridList)
+        foreach (GameObject T in GridList)
         {
-            T.T.GetComponent<Tile>().TileUpdate();
-            T.T.GetComponent<Tile>().FindNeighbors();
+            T.GetComponent<Tile>().TileUpdate();
+            T.GetComponent<Tile>().FindNeighbors();
 
         }
 
@@ -211,12 +241,19 @@ public class Grid : MonoBehaviour
 
     }
 
+    public void SortTiles()
+    {
+
+
+
+    }
+
     public void ResetAllPathing()
     {
-        foreach (TileSpace T in GridList)
+        foreach (GameObject T in GridList)
         {
 
-            T.T.GetComponent<Pathnode>().MPRemain = -1;
+            T.GetComponent<Pathnode>().MPRemain = -1;
 
         }
 
@@ -224,9 +261,9 @@ public class Grid : MonoBehaviour
 
     public void ResetGrid()
     {
-        foreach(TileSpace tile in GridList)
+        foreach(GameObject tile in GridList)
         {
-            DestroyImmediate(tile.T, true);
+            DestroyImmediate(tile, true);
                                  
         }
 

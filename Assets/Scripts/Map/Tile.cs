@@ -7,7 +7,7 @@ public enum TileType { Def, grass, water, forest, sand, hills, castle}
 [ExecuteInEditMode]
 [SelectionBase]
 [System.Serializable]
-public class Tile : MonoBehaviour
+public class Tile : MonoBehaviour, IComparer <Tile>
 {
     public int Row;
     public int Column;
@@ -36,6 +36,12 @@ public class Tile : MonoBehaviour
 
     public int AIDefense;
 
+    public int Compare(Tile A, Tile B)
+    {
+        //B - A
+
+        return 0;
+    }
 
     [SerializeField]
     public GameObject Current;
@@ -66,6 +72,43 @@ public class Tile : MonoBehaviour
     {
 
         //TileUpdate();
+
+    }
+
+    public string SaveString()
+    {
+        string Result = "";
+
+        switch (thisTile) {
+            case TileType.grass: Result += "G"; break;
+            case TileType.water: Result += "W"; break;
+            case TileType.castle: Result += "C"; break;
+            case TileType.hills: Result += "H"; break;
+            case TileType.sand: Result += "S"; break;
+            case TileType.forest: Result += "F"; break;
+            case TileType.Def: Result += "D"; break;
+        }
+
+        return Result;
+
+    }
+
+    public void LoadTile(char T)
+    {
+
+
+        switch (T)
+        {
+            case 'G': thisTile = TileType.grass ; break;
+            case 'W': thisTile = TileType.water; break;
+            case 'C': thisTile = TileType.castle; break;
+            case 'H': thisTile = TileType.hills; break;
+            case 'F': thisTile = TileType.forest; break;
+            case 'S': thisTile = TileType.sand; break;
+            case 'D': thisTile = TileType.Def; break;
+        }
+
+        TileUpdate();
 
     }
 

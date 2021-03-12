@@ -18,7 +18,7 @@ public class Grid : MonoBehaviour
 
     public List<Tile> GridList = new List<Tile>();
 
-
+    TileComp tileComparer = new TileComp();
 
     public GameObject BaseTile;
 
@@ -211,9 +211,10 @@ public class Grid : MonoBehaviour
             }
         }
 
-        FindAllNeighbors();
 
-        GridList.Sort();        
+
+        //GridList.Sort();        
+        GridList.Sort(tileComparer);
 
         MinimapCam.transform.position = new Vector3(((Mathf.Sqrt(3) * ((Columns-1))) / 2)/2, 110, Rows/2);
 
@@ -225,6 +226,8 @@ public class Grid : MonoBehaviour
         {
             MinimapCam.GetComponent<Camera>().orthographicSize = MinimapCam.transform.position.z;
         }
+
+        FindAllNeighbors();
     }
 
     public void FindAllNeighbors()

@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class TileComp : IComparer<Tile>
+{
+    public int Compare(Tile x, Tile y)
+    {
+        return (x.Column - y.Column) * 1000 + (x.Row - y.Row);
+    }
+}
+
 public enum TileType { Def, grass, water, forest, sand, hills, castle}
 
 [ExecuteInEditMode]

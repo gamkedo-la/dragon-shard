@@ -40,7 +40,19 @@ public class Tile : MonoBehaviour, IComparer <Tile>
     {
         //B - A
 
-        return 0;
+        if(A.Row < B.Row)
+        {
+            return -1;
+        }
+        if (A.Column < B.Column)
+        {
+            return -1;
+        }
+        else
+        {
+            return 1;
+        }
+
     }
 
     [SerializeField]

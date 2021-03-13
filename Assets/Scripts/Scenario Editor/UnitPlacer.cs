@@ -56,7 +56,7 @@ public class UnitPlacer : MonoBehaviour
                 {
                     if (Active != null)
                     {
-                        Place(rhInfo.collider.gameObject);
+                        Place(rhInfo.collider.gameObject, null);
                     }
                 }
                 else
@@ -75,7 +75,7 @@ public class UnitPlacer : MonoBehaviour
         Deselect();
     }
 
-    public void Place(GameObject T)
+    public GameObject Place(GameObject T, GameObject AI)
     {
         GameObject G = Instantiate(Active);
         G.GetComponent<Pathfinding>().PlaceUnit(T);
@@ -83,6 +83,21 @@ public class UnitPlacer : MonoBehaviour
         players.ThisGame[ActivePlayer].Units.Add(G);
         Select(G);
         //Active = null;
+
+        G.GetComponent<Unit>().GM = Camera.main.GetComponent<Players>();
+        G.GetComponent<Unit>().Click = Camera.main.GetComponent<Clicker>();
+
+        
+
+        Debug.Log("attatching ai");
+        G.GetComponent<Unit>().AIOverlord = AI;
+        if (G.GetComponent<Unit>().AIOverlord != null)
+        {
+
+            G.GetComponent<Unit>().controlledByAI = true;
+
+        }
+        return G;
     }
 
     public void SetActivePlayer(int A)
@@ -124,7 +139,7 @@ public class UnitPlacer : MonoBehaviour
 
         players.ThisGame[P].Units.Add(Selected);
 
-        Selected.GetComponent<Unit>().SetColor();
+        //Selected.GetComponent<Unit>().SetColor();
 
     }
 

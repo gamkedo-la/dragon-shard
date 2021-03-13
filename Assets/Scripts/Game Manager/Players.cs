@@ -382,6 +382,7 @@ public class Players : MonoBehaviour
     {
         string[] splitString = p.Split(';');
 
+        List<Unit> units = new List<Unit>();
 
         int PG = splitString.Length - 4;
 
@@ -433,6 +434,10 @@ public class Players : MonoBehaviour
                 ThisGame[z].ControlledByAI = true;
                 AI = Instantiate(AIBrainPrefab);
                 AI.GetComponent<Tracker>().P = z;
+                AI.GetComponent<Tracker>().Grid = GameObject.Find("Grid").transform;
+                AI.GetComponent<Tracker>().GM = this;
+                AI.GetComponent<Tracker>().Team = ThisGame[z].Alliance;
+
             }
 
             unitPlacer.ActivePlayer = z;
@@ -474,11 +479,12 @@ public class Players : MonoBehaviour
                         }
                     }
 
-                    //Debug.Log("drop" + DropPoint.name);
+                if (AI != null)
+                {
+                    Debug.Log("ai" + AI.name);
+                }
 
-                    unitPlacer.Place(DropPoint);
-
-
+                units.Add(unitPlacer.Place(DropPoint, AI).GetComponent<Unit>());
             }
 
             // Debug.Log("post unit loop");
@@ -489,7 +495,10 @@ public class Players : MonoBehaviour
                 AI.GetComponent<Tracker>().FindUnits();
             }
         }
-
+        foreach(Unit U in units)
+        {
+            U.SetColor();
+        }
     }
 
 

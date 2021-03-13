@@ -30,12 +30,9 @@ public class Unit : MonoBehaviour
     void Start()
     {
         Options = transform.Find("Action Menu").gameObject;
-        GM = Camera.main.GetComponent<Players>();
-        Click = Camera.main.GetComponent<Clicker>();
+        //SetColor();
 
-        SetColor();
-
-        if(Options.GetComponent<LookAt>() != null)
+        if (Options.GetComponent<LookAt>() != null)
         {
             Options.GetComponent<LookAt>().Target = Camera.main.gameObject;
         }

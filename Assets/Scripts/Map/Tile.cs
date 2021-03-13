@@ -15,7 +15,7 @@ public enum TileType { Def, grass, water, forest, sand, hills, castle}
 [ExecuteInEditMode]
 [SelectionBase]
 [System.Serializable]
-public class Tile : MonoBehaviour, IComparer <Tile>
+public class Tile : MonoBehaviour
 {
     public int Row;
     public int Column;
@@ -44,24 +44,7 @@ public class Tile : MonoBehaviour, IComparer <Tile>
 
     public int AIDefense;
 
-    public int Compare(Tile A, Tile B)
-    {
-        //B - A
 
-        if(A.Row < B.Row)
-        {
-            return -1;
-        }
-        if (A.Column < B.Column)
-        {
-            return -1;
-        }
-        else
-        {
-            return 1;
-        }
-
-    }
 
     [SerializeField]
     public GameObject Current;

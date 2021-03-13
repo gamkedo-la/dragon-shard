@@ -68,6 +68,7 @@ public class PlayerInfoContainer : MonoBehaviour
         A.GetComponent<Tracker>().P = P;
         //A.GetComponent<Tracker>().GM = players;
         players.AIPlayers.Add(A);
+        players.ThisGame[P].ControlledByAI = true;
         Debug.Log("created AI");
         return A;
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Players : MonoBehaviour
 {
@@ -30,6 +31,15 @@ public class Players : MonoBehaviour
     public bool SinglePlayer = false;
 
     int Human;
+
+    public Material blue;
+    public Material red; 
+    public Material green;
+    public Material purple;
+    public Material orange;
+    public Material yellow;
+
+    public GameObject AIBrainPrefab;
 
     private void Start()
     {
@@ -304,6 +314,75 @@ public class Players : MonoBehaviour
         }
 
         EGM.DisplayEndGameMenu(WinningPlayers);
+
+    }
+
+    public string SavePlayers()
+    {
+        string Result = "";
+
+        for(int z = 0; z < ThisGame.Length; z++)
+        {
+            Result += ThisGame[z].thisMaterial.name[11] + ",";
+            Result += ThisGame[z].Alliance + ",";
+
+            if(ThisGame[z].ControlledByAI == true)
+            {
+                Result += "a,";
+            }
+            else
+            {
+                Result += "h,";
+            }
+            Result += ";";
+
+        }
+
+
+
+        return Result;
+    }
+
+    public void LoadPlayers(string p)
+    {
+        string[] splitString = p.Split(';');
+
+        Debug.Log(splitString.Length);
+
+        PlayersInThisGame = splitString.Length - 4;
+        ThisGame = new Player[splitString.Length - 4];
+
+        for(int z = 0; z < ThisGame.Length; z++)
+        {
+            Debug.Log(splitString[(z + 3)]);
+
+            string[] PlayerString = splitString[z +3].Split(',');
+
+            ThisGame[z].Units = new List<GameObject>();
+
+            Debug.Log(PlayerString[0]);
+            switch (PlayerString[0])
+            {
+                case "B": SetColor((z),blue); break;
+                case "G": SetColor((z), green); break;
+                case "R": SetColor((z), red); break;
+                case "P": SetColor((z), purple); break;
+                case "O": SetColor((z), orange); break;
+                case "Y": SetColor((z), yellow); break;
+
+            }
+
+            Debug.Log(PlayerString[1]);
+            ThisGame[z].Alliance = Convert.ToInt32(PlayerString[1]);
+
+            Debug.Log(PlayerString[2]);
+            if (PlayerString[2] == "a")
+            {
+                ThisGame[z].ControlledByAI = true;
+                GameObject AI = Instantiate(AIBrainPrefab);
+                AI.GetComponent<Tracker>().P = z;
+            }
+        }
 
     }
 

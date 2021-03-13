@@ -51,6 +51,8 @@ public class Grid : MonoBehaviour
 
         }
 
+        Result += ";";
+
         return Result;
     }
 

@@ -3,7 +3,16 @@ guid: c2edf444ad043814a8b3368da07dcb59
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - thisClicker: {instanceID: 0}
+  - EndTurnButton: {instanceID: 0}
+  - EGM: {instanceID: 0}
+  - blue: {fileID: 2100000, guid: 6c30f0c78fe43df49b990f3ebca33082, type: 2}
+  - red: {fileID: 2100000, guid: 2bb29e86f77f7c34a8eeb02fd002eae6, type: 2}
+  - green: {fileID: 2100000, guid: 6c2b4405783d9614da800631f07e40f9, type: 2}
+  - purple: {fileID: 2100000, guid: 92cfd96a44451c6469a57e8f8727392c, type: 2}
+  - orange: {fileID: 2100000, guid: b7be332bd96673b43ac00647029bc740, type: 2}
+  - yellow: {fileID: 2100000, guid: f5cc9f31262131942a8c61ab70312f4b, type: 2}
   executionOrder: -50
   icon: {instanceID: 0}
   userData: 

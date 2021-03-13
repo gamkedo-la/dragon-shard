@@ -1625,6 +1625,7 @@ MonoBehaviour:
   controlledByAI: 0
   AIActionTaken: 0
   AIOverlord: {fileID: 0}
+  Armor: {fileID: 2629086653856691267}
   ActedThisTurn: 0
 --- !u!114 &5500624895548116046
 MonoBehaviour:

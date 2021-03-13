@@ -62,6 +62,7 @@ MonoBehaviour:
   controlledByAI: 0
   AIActionTaken: 0
   AIOverlord: {fileID: 0}
+  Armor: {fileID: 6390424486765063197}
   ActedThisTurn: 0
 --- !u!114 &3496227508911543312
 MonoBehaviour:
@@ -78,6 +79,7 @@ MonoBehaviour:
   CurrentLocation: {fileID: 0}
   CanMoveTo: []
   MovePoints: 3
+  MP: 0
   Grid: {fileID: 0}
   Grass: 1
   Forest: 2

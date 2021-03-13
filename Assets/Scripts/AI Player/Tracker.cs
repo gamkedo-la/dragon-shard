@@ -69,6 +69,11 @@ public class Tracker : MonoBehaviour
         GM = Camera.main.GetComponent<Players>();
         Team = GM.ThisGame[P].Alliance;
 
+
+    }
+
+    public void FindUnits()
+    {
         for (int k = 0; k < GM.ThisGame.Length; k++)
         {
             if (P != k)
@@ -92,6 +97,7 @@ public class Tracker : MonoBehaviour
             }
         }
         MUArray = MyUnits.ToArray();
+
     }
 
     // Update is called once per frame

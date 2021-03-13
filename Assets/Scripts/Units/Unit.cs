@@ -22,7 +22,7 @@ public class Unit : MonoBehaviour
 
     public GameObject AIOverlord;
 
-    GameObject Armor;
+    public GameObject Armor;
 
     public bool ActedThisTurn = false;
 
@@ -31,8 +31,8 @@ public class Unit : MonoBehaviour
     {
         Options = transform.Find("Action Menu").gameObject;
         GM = Camera.main.GetComponent<Players>();
-        Click = GM.thisClicker;
-        Armor = transform.Find("model").gameObject;
+        Click = Camera.main.GetComponent<Clicker>();
+
         SetColor();
 
         if(Options.GetComponent<LookAt>() != null)
@@ -74,9 +74,12 @@ public class Unit : MonoBehaviour
 
     public void SetColor()
     {
-        if (Armor.GetComponent<ArmorColor>() != null)
+        if (Armor != null)
         {
-            Armor.GetComponent<ArmorColor>().AssignColor(GM.ThisGame[Owner].thisMaterial);
+            if (Armor.GetComponent<ArmorColor>() != null)
+            {
+                Armor.GetComponent<ArmorColor>().AssignColor(GM.ThisGame[Owner].thisMaterial);
+            }
         }
     }
 

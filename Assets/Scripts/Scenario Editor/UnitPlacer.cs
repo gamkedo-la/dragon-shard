@@ -13,7 +13,7 @@ public class UnitPlacer : MonoBehaviour
 
     public GameObject SelectedPlayer;
 
-    int ActivePlayer = 0;
+    public int ActivePlayer = 0;
 
     public AddingPlayers AP;
 
@@ -29,6 +29,8 @@ public class UnitPlacer : MonoBehaviour
 
     public Dropdown SelectedOwner;
 
+    public bool placing;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +44,7 @@ public class UnitPlacer : MonoBehaviour
         {
             return;
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && placing == true)
         {
             Ray toMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rhInfo;
@@ -134,6 +136,17 @@ public class UnitPlacer : MonoBehaviour
 
         Destroy(Selected);
         Deselect();
+    }
+
+    public void StartPlacing()
+    {
+
+        placing = true;
+    }
+
+    public void StopPlacing()
+    {
+        placing = false;
     }
 
 }

@@ -39,6 +39,8 @@ public class EditorInterface : MonoBehaviour
         TerrainSelector.GetComponent<CanvasGroup>().interactable = true;
         TerrainSelector.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
+        UnitEditor.GetComponent<UnitPlacer>().StopPlacing();
+
         terrain.PaintingTerrain = true;
 
     }
@@ -57,6 +59,8 @@ public class EditorInterface : MonoBehaviour
         TerrainSelector.GetComponent<CanvasGroup>().alpha = 0;
         TerrainSelector.GetComponent<CanvasGroup>().interactable = false;
         TerrainSelector.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+        UnitEditor.GetComponent<UnitPlacer>().StartPlacing();
 
         terrain.PaintingTerrain = false;
 
@@ -78,6 +82,8 @@ public class EditorInterface : MonoBehaviour
         TerrainSelector.GetComponent<CanvasGroup>().blocksRaycasts = false;
 
         terrain.PaintingTerrain = false;
+
+        UnitEditor.GetComponent<UnitPlacer>().StopPlacing();
 
     }
 

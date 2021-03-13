@@ -22769,6 +22769,7 @@ MonoBehaviour:
   - {fileID: 7978855994362782345, guid: 9db05c78e055b1d4b8875594355e29d6, type: 3}
   Active: {fileID: 0}
   SelectedPlayer: {fileID: 0}
+  ActivePlayer: 0
   AP: {fileID: 1093389584}
   players: {fileID: 0}
   SelectionRing: {fileID: 710986066}
@@ -22776,6 +22777,7 @@ MonoBehaviour:
   SelectedUI: {fileID: 1503851308}
   SelectedName: {fileID: 1563536795}
   SelectedOwner: {fileID: 258831050}
+  placing: 0
 --- !u!225 &643497998
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -47784,10 +47786,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6725435970975965213, guid: 6277f90484c1c1741b3c9d60c155fbdb,
         type: 3}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 1353650354}
+    - target: {fileID: 6725435970975965213, guid: 6277f90484c1c1741b3c9d60c155fbdb,
+        type: 3}
+      propertyPath: unitPlacer
+      value: 
+      objectReference: {fileID: 643497997}
+    - target: {fileID: 6725435970975965213, guid: 6277f90484c1c1741b3c9d60c155fbdb,
+        type: 3}
       propertyPath: AIBrainPrefab
       value: 
       objectReference: {fileID: 2325051218938056130, guid: 04fdda1578b8124498fa43ffac2d211c,
         type: 3}
+    - target: {fileID: 6725435970975965213, guid: 6277f90484c1c1741b3c9d60c155fbdb,
+        type: 3}
+      propertyPath: addingPlayers
+      value: 
+      objectReference: {fileID: 1093389584}
     m_RemovedComponents:
     - {fileID: 8005973776233382911, guid: 6277f90484c1c1741b3c9d60c155fbdb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6277f90484c1c1741b3c9d60c155fbdb, type: 3}

@@ -32,6 +32,8 @@ public class Players : MonoBehaviour
 
     int Human;
 
+    public Grid grid;
+
     public Material blue;
     public Material red; 
     public Material green;
@@ -40,6 +42,9 @@ public class Players : MonoBehaviour
     public Material yellow;
 
     public GameObject AIBrainPrefab;
+
+    public UnitPlacer unitPlacer;
+    public AddingPlayers addingPlayers;
 
     private void Start()
     {
@@ -334,6 +339,36 @@ public class Players : MonoBehaviour
             {
                 Result += "h,";
             }
+
+            if (unitPlacer == null)
+            {
+                Debug.Log("unit placer not found. BIG PROBLEM");
+            }
+            else {
+
+                foreach (GameObject U in ThisGame[z].Units)
+                {
+
+                    switch (U.GetComponent<Unit>().UnitName)
+                    {
+                        case "Human Archer": Result += "HA_"; break;
+                        case "Human Cavalry": Result += "HC_"; break;
+                        case "Human Mage": Result += "HM_"; break;
+                        case "Human Spearman": Result += "HS_"; break;
+                        case "Dwarf Axe Thrower": Result += "DA_"; break;
+                        case "Dwarf Infantry": Result += "DI_"; break;
+                        case "Dwarf Mage": Result += "DMa_"; break;
+                        case "Dwarf Mortar": Result += "DMo_"; break;
+                        case "Elf Archer": Result += "EA_"; break;
+                        case "Elf Scout": Result += "ESc_"; break;
+                        case "Elf Swordsman": Result += "ESw_"; break;
+                        case "Elf Mage": Result += "EM_"; break;
+
+                    }
+                    Result+= U.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Row + "_" + U.GetComponent<Pathfinding>().CurrentLocation.GetComponent<Tile>().Column + "_,";
+                }
+            }
+
             Result += ";";
 
         }
@@ -347,20 +382,34 @@ public class Players : MonoBehaviour
     {
         string[] splitString = p.Split(';');
 
-        Debug.Log(splitString.Length);
 
-        PlayersInThisGame = splitString.Length - 4;
-        ThisGame = new Player[splitString.Length - 4];
+        int PG = splitString.Length - 4;
+
+        Debug.Log(PlayersInThisGame);
+
+
+        if (addingPlayers != null)
+        {
+            for (int z = 1; z < PG; z++)
+            {
+                addingPlayers.AddPlayer();
+
+            }
+        }
+        else
+        {
+            ThisGame = new Player[PG];
+        }
 
         for(int z = 0; z < ThisGame.Length; z++)
         {
-            Debug.Log(splitString[(z + 3)]);
+            //Debug.Log(splitString[(z + 3)]);
 
             string[] PlayerString = splitString[z +3].Split(',');
 
             ThisGame[z].Units = new List<GameObject>();
 
-            Debug.Log(PlayerString[0]);
+            //Debug.Log(PlayerString[0]);
             switch (PlayerString[0])
             {
                 case "B": SetColor((z),blue); break;
@@ -372,15 +421,72 @@ public class Players : MonoBehaviour
 
             }
 
-            Debug.Log(PlayerString[1]);
+            //Debug.Log(PlayerString.Length);
+
+            Debug.Log(PlayersInThisGame);
             ThisGame[z].Alliance = Convert.ToInt32(PlayerString[1]);
 
-            Debug.Log(PlayerString[2]);
+            GameObject AI = null;
+
             if (PlayerString[2] == "a")
             {
                 ThisGame[z].ControlledByAI = true;
-                GameObject AI = Instantiate(AIBrainPrefab);
+                AI = Instantiate(AIBrainPrefab);
                 AI.GetComponent<Tracker>().P = z;
+            }
+
+            unitPlacer.ActivePlayer = z;
+
+            //Debug.Log("unit " + PlayerString[3]);
+            for (int g = 3; g < PlayerString.Length - 1; g++)
+            {
+                    //Debug.Log("unit loop");
+
+                    string[] UnitString = PlayerString[g].Split('_');
+
+                   // Debug.Log("unit " + UnitString[0]);
+
+
+
+                    switch (UnitString[0])
+                    {
+                        case "HA": unitPlacer.Active = unitPlacer.Units[1]; break;
+                        case "HC": unitPlacer.Active = unitPlacer.Units[2]; break;
+                        case "HM": unitPlacer.Active = unitPlacer.Units[3]; break;
+                        case "HS": unitPlacer.Active = unitPlacer.Units[0]; break;
+                        case "DA": unitPlacer.Active = unitPlacer.Units[5]; break;
+                        case "DI": unitPlacer.Active = unitPlacer.Units[4]; break;
+                        case "DMa": unitPlacer.Active = unitPlacer.Units[7]; break;
+                        case "DMo": unitPlacer.Active = unitPlacer.Units[6]; break;
+                        case "EA": unitPlacer.Active = unitPlacer.Units[8]; break;
+                        case "ESc": unitPlacer.Active = unitPlacer.Units[9]; break;
+                        case "ESw": unitPlacer.Active = unitPlacer.Units[10]; break;
+                        case "EM": unitPlacer.Active = unitPlacer.Units[11]; break;
+                    }
+
+                    GameObject DropPoint = null;
+
+                    foreach(Tile T in grid.GridList)
+                    {
+                        if(T.Row == Convert.ToInt32(UnitString[1]) && T.Column == Convert.ToInt32(UnitString[2]))
+                        {
+                            DropPoint = T.gameObject;
+                        }
+                    }
+
+                    //Debug.Log("drop" + DropPoint.name);
+
+                    unitPlacer.Place(DropPoint);
+
+
+            }
+
+            // Debug.Log("post unit loop");
+            if (PlayerString[2] == "a")
+            {
+
+
+                AI.GetComponent<Tracker>().FindUnits();
             }
         }
 

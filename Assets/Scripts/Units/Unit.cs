@@ -29,6 +29,8 @@ public class Unit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+
         Options = transform.Find("Action Menu").gameObject;
         //SetColor();
 
@@ -86,6 +88,8 @@ public class Unit : MonoBehaviour
         public TileType T;
         public int MovePointsUsed;
     }
+
+
 
 
 }

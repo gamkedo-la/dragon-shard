@@ -69,6 +69,10 @@ public class Players : MonoBehaviour
                     ThisGame[i].Units.Add(U);
                     U.GetComponent<Unit>().Alliance = ThisGame[i].Alliance;
 
+                    U.GetComponent<Unit>().GM = this;
+                    U.GetComponent<Unit>().Click = thisClicker;
+                    U.GetComponent<Unit>().SetColor();
+
                 }
             }
 
@@ -505,7 +509,10 @@ public class Players : MonoBehaviour
             AI.GetComponent<Tracker>().FindUnits();
         }
 
-        EndTurnButton.GetComponent<UIColors>().SetColors();
+        if (EndTurnButton != null)
+        {
+            EndTurnButton.GetComponent<UIColors>().SetColors();
+        }
     }
 
 

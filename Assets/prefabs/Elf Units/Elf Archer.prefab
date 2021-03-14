@@ -905,7 +905,7 @@ MonoBehaviour:
   DamageText: {fileID: 1682866155419517283, guid: 4efa638b120ee6c4ba42a799d94e4519,
     type: 3}
   Attckr: {fileID: 0}
-  UnitHitAudio: {fileID: 0}
+  UnitHitAudio: {fileID: 11400000, guid: b1e880ce3889e3348ba9ffb9c6e6b924, type: 2}
 --- !u!114 &1674121198525883229
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,6 +52,19 @@ public class AudioPlayer : MonoBehaviour
         }
     }
 
+    public void PlayAudioEvent(AudioEvent audioEvent)
+    {
+        if (audioEvent != null)
+        {
+            var clip = audioEvent.GetClip();
+            var source = GetNextSource();
+            source.clip = clip;
+            source.Play();
+        }
+        else
+            Debug.LogError("Event undefined.  Check: " + gameObject.name);
+    }
+
     private AudioSource GetNextSource()
     {
         playIndex = (playIndex + 1) % audioSources.Count;

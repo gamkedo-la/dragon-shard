@@ -64,16 +64,20 @@ public class Attack : MonoBehaviour
 
     public bool AttackedThisTurn = false;
 
+    [SerializeField] AudioEvent AttackAudio;
+    internal AudioPlayer audioPlayer;
     // Start is called before the first frame update
     void Start()
     {
         if (attacker == null)
             attacker = GetComponent<Experience>();
 
-        if((MeleeAttacks * MeleeDamage) > (RangedAttacks * RangedDamage))
+        if ((MeleeAttacks * MeleeDamage) > (RangedAttacks * RangedDamage))
         {
             MeleePrimary = true;
         }
+
+        audioPlayer = GetComponent<AudioPlayer>();
     }
 
     public void TurnStart()
@@ -144,7 +148,7 @@ public class Attack : MonoBehaviour
                                 GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
                             }
 
-                                return;
+                            return;
 
                         }
                         turn = false;
@@ -173,7 +177,7 @@ public class Attack : MonoBehaviour
             }
         }
     }
-    
+
     public void Att(HitPoints Enemy, int D, float Def)
     {
         int R = Random.Range(1, 101);
@@ -188,6 +192,9 @@ public class Attack : MonoBehaviour
         {
             Enemy.TakeDamage(D, attacker);
         }
+
+        if (audioPlayer != null)
+            audioPlayer.PlayAudioEvent(AttackAudio);
     }
 
     public void SetDef()

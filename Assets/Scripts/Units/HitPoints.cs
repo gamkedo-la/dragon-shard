@@ -17,11 +17,14 @@ public class HitPoints : MonoBehaviour
 
     HPLevelDialogTrigger dt;
 
+    [SerializeField] AudioEvent UnitHitAudio;
+    internal AudioPlayer audioPlayer;
     // Start is called before the first frame update
     void Start()
     {
         Cam = Camera.main.gameObject;
         dt = GetComponent<HPLevelDialogTrigger>();
+        audioPlayer = GetComponent<AudioPlayer>();
     }
 
     // Update is called once per frame
@@ -54,6 +57,8 @@ public class HitPoints : MonoBehaviour
             T.GetComponent<DamageText>().FSize = 300;
         }
 
+        if (audioPlayer != null)
+            audioPlayer.PlayAudioEvent(UnitHitAudio);
 
         if (CurrentHP > MaxHP)
         {
@@ -64,7 +69,11 @@ public class HitPoints : MonoBehaviour
             Death(attacker);
         }
 
+<<<<<<< Updated upstream
         if (dt != null)
+=======
+        if (CurrentHP <= dt.HPTriggerLevel)
+>>>>>>> Stashed changes
         {
             if (CurrentHP <= dt.HPTriggerLevel)
             {
@@ -84,11 +93,11 @@ public class HitPoints : MonoBehaviour
 
         GetComponent<Pathfinding>().CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = null;
 
-        if(GetComponent<Unit>().AIOverlord != null && GetComponent<Unit>().Owner == GetComponent<Unit>().GM.CurrentTurn)
+        if (GetComponent<Unit>().AIOverlord != null && GetComponent<Unit>().Owner == GetComponent<Unit>().GM.CurrentTurn)
         {
             GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
         }
-        if(otherUnit.GetComponent<Unit>().AIOverlord != null && otherUnit.GetComponent<Unit>().Owner == otherUnit.GetComponent<Unit>().GM.CurrentTurn)
+        if (otherUnit.GetComponent<Unit>().AIOverlord != null && otherUnit.GetComponent<Unit>().Owner == otherUnit.GetComponent<Unit>().GM.CurrentTurn)
         {
             otherUnit.GetComponent<Unit>().AIOverlord.GetComponent<Tracker>().NextUnit();
         }

@@ -592,8 +592,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamBuffLength: 1
   DamBuffStrength: 0.3
+  supportMagicAudio: {fileID: 11400000, guid: bc24b272f368a2c4d9598be2e3e59247, type: 2}
   DefuffLength: 1
   DefBuffStrength: 0.2
+  debuffMagicAudio: {fileID: 11400000, guid: e7d850cf50156f045abbf1451e9c7e65, type: 2}
 --- !u!114 &-2102637886013102682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,8 +639,9 @@ MonoBehaviour:
   audioEvents: []
   audioSources: []
   initialSources: 1
-  mixer: {fileID: 0}
-  mixGroup: {fileID: 0}
+  mixer: {fileID: 24100000, guid: c62f0464f6fb5154fb0c898b95c259b9, type: 2}
+  mixGroup: {fileID: 7971406496785222453, guid: c62f0464f6fb5154fb0c898b95c259b9,
+    type: 2}
   spatialBlend: 0
   unitInfo: {fileID: 0}
 --- !u!1 &6696637439083268391

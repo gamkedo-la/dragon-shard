@@ -19,19 +19,22 @@ public class DwarfMagic : MonoBehaviour
 
     GameObject FTarget;
 
+    [SerializeField] AudioEvent fireballMagicAudio;
+    internal AudioPlayer audioPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioPlayer = GetComponent<AudioPlayer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(timer >= 0)
+        if (timer >= 0)
         {
             timer -= Time.deltaTime;
-            if(timer <= 0)
+            if (timer <= 0)
             {
                 if (FTarget != null)
                 {
@@ -75,21 +78,21 @@ public class DwarfMagic : MonoBehaviour
         foreach (Transform T in GetComponent<Pathfinding>().Grid)
         {
             T.GetComponent<Pathnode>().Fade();
-            
+
         }
-        foreach(GameObject A in AoE)
+        foreach (GameObject A in AoE)
         {
             A.GetComponent<Pathnode>().Unfade();
         }
 
-        GetComponent<Pathfinding>().CurrentLocation.GetComponent<Pathnode>().Unfade();    
+        GetComponent<Pathfinding>().CurrentLocation.GetComponent<Pathnode>().Unfade();
 
     }
-    
+
     public void CastFireWave(GameObject G)
     {
 
-        if(G == Origin)
+        if (G == Origin)
         {
             GetComponent<Unit>().ActedThisTurn = true;
             foreach (GameObject A in AoE)
@@ -97,6 +100,9 @@ public class DwarfMagic : MonoBehaviour
                 if (A.GetComponent<Pathnode>().CurrentOccupant != null)
                 {
                     GetComponent<Attack>().Att(A.GetComponent<Pathnode>().CurrentOccupant.GetComponent<HitPoints>(), FireWaveDamage, 0);
+
+                    if (audioPlayer != null)
+                        audioPlayer.PlayAudioEvent(fireballMagicAudio);
                 }
             }
         }
@@ -108,8 +114,11 @@ public class DwarfMagic : MonoBehaviour
     public void CastFireball(GameObject G)
     {
         GetComponent<Unit>().ActedThisTurn = true;
-        FTarget = G;   
+        FTarget = G;
         timer = fireballAnimLength;
-    }  
+
+        if (audioPlayer != null)
+            audioPlayer.PlayAudioEvent(fireballMagicAudio);
+    }
 
 }

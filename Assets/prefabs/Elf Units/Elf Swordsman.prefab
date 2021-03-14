@@ -995,8 +995,9 @@ MonoBehaviour:
   audioEvents: []
   audioSources: []
   initialSources: 1
-  mixer: {fileID: 0}
-  mixGroup: {fileID: 0}
+  mixer: {fileID: 24100000, guid: c62f0464f6fb5154fb0c898b95c259b9, type: 2}
+  mixGroup: {fileID: 7971406496785222453, guid: c62f0464f6fb5154fb0c898b95c259b9,
+    type: 2}
   spatialBlend: 0
   unitInfo: {fileID: 0}
 --- !u!1 &4792717034733173757

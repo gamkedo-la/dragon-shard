@@ -23,16 +23,20 @@ public class ElfMagic : MonoBehaviour
 
     public GameObject TeleportTarget;
 
+    [SerializeField] AudioEvent debuffMagicAudio;
+    [SerializeField] AudioEvent supportMagicAudio;
+    internal AudioPlayer audioPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioPlayer = GetComponent<AudioPlayer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SlowTargeting(GameObject G)
@@ -87,6 +91,9 @@ public class ElfMagic : MonoBehaviour
                 if (A.GetComponent<Pathnode>().CurrentOccupant != null)
                 {
                     A.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Pathfinding>().Slow(SlowAmount);
+
+                    if (audioPlayer != null)
+                        audioPlayer.PlayAudioEvent(debuffMagicAudio);
                 }
             }
         }
@@ -183,9 +190,9 @@ public class ElfMagic : MonoBehaviour
 
         foreach (Transform T in Grid)
         {
-            T.GetComponent<Pathnode>().Fade();          
+            T.GetComponent<Pathnode>().Fade();
         }
-        foreach(GameObject TT in PossibleTeleportDestinations)
+        foreach (GameObject TT in PossibleTeleportDestinations)
         {
             TT.GetComponent<Pathnode>().Unfade();
         }
@@ -194,9 +201,12 @@ public class ElfMagic : MonoBehaviour
 
     public void TeleportUnit(GameObject Endpoint)
     {
-        if(PossibleTeleportDestinations.Contains(Endpoint) == true)
+        if (PossibleTeleportDestinations.Contains(Endpoint) == true)
         {
             TeleportTarget.GetComponent<Pathfinding>().PlaceUnit(Endpoint);
+
+            if (audioPlayer != null)
+                audioPlayer.PlayAudioEvent(supportMagicAudio);
         }
 
         GetComponent<Unit>().Click.Clear();

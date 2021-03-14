@@ -1882,6 +1882,7 @@ MonoBehaviour:
   AoE: []
   FireWaveDamage: 5
   FireBallDamage: 10
+  fireballMagicAudio: {fileID: 11400000, guid: f4dbd1895eae9db41977ca086ea9115c, type: 2}
 --- !u!114 &7294551631202640889
 MonoBehaviour:
   m_ObjectHideFlags: 0

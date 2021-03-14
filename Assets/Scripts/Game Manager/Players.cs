@@ -491,14 +491,21 @@ public class Players : MonoBehaviour
             if (PlayerString[2] == "a")
             {
 
+                AIPlayers.Add(AI);
 
-                AI.GetComponent<Tracker>().FindUnits();
             }
         }
         foreach(Unit U in units)
         {
             U.SetColor();
         }
+
+        foreach(GameObject AI in AIPlayers)
+        {
+            AI.GetComponent<Tracker>().FindUnits();
+        }
+
+        EndTurnButton.GetComponent<UIColors>().SetColors();
     }
 
 

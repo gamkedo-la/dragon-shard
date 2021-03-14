@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MapSize : MonoBehaviour
 {
+    public bool Editor = true;
 
     public InputField R;
     public InputField C;
@@ -24,8 +25,11 @@ public class MapSize : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        row = int.Parse(R.text);
-        col = int.Parse(C.text);
+        if (Editor == true)
+        {
+            row = int.Parse(R.text);
+            col = int.Parse(C.text);
+        }
     }
 
     public void UpdateGrid()

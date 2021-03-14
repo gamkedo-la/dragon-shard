@@ -648,6 +648,7 @@ GameObject:
   - component: {fileID: 8742256108145481924}
   - component: {fileID: 2453502589007946869}
   - component: {fileID: 84020298846746432}
+  - component: {fileID: 7700218875677760203}
   m_Layer: 0
   m_Name: DwarfAxeThrower
   m_TagString: Unit
@@ -790,6 +791,8 @@ MonoBehaviour:
   DefenseLevelBuff: 1
   AttackLevelBuff: 1
   AttackedThisTurn: 0
+  unitInfo: {fileID: 0}
+  AttackAudio: {fileID: 11400000, guid: 8a6f2127df2ff974a95681a9ac8f9abc, type: 2}
 --- !u!114 &2453502589007946869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -807,6 +810,7 @@ MonoBehaviour:
   DamageText: {fileID: 1682866155419517283, guid: 4efa638b120ee6c4ba42a799d94e4519,
     type: 3}
   Attckr: {fileID: 0}
+  UnitHitAudio: {fileID: 0}
 --- !u!114 &84020298846746432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,6 +839,25 @@ MonoBehaviour:
   LevelUpRangedDamage: 1
   LevelUpHp: 1
   LevelUpDef: 1
+--- !u!114 &7700218875677760203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3928511667735217507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 233ff9b958fb74b41a48ed1f8ca01cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvents: []
+  audioSources: []
+  initialSources: 1
+  mixer: {fileID: 0}
+  mixGroup: {fileID: 0}
+  spatialBlend: 0
+  unitInfo: {fileID: 0}
 --- !u!1 &3998754173768508632
 GameObject:
   m_ObjectHideFlags: 0

@@ -743,6 +743,7 @@ GameObject:
   - component: {fileID: 8017418633245920473}
   - component: {fileID: 3755364112484888680}
   - component: {fileID: 1674121198525883229}
+  - component: {fileID: -2009355087975431890}
   m_Layer: 0
   m_Name: Elf Archer
   m_TagString: Unit
@@ -885,6 +886,8 @@ MonoBehaviour:
   DefenseLevelBuff: 1
   AttackLevelBuff: 1
   AttackedThisTurn: 0
+  unitInfo: {fileID: 0}
+  AttackAudio: {fileID: 11400000, guid: 4ee954a316c322c42bedd7bafb74f6a3, type: 2}
 --- !u!114 &3755364112484888680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,6 +905,7 @@ MonoBehaviour:
   DamageText: {fileID: 1682866155419517283, guid: 4efa638b120ee6c4ba42a799d94e4519,
     type: 3}
   Attckr: {fileID: 0}
+  UnitHitAudio: {fileID: 0}
 --- !u!114 &1674121198525883229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,6 +934,25 @@ MonoBehaviour:
   LevelUpRangedDamage: 1
   LevelUpHp: 1
   LevelUpDef: 1
+--- !u!114 &-2009355087975431890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2348007992805118334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 233ff9b958fb74b41a48ed1f8ca01cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvents: []
+  audioSources: []
+  initialSources: 1
+  mixer: {fileID: 0}
+  mixGroup: {fileID: 0}
+  spatialBlend: 0
+  unitInfo: {fileID: 0}
 --- !u!1 &2974694247177357415
 GameObject:
   m_ObjectHideFlags: 0

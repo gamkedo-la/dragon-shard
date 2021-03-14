@@ -64,8 +64,10 @@ public class Attack : MonoBehaviour
 
     public bool AttackedThisTurn = false;
 
+    [SerializeField] Unit unitInfo;
     [SerializeField] AudioEvent AttackAudio;
     internal AudioPlayer audioPlayer;
+    internal Players gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -78,6 +80,11 @@ public class Attack : MonoBehaviour
         }
 
         audioPlayer = GetComponent<AudioPlayer>();
+
+        if (unitInfo == null)
+            unitInfo = GetComponent<Unit>();
+
+        gameManager = Camera.main.GetComponent<Players>();
     }
 
     public void TurnStart()
@@ -194,7 +201,10 @@ public class Attack : MonoBehaviour
         }
 
         if (audioPlayer != null)
-            audioPlayer.PlayAudioEvent(AttackAudio);
+        {
+            if (unitInfo.Owner == gameManager.CurrentTurn)
+                audioPlayer.PlayAudioEvent(AttackAudio);
+        }
     }
 
     public void SetDef()

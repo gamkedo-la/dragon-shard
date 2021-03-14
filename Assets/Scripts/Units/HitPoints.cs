@@ -69,11 +69,7 @@ public class HitPoints : MonoBehaviour
             Death(attacker);
         }
 
-<<<<<<< Updated upstream
         if (dt != null)
-=======
-        if (CurrentHP <= dt.HPTriggerLevel)
->>>>>>> Stashed changes
         {
             if (CurrentHP <= dt.HPTriggerLevel)
             {

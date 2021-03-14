@@ -1675,6 +1675,7 @@ GameObject:
   - component: {fileID: 8593222179465752945}
   - component: {fileID: 6081923917422731844}
   - component: {fileID: 8217375580394501994}
+  - component: {fileID: 7294551631202640889}
   m_Layer: 0
   m_Name: DwarfLeader
   m_TagString: Unit
@@ -1817,6 +1818,8 @@ MonoBehaviour:
   DefenseLevelBuff: 1
   AttackLevelBuff: 1
   AttackedThisTurn: 0
+  unitInfo: {fileID: 0}
+  AttackAudio: {fileID: 11400000, guid: 8a6f2127df2ff974a95681a9ac8f9abc, type: 2}
 --- !u!114 &8593222179465752945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1834,6 +1837,7 @@ MonoBehaviour:
   DamageText: {fileID: 1682866155419517283, guid: 4efa638b120ee6c4ba42a799d94e4519,
     type: 3}
   Attckr: {fileID: 0}
+  UnitHitAudio: {fileID: 0}
 --- !u!114 &6081923917422731844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1878,6 +1882,25 @@ MonoBehaviour:
   AoE: []
   FireWaveDamage: 5
   FireBallDamage: 10
+--- !u!114 &7294551631202640889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7190336675138261095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 233ff9b958fb74b41a48ed1f8ca01cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvents: []
+  audioSources: []
+  initialSources: 1
+  mixer: {fileID: 0}
+  mixGroup: {fileID: 0}
+  spatialBlend: 0
+  unitInfo: {fileID: 0}
 --- !u!1001 &9072285747561913833
 PrefabInstance:
   m_ObjectHideFlags: 0

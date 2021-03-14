@@ -13,6 +13,8 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] [Range(0, 1)] float spatialBlend = 0;
     internal int playIndex = 0;
 
+    [SerializeField] Unit unitInfo;
+
     void Start()
     {
         if (audioSources.Count < initialSources)
@@ -28,6 +30,9 @@ public class AudioPlayer : MonoBehaviour
             s.outputAudioMixerGroup = mixGroup;
             s.spatialBlend = spatialBlend;
         }
+
+        if (unitInfo == null)
+            unitInfo = GetComponent<Unit>();
     }
 
     private void AddAudioSource()

@@ -103,7 +103,7 @@ public class Pathfinding : MonoBehaviour
                     thisClicker.Clear();
 
                     transform.position = CurrentLocation.GetComponent<Tile>().UnitAnchor.transform.position;
-                    PlaceUnit(CurrentLocation);
+                    //PlaceUnit(CurrentLocation);
 
                     if(CurrentLocation.GetComponent<FactionSwitcher>() != null)
                     {

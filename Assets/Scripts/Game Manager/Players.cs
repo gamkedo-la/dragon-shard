@@ -46,6 +46,8 @@ public class Players : MonoBehaviour
     public UnitPlacer unitPlacer;
     public AddingPlayers addingPlayers;
 
+    public List<int> TurnsToSkip;
+
     private void Start()
     {
 
@@ -127,14 +129,16 @@ public class Players : MonoBehaviour
                
         CurrentTurn += 1;
 
-        Debug.Log("Starting turn for player " + CurrentTurn);
+
 
         if (CurrentTurn >= PlayersInThisGame)
         {
             CurrentTurn = 0;
         }
 
-        if(ThisGame[CurrentTurn].Eliminated == true)
+
+
+        if (ThisGame[CurrentTurn].Eliminated == true)
         {
             CurrentTurn += 1;
             if (CurrentTurn >= PlayersInThisGame)
@@ -142,6 +146,8 @@ public class Players : MonoBehaviour
                 CurrentTurn = 0;
             }
         }
+
+        Debug.Log("Starting turn for player " + CurrentTurn);
 
         foreach (GameObject U in ThisGame[CurrentTurn].Units)
         {
@@ -167,6 +173,21 @@ public class Players : MonoBehaviour
         {
             AIturn = false;
             thisClicker.AIturn = false;
+        }
+
+        bool skip = false;
+
+        foreach(int i in TurnsToSkip)
+        {
+            if(i == CurrentTurn)
+            {
+                skip = true;
+            }
+        }
+
+        if(skip == true)
+        {
+            EndCurrentTurn();
         }
 
     }

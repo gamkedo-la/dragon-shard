@@ -83,6 +83,10 @@ public class Players : MonoBehaviour
         foreach (GameObject AI in AIPlayers)
         {
             ThisGame[AI.GetComponent<Tracker>().P].ControlledByAI = true;
+            AI.GetComponent<Tracker>().GM = this;
+            AI.GetComponent<Tracker>().Grid = grid.transform;
+
+            AI.GetComponent<Tracker>().FindUnits();
         }
 
         HumanPlayersCount = ThisGame.Length - AIPlayers.Count;

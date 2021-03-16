@@ -74,6 +74,9 @@ public class Tracker : MonoBehaviour
 
     public void FindUnits()
     {
+        Enemies.Clear();
+        MyUnits.Clear();
+
         for (int k = 0; k < GM.ThisGame.Length; k++)
         {
             if (P != k)

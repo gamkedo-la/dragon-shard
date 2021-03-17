@@ -44,11 +44,7 @@ public class SaveLodButtons : MonoBehaviour
     {
         SaveReminder.gameObject.SetActive(true);
 
-        Vector2 temp = inputField.GetComponent<RectTransform>().position;
 
-        temp.y = 250;
-
-        inputField.GetComponent<RectTransform>().position = temp;
 
         LoadButton.gameObject.SetActive(false);
 
@@ -58,11 +54,8 @@ public class SaveLodButtons : MonoBehaviour
     {
         SaveReminder.gameObject.SetActive(false);
 
-        Vector2 temp = inputField.GetComponent<RectTransform>().position;
 
-        temp.y = 265;
 
-        inputField.GetComponent<RectTransform>().position = temp;
 
         inputField.text = "";
         LoadButton.gameObject.SetActive(true);

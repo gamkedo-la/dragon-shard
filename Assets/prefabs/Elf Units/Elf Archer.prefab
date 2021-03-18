@@ -805,7 +805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentLocation: {fileID: 0}
   CanMoveTo: []
-  MovePoints: 4
+  MovePoints: 5
   MP: 0
   Grid: {fileID: 0}
   Grass: 1

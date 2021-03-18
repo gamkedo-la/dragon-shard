@@ -61,6 +61,11 @@ public class DialogEvent : MonoBehaviour
         }
     }
 
+    public void ResetDialog()
+    {
+        Bookmark = 0;
+    }
+
 
     [System.Serializable]
     public struct DialogLine

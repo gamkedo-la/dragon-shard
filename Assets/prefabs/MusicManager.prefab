@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8583850435532399573}
   - component: {fileID: 8842702710211042406}
   - component: {fileID: 8842702710211042405}
+  - component: {fileID: 1502255139882958766}
   m_Layer: 0
   m_Name: MusicManager
   m_TagString: Untagged
@@ -46,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicTracks:
   - {fileID: 11400000, guid: 1b28ec720954eee4393feae342a1f178, type: 2}
+  audioPlayer: {fileID: 0}
 --- !u!114 &8842702710211042405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,5 +67,22 @@ MonoBehaviour:
   mixGroup: {fileID: 5130287217806875469, guid: c62f0464f6fb5154fb0c898b95c259b9,
     type: 2}
   spatialBlend: 0
-  isMusicPlayer: 0
+  isMusicPlayer: 1
   unitInfo: {fileID: 0}
+--- !u!114 &1502255139882958766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2329310838087562328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aceb7b3af0617d6469f86b7d6154428d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSnapshot: {fileID: 24500006, guid: c62f0464f6fb5154fb0c898b95c259b9, type: 2}
+  musicOffSnapshot: {fileID: 5616319781760633572, guid: c62f0464f6fb5154fb0c898b95c259b9,
+    type: 2}
+  defaultHotKey: 49
+  musicOffHotKey: 50

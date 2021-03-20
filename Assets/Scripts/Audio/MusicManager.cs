@@ -33,6 +33,4 @@ public class MusicManager : MonoBehaviour
 
         audioPlayer.PlayAudioEvent(musicTracks[0]);
     }
-
-
 }

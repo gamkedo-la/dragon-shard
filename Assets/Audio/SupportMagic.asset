@@ -15,3 +15,5 @@ MonoBehaviour:
   eventName: SupportMagic
   audioClips:
   - {fileID: 8300000, guid: 2c56a041dc8256f4dbe7fbe889121f8d, type: 3}
+  Loop: 0
+  volume: -6

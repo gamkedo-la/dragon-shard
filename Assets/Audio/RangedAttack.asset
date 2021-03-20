@@ -15,3 +15,5 @@ MonoBehaviour:
   eventName: RangedAttack
   audioClips:
   - {fileID: 8300000, guid: 2c3b879e47988bc4e8add926e9e1243e, type: 3}
+  Loop: 0
+  volume: -6

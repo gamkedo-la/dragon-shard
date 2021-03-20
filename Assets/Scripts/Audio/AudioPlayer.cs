@@ -47,10 +47,11 @@ public class AudioPlayer : MonoBehaviour
     {
         if (eventIndex < audioEvents.Count)
         {
-            var clip = audioEvents[eventIndex].GetClip();
+            //var clip = audioEvents[eventIndex].GetClip();
             var source = GetNextSource();
+            SetPropertiesFromEvent(audioEvents[eventIndex], source);
 
-            source.clip = clip;
+            //source.clip = clip;
             source.Play();
         }
         else
@@ -63,9 +64,8 @@ public class AudioPlayer : MonoBehaviour
     {
         if (audioEvent != null)
         {
-            var clip = audioEvent.GetClip();
             var source = GetNextSource();
-            source.clip = clip;
+            SetPropertiesFromEvent(audioEvent, source);
             source.Play();
         }
         else
@@ -87,6 +87,13 @@ public class AudioPlayer : MonoBehaviour
         }
 
         return audioSources[playIndex];
+    }
+
+    private void SetPropertiesFromEvent(AudioEvent audioEvent, AudioSource source)
+    {
+        source.clip = audioEvent.GetClip();
+        source.volume = audioEvent.getVolume();
+        source.loop = audioEvent.isLooping();
     }
 }
 

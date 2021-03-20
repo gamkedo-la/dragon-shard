@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEditor;
 
 public class AudioPlayer : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] [Range(0, 1)] float spatialBlend = 0;
     internal int playIndex = 0;
 
-    [SerializeField] Unit unitInfo;
+    public bool isMusicPlayer;
+    public Unit unitInfo;
 
     void Start()
     {
@@ -31,7 +33,7 @@ public class AudioPlayer : MonoBehaviour
             s.spatialBlend = spatialBlend;
         }
 
-        if (unitInfo == null)
+        if (unitInfo == null && !isMusicPlayer)
             unitInfo = GetComponent<Unit>();
     }
 
@@ -87,3 +89,21 @@ public class AudioPlayer : MonoBehaviour
         return audioSources[playIndex];
     }
 }
+
+//[CustomEditor(typeof(AudioPlayer))]
+//public class AudioPlayerEditor : Editor
+//{
+//    SerializedProperty uInfo;
+
+//    public override void OnInspectorGUI()
+//    {
+//        //base.OnInspectorGUI();
+
+//        var audioPlayer = target as AudioPlayer;
+
+//        audioPlayer.isMusicPlayer = GUILayout.Toggle(audioPlayer.isMusicPlayer, "Is Music Player");
+
+//        if (audioPlayer.isMusicPlayer)
+//            audioPlayer.unitInfo = EditorGUILayout.PropertyField(uInfo);
+//    }
+//}

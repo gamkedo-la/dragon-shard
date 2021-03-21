@@ -144,8 +144,9 @@ public class Tracker : MonoBehaviour
         {
             Grid.GetComponent<Grid>().ResetAllPathing();
             MUArray[i].GetComponent<Pathfinding>().GenerateMovementOptions();
-            MUArray[i].GetComponent<Pathfinding>().MoveTo(FindDestination(MUArray[i]));
             MUArray[i].GetComponent<Unit>().AIActionTaken = true;
+            MUArray[i].GetComponent<Pathfinding>().MoveTo(FindDestination(MUArray[i]));
+
         }
         else
         {

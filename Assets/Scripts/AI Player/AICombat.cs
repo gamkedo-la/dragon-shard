@@ -32,7 +32,7 @@ public class AICombat : MonoBehaviour
 
             if (G.GetComponent<Pathnode>().CurrentOccupant != null)
             {
-                if (G.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != U.GetComponent<Unit>().Owner)
+                if (G.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Alliance != U.GetComponent<Unit>().Alliance)
                 {
                     PotentialTargets.Add(G.GetComponent<Pathnode>().CurrentOccupant);
                 }

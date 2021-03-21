@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 5601941826265743143}
   m_Layer: 0
   m_Name: Attack
-  m_TagString: DwarfMortarButton
+  m_TagString: attack button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -951,6 +951,7 @@ MonoBehaviour:
   mixGroup: {fileID: 7971406496785222453, guid: c62f0464f6fb5154fb0c898b95c259b9,
     type: 2}
   spatialBlend: 0
+  isMusicPlayer: 0
   unitInfo: {fileID: 0}
 --- !u!1 &7246424177686173342
 GameObject:

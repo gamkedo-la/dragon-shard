@@ -167,7 +167,7 @@ public class UnitInfo : MonoBehaviour
         SelectedUnit = null;
 
         SelectionRing.transform.parent = null;
-        SelectionRing.transform.position = new Vector3(0, -.1f, .5f);
+        SelectionRing.transform.position = new Vector3(0, -.2f, .5f);
 
     }
 

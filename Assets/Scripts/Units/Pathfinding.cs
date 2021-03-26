@@ -141,7 +141,7 @@ public class Pathfinding : MonoBehaviour
         }
         CurrentLocation = T;
         CurrentLocation.GetComponent<Pathnode>().CurrentOccupant = gameObject;
-        transform.position = CurrentLocation.transform.position;
+        transform.position = CurrentLocation.GetComponent<Tile>().UnitAnchor.transform.position;
 
         transform.rotation = Quaternion.identity;
 
@@ -380,7 +380,7 @@ public class Pathfinding : MonoBehaviour
 
         while(N.GetComponent<Pathnode>().Previous != null)
         {
-
+            
             Path.SetValue(N.GetComponent<Pathnode>().Previous, i);
             i++;
             N = N.GetComponent<Pathnode>().Previous;

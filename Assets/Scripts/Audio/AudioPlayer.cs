@@ -17,6 +17,8 @@ public class AudioPlayer : MonoBehaviour
     public bool isMusicPlayer;
     public Unit unitInfo;
 
+    private bool isMuted = false;
+
     void Start()
     {
         if (audioSources.Count < initialSources)
@@ -40,6 +42,7 @@ public class AudioPlayer : MonoBehaviour
     private void AddAudioSource()
     {
         var audioS = gameObject.AddComponent<AudioSource>();
+        audioS.mute = isMuted;
         audioSources.Add(audioS);
     }
 
@@ -94,6 +97,17 @@ public class AudioPlayer : MonoBehaviour
         source.clip = audioEvent.GetClip();
         source.volume = audioEvent.getVolume();
         source.loop = audioEvent.isLooping();
+    }
+
+    void Update(){
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            foreach (AudioSource s in audioSources)
+            {
+                isMuted = !isMuted;
+                s.mute = !s.mute;
+            }
+        }
     }
 }
 

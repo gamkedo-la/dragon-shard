@@ -1679,7 +1679,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 50
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 5
     m_MaxSize: 50
     m_Alignment: 0
@@ -1688,7 +1688,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Credits:'
+  m_Text: "\u2022 Will McKay: Project lead, core gameplay, 3D terrain, map editor,
+    combat systems, tile type support, enemy team AI, main UI, save and load, unit
+    data tuning, grass/forest/hill tile models and textures, level design, assorted
+    bug fixes, pathfinding, dialog system, optimizations, minimap, spells, tooltips,
+    AoE attacks, character models, camera movement\n\u2022 Roc Lee: Experience points
+    and level up implementation, archer and dwarf improvements, level buff, sounds
+    (hit, death, debuff, magic, attack sounds, UI), audio implementation, input bug
+    fix, music hookup, sound mixing, mute support\n\u2022 Philip Greene: Archer unit,
+    title text, armor color script, UI buttons polish,\n\u2022 MrPhil (Philip Ludington):
+    Unit menu bug fix\n\u2022 Agust\xEDn Mart\xEDnez: Fort model and textures\n\u2022
+    Alan Zaring: Battle music\n\u2022 Tylor Allison: Sand tile model\n\u2022 George
+    Carter: Mute feature\n\u2022 Chris DeLeon: Compiled credits\n\nMade in HomeTeamGameDev.com
+    Outpost - Come make games with us!"
 --- !u!222 &2015841588
 CanvasRenderer:
   m_ObjectHideFlags: 0

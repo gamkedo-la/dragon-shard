@@ -145,6 +145,8 @@ public class Pathfinding : MonoBehaviour
 
         transform.rotation = Quaternion.identity;
 
+        transform.Rotate(Vector3.up, 180.0f);
+
     }
 
     void FindAvailableTiles(GameObject T)

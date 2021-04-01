@@ -86,6 +86,7 @@ public class MidLevelSpawn : MonoBehaviour
 
     }
 
+    [System.Serializable]
     public struct Pod
     {
         public GameObject Unit;

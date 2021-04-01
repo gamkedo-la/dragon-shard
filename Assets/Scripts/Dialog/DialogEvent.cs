@@ -8,8 +8,11 @@ public class DialogEvent : MonoBehaviour
 
     public DialogUI DialogBox;
 
-    int Bookmark = 0;
-    
+    [HideInInspector]
+    public int Bookmark = 0;
+
+    public bool finished = false;
+
     public bool EndOfLevel = false;
 
     [Header("Only for if this dialog is at the end of the level")]
@@ -42,6 +45,7 @@ public class DialogEvent : MonoBehaviour
         {
             DialogBox.ToggleVisible(false);
             DialogBox.dialogEvent = null;
+            finished = true;
             Camera.main.GetComponent<Clicker>().ActionInProgress = false;
 
             if(EndOfLevel == true)
@@ -63,6 +67,7 @@ public class DialogEvent : MonoBehaviour
 
     public void ResetDialog()
     {
+        finished = false;
         Bookmark = 0;
     }
 

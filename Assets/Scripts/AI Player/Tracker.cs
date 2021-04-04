@@ -173,7 +173,7 @@ public class Tracker : MonoBehaviour
         {
             if (t.GetComponent<Pathnode>().CurrentOccupant != null)
             {
-                if (t.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Owner != P)
+                if (t.GetComponent<Pathnode>().CurrentOccupant.GetComponent<Unit>().Alliance != Team)
                 {
                     a = true;
 
@@ -222,6 +222,12 @@ public class Tracker : MonoBehaviour
             {
                 node.GetComponent<Pathnode>().SetMPRequired(U.GetComponent<Pathfinding>().Sand);
             }
+
+            if(node.GetComponent<Pathnode>().CurrentOccupant != null)
+            {
+                node.GetComponent<Pathnode>().SetMPRequired(1000);
+            }
+
 
         }
 

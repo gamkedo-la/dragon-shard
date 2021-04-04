@@ -97,6 +97,8 @@ public class UnitPlacer : MonoBehaviour
             G.GetComponent<Unit>().controlledByAI = true;
 
         }
+        G.GetComponent<Unit>().SetColor();
+
         return G;
     }
 

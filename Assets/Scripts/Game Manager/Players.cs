@@ -196,7 +196,7 @@ public class Players : MonoBehaviour
 
     }
 
-    public void AddPlayer()
+    public void AddPlayer(int a)
     {
         Player[] FinalArray = new Player[ThisGame.Length + 1];
         for(int i = 0; i < ThisGame.Length; i++)
@@ -205,6 +205,7 @@ public class Players : MonoBehaviour
         }
         ThisGame = FinalArray;
         ThisGame[ThisGame.Length - 1].Units = new List<GameObject>();
+        ThisGame[ThisGame.Length - 1].Alliance = a;
 
         PlayersInThisGame++;
 

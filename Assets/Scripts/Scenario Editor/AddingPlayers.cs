@@ -68,7 +68,7 @@ public class AddingPlayers : MonoBehaviour
 
             NumPlayers++;
             PlayerInfoContainers.Add(tempGO);
-            players.AddPlayer();
+            players.AddPlayer(NumPlayers - 1);
             tempGO.GetComponent<PlayerInfoContainer>().SetAlliance(NumPlayers - 1);
 
             APforUnitPlacement.ClearOptions();

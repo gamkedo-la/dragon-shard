@@ -126,9 +126,9 @@ public class Grid : MonoBehaviour
                 {
                     for (int j = LR+1; j <= Rows; j++)
                     {
-                        //GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), Quaternion.identity, gameObject.transform);
+                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), Quaternion.identity, gameObject.transform);
 
-                        GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
+                        //GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
 
                         tl.transform.position = new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j);
 
@@ -149,9 +149,9 @@ public class Grid : MonoBehaviour
 
                     for (int j = LR+1; j <= Rows; j++)
                     {
-                        //GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), Quaternion.identity, gameObject.transform);
+                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), Quaternion.identity, gameObject.transform);
 
-                        GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
+                        //GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
 
                         tl.transform.position = new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f);
 
@@ -173,9 +173,9 @@ public class Grid : MonoBehaviour
                 {
                     for (int j = 1; j <= Rows; j++)
                     {
-                        //GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), Quaternion.identity, gameObject.transform);
+                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j), Quaternion.identity, gameObject.transform);
 
-                        GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
+                        //GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
 
                         tl.transform.position = new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j);
 
@@ -194,9 +194,9 @@ public class Grid : MonoBehaviour
                 {
                     for (int j = 1; j <= Rows; j++)
                     {
-                        //GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), Quaternion.identity, gameObject.transform);
+                        GameObject tl = Instantiate(BaseTile, new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f), Quaternion.identity, gameObject.transform);
 
-                        GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
+                        //GameObject tl = (GameObject)PrefabUtility.InstantiatePrefab(BaseTile, gameObject.transform);
 
                         tl.transform.position = new Vector3((Mathf.Sqrt(3) * (i - 1)) / 2, 0, j - .5f);
 

@@ -1695,12 +1695,13 @@ MonoBehaviour:
     AoE attacks, character models, camera movement\n\u2022 Roc Lee: Experience points
     and level up implementation, archer and dwarf improvements, level buff, sounds
     (hit, death, debuff, magic, attack sounds, UI), audio implementation, input bug
-    fix, music hookup, sound mixing, mute support\n\u2022 Philip Greene: Archer unit,
-    title text, armor color script, UI buttons polish,\n\u2022 MrPhil (Philip Ludington):
-    Unit menu bug fix\n\u2022 Agust\xEDn Mart\xEDnez: Fort model and textures\n\u2022
-    Alan Zaring: Battle music\n\u2022 Tylor Allison: Sand tile model\n\u2022 George
-    Carter: Mute feature\n\u2022 Chris DeLeon: Compiled credits\n\nMade in HomeTeamGameDev.com
-    Outpost - Come make games with us!"
+    fix, music hookup, sound mixing, mute support\n\u2022 Jonathan Peterson: Story
+    outline, plot details and characters, dialog writing and implementation\n\u2022
+    Philip Greene: Archer unit, title text, armor color script, UI buttons polish,\n\u2022
+    MrPhil (Philip Ludington): Unit menu bug fix\n\u2022 Agust\xEDn Mart\xEDnez:
+    Fort model and textures\n\u2022 Alan Zaring: Battle music\n\u2022 Tylor Allison:
+    Sand tile model\n\u2022 George Carter: Mute feature\n\u2022 Chris DeLeon: Compiled
+    credits\n\nMade in HomeTeamGameDev.com Outpost - Come make games with us!"
 --- !u!222 &2015841588
 CanvasRenderer:
   m_ObjectHideFlags: 0
